@@ -1,7 +1,3 @@
-Sure, here's the updated README with the plugin name "Typewriter":
-
----
-
 # Typewriter
 
 A Neovim plugin that emulates a typewriter, keeping the cursor centered on the screen for a focused writing experience.
