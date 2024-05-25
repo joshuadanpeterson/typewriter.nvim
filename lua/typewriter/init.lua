@@ -1,4 +1,4 @@
--- typewriter/init.lua
+-- lua/typewriter/init.lua
 -- This plugin provides typewriter scrolling for neovim.
 
 -- ~/.local/share/nvim/lazy/typewriter/lua/typewriter/init.lua
@@ -11,13 +11,8 @@ local function center_cursor()
 	if not typewriter_active then
 		return
 	end
-	local win_height = api.nvim_win_get_height(0)
-	local cursor = api.nvim_win_get_cursor(0)
 
-	local new_row = math.floor(win_height / 2)
-	local new_col = cursor[2]
-
-	api.nvim_win_set_cursor(0, { new_row, new_col })
+	-- Center the screen around the cursor
 	api.nvim_command("normal! zz")
 end
 
