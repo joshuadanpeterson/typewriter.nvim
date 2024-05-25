@@ -1,7 +1,9 @@
 -- typewriter/init.lua
 -- This plugin provides typewriter scrolling for neovim.
 
-local typewriter = {}
+-- ~/.local/share/nvim/lazy/typewriter/lua/typewriter/init.lua
+
+local api = vim.api
 
 local typewriter_active = false
 
@@ -9,20 +11,20 @@ local function center_cursor()
 	if not typewriter_active then
 		return
 	end
-	local win_height = vim.api.nvim_win_get_height(0)
-	local cursor = vim.api.nvim_win_get_cursor(0)
+	local win_height = api.nvim_win_get_height(0)
+	local cursor = api.nvim_win_get_cursor(0)
 
 	local new_row = math.floor(win_height / 2)
 	local new_col = cursor[2]
 
-	vim.api.nvim_win_set_cursor(0, { new_row, new_col })
-	vim.api.nvim_command("normal! zz")
+	api.nvim_win_set_cursor(0, { new_row, new_col })
+	api.nvim_command("normal! zz")
 end
 
 local function enable_typewriter_mode()
 	if not typewriter_active then
 		typewriter_active = true
-		vim.api.nvim_command('autocmd CursorMoved * lua require("typewriter").center_cursor()')
+		api.nvim_command('autocmd CursorMoved * lua require("typewriter").center_cursor()')
 		print("Typewriter mode enabled")
 	end
 end
@@ -30,7 +32,7 @@ end
 local function disable_typewriter_mode()
 	if typewriter_active then
 		typewriter_active = false
-		vim.api.nvim_command("autocmd! TypewriterMode")
+		api.nvim_command("autocmd! TypewriterMode")
 		print("Typewriter mode disabled")
 	end
 end
@@ -43,22 +45,20 @@ local function toggle_typewriter_mode()
 	end
 end
 
-function typewriter.setup()
-	vim.api.nvim_command("augroup TypewriterMode")
-	vim.api.nvim_command("autocmd!")
-	vim.api.nvim_command("augroup END")
+local function setup()
+	api.nvim_command("augroup TypewriterMode")
+	api.nvim_command("autocmd!")
+	api.nvim_command("augroup END")
 
-	vim.api.nvim_create_user_command("EnableTypewriter", enable_typewriter_mode, {})
-	vim.api.nvim_create_user_command("DisableTypewriter", disable_typewriter_mode, {})
-	vim.api.nvim_create_user_command("ToggleTypewriter", toggle_typewriter_mode, {})
+	api.nvim_create_user_command("EnableTypewriter", enable_typewriter_mode, {})
+	api.nvim_create_user_command("DisableTypewriter", disable_typewriter_mode, {})
+	api.nvim_create_user_command("ToggleTypewriter", toggle_typewriter_mode, {})
 end
 
--- Add the lazy directory to package.path
-local function add_to_package_path(path)
-	local sep = package.config:sub(1, 1)
-	package.path = package.path .. sep .. path .. "/?.lua"
-end
-
-add_to_package_path("~/.local/share/nvim/lazy/typewriter")
-
-return typewriter
+return {
+	setup = setup,
+	center_cursor = center_cursor,
+	enable = enable_typewriter_mode,
+	disable = disable_typewriter_mode,
+	toggle = toggle_typewriter_mode,
+}
