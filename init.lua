@@ -21,7 +21,7 @@ end
 local function enable_typewriter_mode()
 	if not typewriter_active then
 		typewriter_active = true
-		api.nvim_command('autocmd CursorMoved * lua require("custom.typewriter").center_cursor()')
+		api.nvim_command('autocmd CursorMoved * lua require("typewriter").center_cursor()')
 		print("Typewriter mode enabled")
 	end
 end
