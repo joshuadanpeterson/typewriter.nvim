@@ -104,6 +104,12 @@ This plugin was inspired by:
 - [True Zen](https://github.com/pocco81/true-zen.nvim)
 - [Twilight](https://github.com/folke/twilight.nvim)
 
+## Credits
+
+Special thanks to the following for their inspiration and ideas:
+
+The [Reddit post "Typewriter Scrolling"](https://www.reddit.com/r/neovim/comments/yhn7sc/typewriter_scrolling/) for the initial idea.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
