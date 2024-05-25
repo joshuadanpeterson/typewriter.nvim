@@ -1,6 +1,8 @@
 -- typewriter/init.lua
 -- This plugin provides typewriter scrolling for neovim.
 
+local typewriter = {}
+
 local api = vim.api
 
 local typewriter_active = false
@@ -43,7 +45,7 @@ local function toggle_typewriter_mode()
 	end
 end
 
-local function setup()
+function typewriter.setup()
 	api.nvim_command("augroup TypewriterMode")
 	api.nvim_command("autocmd!")
 	api.nvim_command("augroup END")
@@ -53,10 +55,4 @@ local function setup()
 	api.nvim_create_user_command("ToggleTypewriter", toggle_typewriter_mode, {})
 end
 
-return {
-	setup = setup,
-	center_cursor = center_cursor,
-	enable = enable_typewriter_mode,
-	disable = disable_typewriter_mode,
-	toggle = toggle_typewriter_mode,
-}
+return typewriter
