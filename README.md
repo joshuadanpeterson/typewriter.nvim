@@ -44,11 +44,11 @@ lazy.setup({
 
 ## Commands
 
-| Command              | Description                        |
-| -------------------- | ---------------------------------- |
-| `:EnableTypewriter`  | Enable typewriter mode.            |
-| `:DisableTypewriter` | Disable typewriter mode.           |
-| `:ToggleTypewriter`  | Toggle typewriter mode on and off. |
+| Command      | Description                        |
+| ------------ | ---------------------------------- |
+| `:TWEnable`  | Enable typewriter mode.            |
+| `:TWDisable` | Disable typewriter mode.           |
+| `:TWToggle`  | Toggle typewriter mode on and off. |
 
 ## Usage
 
