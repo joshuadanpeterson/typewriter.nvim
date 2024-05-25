@@ -53,4 +53,12 @@ function typewriter.setup()
 	vim.api.nvim_create_user_command("ToggleTypewriter", toggle_typewriter_mode, {})
 end
 
+-- Add the lazy directory to package.path
+local function add_to_package_path(path)
+	local sep = package.config:sub(1, 1)
+	package.path = package.path .. sep .. path .. "/?.lua"
+end
+
+add_to_package_path("~/.local/share/nvim/lazy/typewriter")
+
 return typewriter
