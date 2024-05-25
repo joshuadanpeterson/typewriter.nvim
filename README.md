@@ -106,6 +106,7 @@ This plugin was inspired by:
 - [stay-centered.nvim](https://github.com/arnamak/stay-centered.nvim)
 - [ZenMode](https://github.com/folke/zen-mode.nvim)
 - [True Zen](https://github.com/pocco81/true-zen.nvim)
+- [Twilight](https://github.com/folke/twilight.nvim)
 
 ## License
 
