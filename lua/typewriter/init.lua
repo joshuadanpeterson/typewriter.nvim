@@ -47,7 +47,7 @@ local function setup()
 
 	api.nvim_create_user_command("TWEnable", enable_typewriter_mode, {})
 	api.nvim_create_user_command("TWDisable", disable_typewriter_mode, {})
-	api.nvim_create_user_command("ToggleTypewriter", toggle_typewriter_mode, {})
+	api.nvim_create_user_command("TWToggle", toggle_typewriter_mode, {})
 end
 
 return {
