@@ -12,8 +12,14 @@ local function center_cursor()
 		return
 	end
 
+	-- Save the current view
+	local view = vim.fn.winsaveview()
+
 	-- Center the screen around the cursor
 	api.nvim_command("normal! zz")
+
+	-- Restore the saved view to maintain cursor position
+	vim.fn.winrestview(view)
 end
 
 local function enable_typewriter_mode()
