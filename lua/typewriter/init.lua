@@ -12,8 +12,14 @@ local function center_cursor()
 		return
 	end
 
-	-- Center the screen around the cursor without disrupting insert mode behavior
-	api.nvim_feedkeys(api.nvim_replace_termcodes("<C-o>zz", true, false, true), "n", false)
+	-- Get the current cursor position
+	local cursor = api.nvim_win_get_cursor(0)
+
+	-- Center the screen around the cursor
+	api.nvim_command("normal! zz")
+
+	-- Restore the cursor position
+	api.nvim_win_set_cursor(0, cursor)
 end
 
 local function enable_typewriter_mode()
