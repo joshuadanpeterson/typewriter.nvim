@@ -6,6 +6,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 
 - Keeps the cursor centered on the screen while you type or navigate.
 - Simple commands to enable, disable, and toggle the typewriter mode.
+- Integrates with ZenMode and True Zen for a seamless distraction-free environment.
 
 ## Installation
 
@@ -69,7 +70,42 @@ require('packer').startup(function()
     use {
         'joshuadanpeterson/typewriter',
         config = function()
-            require('typewriter').setup()
+            require('typewriter').setup({
+                enable_with_zen_mode = true,
+                enable_with_true_zen = true,
+            })
+        end
+    }
+
+    use {
+        'folke/zen-mode.nvim',
+        opts = {
+            on_open = function()
+                vim.cmd('TWEnable')
+            end,
+            on_close = function()
+                vim.cmd('TWDisable')
+            end
+        }
+    }
+
+    use {
+        'pocco81/true-zen.nvim',
+        config = function()
+            require("true-zen").setup {
+                modes = {
+                    ataraxis = {
+                        callbacks = {
+                            open_pre = function()
+                                vim.cmd('TWEnable')
+                            end,
+                            close_pos = function()
+                                vim.cmd('TWDisable')
+                            end
+                        }
+                    }
+                }
+            }
         end
     }
 end)
@@ -88,12 +124,58 @@ lazy.setup({
     {
         'joshuadanpeterson/typewriter',
         config = function()
-            require('typewriter').setup()
+            require('typewriter').setup({
+                enable_with_zen_mode = true,
+                enable_with_true_zen = true,
+            })
         end,
         opts = {}
     },
+
+    {
+        'folke/zen-mode.nvim',
+        opts = {
+            on_open = function()
+                vim.cmd('TWEnable')
+            end,
+            on_close = function()
+                vim.cmd('TWDisable')
+            end
+        }
+    },
+
+    {
+        'pocco81/true-zen.nvim',
+        config = function()
+            require("true-zen").setup {
+                modes = {
+                    ataraxis = {
+                        callbacks = {
+                            open_pre = function()
+                                vim.cmd('TWEnable')
+                            end,
+                            close_pos = function()
+                                vim.cmd('TWDisable')
+                            end
+                        }
+                    }
+                }
+            }
+        end,
+        opts = {}
+    }
 })
 ```
+
+## Integration with ZenMode and True Zen
+
+### ZenMode
+
+[ZenMode](https://github.com/folke/zen-mode.nvim) is a plugin for Neovim written by [folke](https://github.com/folke) that provides a distraction-free coding environment by opening the current buffer in a new full-screen floating window. It hides various UI elements, works well with other floating windows, and integrates with plugins like Telescope and gitsigns. Typewriter integrates with ZenMode to automatically enable typewriter mode when entering ZenMode and disable it when exiting.
+
+### True Zen
+
+[True Zen](https://github.com/pocco81/true-zen.nvim) is another plugin for Neovim written by [pocco81](https://github.com/pocco81) that offers multiple modes to unclutter your screen, including Ataraxis (a zen mode), Minimalist, Narrow, and Focus. True Zen allows you to disable UI components, narrow a text region for better focus, and customize callbacks for each mode. Typewriter integrates with True Zen, particularly the Ataraxis mode, to automatically enable typewriter mode when entering Ataraxis and disable it when exiting.
 
 ## Inspiration
 
@@ -108,7 +190,7 @@ This plugin was inspired by:
 
 Special thanks to the following for their inspiration and ideas:
 
-The [Reddit post "Typewriter Scrolling"](https://www.reddit.com/r/neovim/comments/yhn7sc/typewriter_scrolling/) for the initial idea.
+- The [Reddit post "Typewriter Scrolling"](https://www.reddit.com/r/neovim/comments/yhn7sc/typewriter_scrolling/) for the initial idea.
 
 ## License
 
