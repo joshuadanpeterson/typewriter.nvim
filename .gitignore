@@ -1,2 +1,7 @@
 -P
+# Files and filetypes
 TODO.md
+*.vhs
+*.tape
+*.cast
+*.txt
