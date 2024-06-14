@@ -1,7 +1,8 @@
+# Typewriter
+
 <a href="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim">
   <img src="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim/shield" />
 </a>
-# Typewriter
 
 A Neovim plugin that emulates a typewriter, keeping the cursor centered on the screen for a focused writing experience.
 
