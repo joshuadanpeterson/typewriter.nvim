@@ -2,6 +2,10 @@
 
 A Neovim plugin that emulates a typewriter, keeping the cursor centered on the screen for a focused writing experience.
 
+<div align=center>
+<img src='./demos/demo.gif' height=500 width=500 title='Typewriter Demo'/>
+</div>
+
 ## Features
 
 - Keeps the cursor centered on the screen while you type or navigate.
