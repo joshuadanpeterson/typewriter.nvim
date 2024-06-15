@@ -3,7 +3,7 @@ name: Create Release
 on:
   push:
     tags:
-      - "v*.*.*" # This will trigger on version tags like v1.0.0, v1.2.3, etc.
+      - "v*.*.*" # This will trigger on version tags like v0.0.1, v0.1.0, v1.0.0, etc.
 
 jobs:
   release:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: "20.x"
 
       - name: Install dependencies
         run: npm install
