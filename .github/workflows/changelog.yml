@@ -25,6 +25,9 @@ jobs:
       - name: Install github_changelog_generator
         run: gem install github_changelog_generator
 
+      - name: Update remote URL
+        run: git remote set-url origin https://github.com/joshuadanpeterson/typewriter.nvim.git
+
       - name: Generate Changelog
         run: |
           github_changelog_generator --user joshuadanpeterson --project typewriter.nvim --token ${{ secrets.GITHUB_TOKEN }}
