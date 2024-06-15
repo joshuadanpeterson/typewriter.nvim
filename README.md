@@ -198,7 +198,8 @@ This plugin was inspired by:
 
 Special thanks to the following for their inspiration and ideas:
 
-- The [Reddit post "Typewriter Scrolling"](https://www.reddit.com/r/neovim/comments/yhn7sc/typewriter_scrolling/) for the initial idea.
+- The [Reddit post "Typewriter Scrolling"](https://www.reddit.com/r/neovim/comments/yhn7sc/typewriter_scrolling/).
+- The [Obsidian plugin "Typewriter Mode"](https://github.com/davisriedel/obsidian-typewriter-mode).
 
 ## License
 
