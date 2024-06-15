@@ -1,4 +1,3 @@
----
 name: Type Check Code Base
 on:
   pull_request: ~
