@@ -5,6 +5,9 @@ on:
     tags:
       - "v*.*.*" # This will trigger on version tags like v0.0.1, v0.1.0, v1.0.0, etc.
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
