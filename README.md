@@ -22,7 +22,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 
 Add the following to your Packer configuration:
 
-```lua
+```
 use {
     'joshuadanpeterson/typewriter',
     config = function()
@@ -35,7 +35,7 @@ use {
 
 Add the following to your Lazy.nvim configuration:
 
-```lua
+```
 local lazy = require('lazy')
 
 lazy.setup({
@@ -51,21 +51,27 @@ lazy.setup({
 })
 ```
 
-## Commands
+## [Commands](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Typewriter.nvim-Commands)
 
-| Command      | Description                        |
-| ------------ | ---------------------------------- |
-| `:TWEnable`  | Enable typewriter mode.            |
-| `:TWDisable` | Disable typewriter mode.           |
-| `:TWToggle`  | Toggle typewriter mode on and off. |
+Here is a markdown table that summarizes the commands available in Typewriter.nvim:
 
-## Usage
+| Command      | Description                       |
+| ------------ | --------------------------------- |
+| `:TWEnable`  | Enable typewriter mode            |
+| `:TWDisable` | Disable typewriter mode           |
+| `:TWToggle`  | Toggle typewriter mode on and off |
 
-1. Add the plugin to your Neovim configuration as shown in the installation section.
-2. Reload Neovim or restart it.
-3. Use the provided commands to control the typewriter mode.
+These commands allow you to control the typewriter mode in Neovim, enhancing your writing and coding experience by maintaining focus and reducing distractions.
 
-## Example Configuration
+## [ZenMode and True Zen Configuration](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Integration-Guide)
+
+### ZenMode
+
+[ZenMode](https://github.com/folke/zen-mode.nvim) is a plugin for Neovim written by [folke](https://github.com/folke) that provides a distraction-free coding environment by opening the current buffer in a new full-screen floating window. It hides various UI elements, works well with other floating windows, and integrates with plugins like Telescope and gitsigns. Typewriter integrates with ZenMode to automatically enable typewriter mode when entering ZenMode and disable it when exiting.
+
+### True Zen
+
+[True Zen](https://github.com/pocco81/true-zen.nvim) is another plugin for Neovim written by [pocco81](https://github.com/pocco81) that offers multiple modes to unclutter your screen, including Ataraxis (a zen mode), Minimalist, Narrow, and Focus. True Zen allows you to disable UI components, narrow a text region for better focus, and customize callbacks for each mode. Typewriter integrates with True Zen, particularly the Ataraxis mode, to automatically enable typewriter mode when entering Ataraxis and disable it when exiting.
 
 ### Packer
 
@@ -175,16 +181,6 @@ lazy.setup({
 })
 ```
 
-## Integration with ZenMode and True Zen
-
-### ZenMode
-
-[ZenMode](https://github.com/folke/zen-mode.nvim) is a plugin for Neovim written by [folke](https://github.com/folke) that provides a distraction-free coding environment by opening the current buffer in a new full-screen floating window. It hides various UI elements, works well with other floating windows, and integrates with plugins like Telescope and gitsigns. Typewriter integrates with ZenMode to automatically enable typewriter mode when entering ZenMode and disable it when exiting.
-
-### True Zen
-
-[True Zen](https://github.com/pocco81/true-zen.nvim) is another plugin for Neovim written by [pocco81](https://github.com/pocco81) that offers multiple modes to unclutter your screen, including Ataraxis (a zen mode), Minimalist, Narrow, and Focus. True Zen allows you to disable UI components, narrow a text region for better focus, and customize callbacks for each mode. Typewriter integrates with True Zen, particularly the Ataraxis mode, to automatically enable typewriter mode when entering Ataraxis and disable it when exiting.
-
 ## Inspiration
 
 This plugin was inspired by:
@@ -206,3 +202,7 @@ Special thanks to the following for their inspiration and ideas:
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Feel free to open up an [issue](https://github.com/joshuadanpeterson/typewriter.nvim/issues) or a [pull request](https://github.com/joshuadanpeterson/typewriter.nvim/pulls) to contribute to the project.
