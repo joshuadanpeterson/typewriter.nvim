@@ -6,13 +6,16 @@ on:
       - "v*.*.*" # This will trigger on version tags like v0.0.1, v0.1.0, v1.0.0, etc.
   workflow_dispatch: # This allows manual triggering of the workflow from the GitHub Actions tab.
 
+permissions:
+  contents: write
+
 jobs:
   generate-changelog:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Updated to use Node.js 20
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -28,8 +31,8 @@ jobs:
 
       - name: Commit and push changelog
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name 'Josh Peterson'
+          git config --global user.email 'joshuadanpeterson@gmail.com'
           git add CHANGELOG.md
           git commit -m 'Update changelog'
           git push
