@@ -200,6 +200,8 @@ Special thanks to the following for their inspiration and ideas:
 
 - The [Reddit post "Typewriter Scrolling"](https://www.reddit.com/r/neovim/comments/yhn7sc/typewriter_scrolling/).
 - The [Obsidian plugin "Typewriter Mode"](https://github.com/davisriedel/obsidian-typewriter-mode).
+- [JotterPad Typewriter Scrolling](https://help.jotterpad.app/en/article/typewriter-scrolling-1mb7vjz/)
+- [Scrivener Typewriter Scrolling](https://scrivenerclasses.com/lesson/typewriter-scrolling/)
 
 ## License
 
