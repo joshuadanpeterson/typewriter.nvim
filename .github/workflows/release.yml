@@ -1,0 +1,44 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*" # This will trigger on version tags like v1.0.0, v1.2.3, etc.
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ## Changes
+            - Initial release of Typewriter.nvim.
+            - Features:
+              - Keeps the cursor centered on the screen while typing or navigating.
+              - Simple commands to enable, disable, and toggle the typewriter mode.
+              - Integrates with ZenMode and True Zen for a seamless distraction-free environment.
+
+          draft: false
+          prerelease: false
