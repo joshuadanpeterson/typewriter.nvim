@@ -87,7 +87,7 @@ Here is a markdown table that summarizes the commands available in Typewriter.nv
 | `:TWEnable`  | Enable typewriter mode                                                      |
 | `:TWDisable` | Disable typewriter mode                                                     |
 | `:TWToggle`  | Toggle typewriter mode on and off                                           |
-| `'TWCenter`  | Center the view around the current code block or function using Tree-sitter |
+| `:TWCenter`  | Center the view around the current code block or function using Tree-sitter |
 
 These commands allow you to control the typewriter mode in Neovim, enhancing your writing and coding experience by maintaining focus and reducing distractions. The new `:TWCenter` command leverages Tree-sitter to intelligently center the view around the current code block or function, providing a more focused view of your code.
 
