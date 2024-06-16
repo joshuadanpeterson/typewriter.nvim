@@ -3,6 +3,7 @@ local M = {}
 
 M.expand = {
 	["function"] = true,
+	["body"] = true,
 	["method"] = true,
 	["table"] = true,
 	["if_statement"] = true,
@@ -44,6 +45,7 @@ M.expand = {
 	["interface_declaration"] = true,
 	["type_alias"] = true,
 	["variable_declaration"] = true,
+	["lexical_declaration"] = true,
 	["assignment"] = true,
 	["expression_statement"] = true,
 	["return_statement"] = true,
