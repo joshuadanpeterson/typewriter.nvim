@@ -15,14 +15,28 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - Keeps the cursor centered on the screen while you type or navigate.
 - Simple commands to enable, disable, and toggle the typewriter mode.
 - Integrates with ZenMode and True Zen for a seamless distraction-free environment.
+- New `:TWCenter` command to center the view around the current code block or function using [Tree-sitter](https://tree-sitter.github.io/tree-sitter/).
 
 ## Installation
+
+### Dependencies
+
+Typewriter requires the following dependencies:
+
+[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Typewriter uses Tree-sitter to determine the current code block or function for the `:TWCenter` command.
+
+Make sure to install and configure nvim-treesitter before using Typewriter.
 
 ### Using [Packer](https://github.com/wbthomason/packer.nvim)
 
 Add the following to your Packer configuration:
 
 ```
+use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+}
+
 use {
     'joshuadanpeterson/typewriter',
     config = function()
@@ -42,7 +56,15 @@ lazy.setup({
     -- Other plugins...
 
     {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+    },
+
+    {
         'joshuadanpeterson/typewriter',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
         config = function()
             require('typewriter').setup()
         end,
@@ -55,13 +77,14 @@ lazy.setup({
 
 Here is a markdown table that summarizes the commands available in Typewriter.nvim:
 
-| Command      | Description                       |
-| ------------ | --------------------------------- |
-| `:TWEnable`  | Enable typewriter mode            |
-| `:TWDisable` | Disable typewriter mode           |
-| `:TWToggle`  | Toggle typewriter mode on and off |
+| Command      | Description                                                                 |
+| ------------ | --------------------------------------------------------------------------- |
+| `:TWEnable`  | Enable typewriter mode                                                      |
+| `:TWDisable` | Disable typewriter mode                                                     |
+| `:TWToggle`  | Toggle typewriter mode on and off                                           |
+| `'TWCenter`  | Center the view around the current code block or function using Tree-sitter |
 
-These commands allow you to control the typewriter mode in Neovim, enhancing your writing and coding experience by maintaining focus and reducing distractions.
+These commands allow you to control the typewriter mode in Neovim, enhancing your writing and coding experience by maintaining focus and reducing distractions. The new `:TWCenter` command leverages Tree-sitter to intelligently center the view around the current code block or function, providing a more focused view of your code.
 
 ## [ZenMode and True Zen Configuration](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Integration-Guide)
 
@@ -189,6 +212,7 @@ This plugin was inspired by:
 - [ZenMode](https://github.com/folke/zen-mode.nvim)
 - [True Zen](https://github.com/pocco81/true-zen.nvim)
 - [Twilight](https://github.com/folke/twilight.nvim)
+- [Reddit comment by geckothegeek42](https://www.reddit.com/r/neovim/comments/1dg8myh/comment/l8pwg1a/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
 ## Credits
 
