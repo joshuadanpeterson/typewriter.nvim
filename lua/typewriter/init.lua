@@ -1,8 +1,6 @@
 -- lua/typewriter/init.lua
 -- This plugin provides typewriter scrolling for neovim.
 
--- ~/.local/share/nvim/lazy/typewriter/lua/typewriter/init.lua
-
 local api = vim.api
 local typewriter_active = false
 local config = {
