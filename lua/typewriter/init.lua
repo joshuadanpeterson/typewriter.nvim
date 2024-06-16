@@ -108,7 +108,7 @@ local function center_block_and_cursor()
 end
 
 local function setup(user_config)
-	if user_config then
+	if user_config and type(user_config) == "table" then
 		config = vim.tbl_extend("force", config, user_config)
 	end
 	api.nvim_command("augroup TypewriterMode")
