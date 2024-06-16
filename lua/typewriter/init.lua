@@ -48,7 +48,7 @@ end
 
 local function center_block_and_cursor()
 	local ts_utils = require("nvim-treesitter.ts_utils")
-	local config = require("utils.center_block_config")
+	local config = require("typewriter.utils.center_block_config")
 
 	local function is_significant_block(node)
 		local node_type = node:type()
