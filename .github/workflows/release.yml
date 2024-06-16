@@ -24,6 +24,7 @@ jobs:
             - Added new `:TWCenter` command to center the view around the current code block or function using Tree-sitter.
             - Introduced Tree-sitter as a dependency for intelligent code block detection.
             - Updated installation instructions to include Tree-sitter setup.
+            - Moved `center_block_config.lua` to the `utils` folder for better organization.
             - Enhanced README with information about the `:TWCenter` command and Tree-sitter dependency.
 
             ## Previous Features
