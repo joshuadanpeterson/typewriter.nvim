@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.1.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.1.0) (2024-06-16)
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.9...v0.1.0)
+
 ## [v0.0.9](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.9) (2024-06-15)
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.8...v0.0.9)
