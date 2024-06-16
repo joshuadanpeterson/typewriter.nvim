@@ -7,7 +7,7 @@
 A Neovim plugin that emulates a typewriter, keeping the cursor centered on the screen for a focused writing experience.
 
 <div align=center>
-<img src='./demos/demo.gif' height=500 width=500 title='Typewriter Demo'/>
+<img src='./demos/demo.gif' height=500 width=600 title='Typewriter Demo'/>
 </div>
 
 ## Features
@@ -16,6 +16,10 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - Simple commands to enable, disable, and toggle the typewriter mode.
 - Integrates with ZenMode and True Zen for a seamless distraction-free environment.
 - New `:TWCenter` command to center the view around the current code block or function using [Tree-sitter](https://tree-sitter.github.io/tree-sitter/).
+
+<div align=center>
+<img src='./demos/twcenter_demo.gif' height=500 width=700 title='Typewriter Demo'/>
+</div>
 
 ## Installation
 
@@ -39,6 +43,7 @@ use {
 
 use {
     'joshuadanpeterson/typewriter',
+    requires = 'nvim-treesitter/nvim-treesitter',
     config = function()
         require('typewriter').setup()
     end
