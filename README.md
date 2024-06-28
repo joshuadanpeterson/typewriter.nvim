@@ -16,6 +16,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - Simple commands to enable, disable, and toggle the typewriter mode.
 - Integrates with ZenMode and True Zen for a seamless distraction-free environment.
 - New `:TWCenter` command to center the view around the current code block or function using [Tree-sitter](https://tree-sitter.github.io/tree-sitter/).
+- Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view.
 
 <div align=center>
 <img src='./demos/twcenter_demo.gif' height=500 width=700 title='Typewriter Demo'/>
@@ -115,6 +116,7 @@ require('packer').startup(function()
             require('typewriter').setup({
                 enable_with_zen_mode = true,
                 enable_with_true_zen = true,
+                keep_cursor_position = true,
             })
         end
     }
@@ -169,6 +171,7 @@ lazy.setup({
             require('typewriter').setup({
                 enable_with_zen_mode = true,
                 enable_with_true_zen = true,
+                keep_cursor_position = true,
             })
         end,
         opts = {}
