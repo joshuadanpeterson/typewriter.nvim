@@ -4,7 +4,7 @@
   <img src="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim/shield" />
 </a>
 
-A Neovim plugin that emulates a typewriter, keeping the cursor centered on the screen for a focused writing experience.
+A Neovim plugin that emulates a typewriter, keeping the cursor centered on the screen for a focused writing experience, and provides advanced code block navigation.
 
 <div align=center>
 <img src='./demos/demo.gif' height=500 width=600 title='Typewriter Demo'/>
@@ -15,8 +15,10 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - Keeps the cursor centered on the screen while you type or navigate.
 - Simple commands to enable, disable, and toggle the typewriter mode.
 - Integrates with ZenMode and True Zen for a seamless distraction-free environment.
-- New `:TWCenter` command to center the view around the current code block or function using [Tree-sitter](https://tree-sitter.github.io/tree-sitter/).
-- Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view.
+- `:TWCenter` command to center the view around the current code block or function using [Tree-sitter](https://tree-sitter.github.io/tree-sitter/).
+- `:TWTop` command to move the top of the current code block to the top of the screen.
+- `:TWBottom` command to move the bottom of the current code block to the bottom of the screen.
+- Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view or using TWTop/TWBottom.
 
 <div align=center>
 <img src='./demos/twcenter_demo.gif' height=500 width=700 title='Typewriter Demo'/>
@@ -28,7 +30,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 
 Typewriter requires the following dependencies:
 
-[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Typewriter uses Tree-sitter to determine the current code block or function for the `:TWCenter` command.
+[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Typewriter uses Tree-sitter to determine the current code block or function for the `:TWCenter`, `:TWTop`, and `:TWBottom` commands.
 
 Make sure to install and configure nvim-treesitter before using Typewriter.
 
@@ -36,7 +38,7 @@ Make sure to install and configure nvim-treesitter before using Typewriter.
 
 Add the following to your Packer configuration:
 
-```
+```lua
 use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
@@ -55,7 +57,7 @@ use {
 
 Add the following to your Lazy.nvim configuration:
 
-```
+```lua
 local lazy = require('lazy')
 
 lazy.setup({
@@ -89,8 +91,10 @@ Here is a markdown table that summarizes the commands available in Typewriter.nv
 | `:TWDisable` | Disable typewriter mode                                                     |
 | `:TWToggle`  | Toggle typewriter mode on and off                                           |
 | `:TWCenter`  | Center the view around the current code block or function using Tree-sitter |
+| `:TWTop`     | Move the top of the current code block to the top of the screen             |
+| `:TWBottom`  | Move the bottom of the current code block to the bottom of the screen       |
 
-These commands allow you to control the typewriter mode in Neovim, enhancing your writing and coding experience by maintaining focus and reducing distractions. The new `:TWCenter` command leverages Tree-sitter to intelligently center the view around the current code block or function, providing a more focused view of your code.
+These commands allow you to control the typewriter mode in Neovim and navigate code blocks, enhancing your writing and coding experience by maintaining focus and reducing distractions. The `:TWCenter`, `:TWTop`, and `:TWBottom` commands leverage Tree-sitter to intelligently manipulate the view of your code blocks, providing a more focused and flexible coding experience.
 
 ## [ZenMode and True Zen Configuration](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Integration-Guide)
 
