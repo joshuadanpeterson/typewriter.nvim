@@ -20,16 +20,22 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            ## Changes
-            - Added new `:TWCenter` command to center the view around the current code block or function using Tree-sitter.
+            ## New Features
+            - Added new `:TWTop` and `:TWBottom` commands to align the current code block with the top or bottom of the screen, respectively.
+            - Introduced `keep_cursor_position` option to maintain cursor's relative position within the text when using `:TWCenter`, `:TWTop`, and `:TWBottom`.
+
+            ## Previous Changes
+            - Added `:TWCenter` command to center the view around the current code block or function using Tree-sitter.
             - Introduced Tree-sitter as a dependency for intelligent code block detection.
             - Updated installation instructions to include Tree-sitter setup.
             - Moved `center_block_config.lua` to the `utils` folder for better organization.
             - Enhanced README with information about the `:TWCenter` command and Tree-sitter dependency.
 
-            ## Previous Features
+            ## Core Features
             - Keeps the cursor centered on the screen while typing or navigating.
             - Simple commands to enable, disable, and toggle the typewriter mode.
             - Integrates with ZenMode and True Zen for a seamless distraction-free environment.
+
+            For more details, please check the [README](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/README.md).
           draft: false
           prerelease: false
