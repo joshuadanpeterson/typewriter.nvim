@@ -222,6 +222,17 @@ lazy.setup({
 })
 ```
 
+## Wiki
+
+- [Home: Overview](https://github.com/joshuadanpeterson/typewriter.nvim/wiki)
+- [Demos](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Demos)
+- [Installation Guide](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Installation-Guide)
+- [Integration Guide](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Integration-Guide)
+- [Tree‐sitter Integration for :TWCenter Command](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Tree%E2%80%90sitter-Integration-for-:TWCenter-Command)
+- [TW `keep_cursor_position` Feature](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/TW-%60keep_cursor_position%60-Feature)
+- [Typewriter.nvim API](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Typewriter.nvim-API)
+- [Typewriter.nvim Commands](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Typewriter.nvim-Commands)
+
 ## Inspiration
 
 This plugin was inspired by:
