@@ -21,10 +21,12 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view or using TWTop/TWBottom.
 
 <div align=center>
+<h3>TWCenter Demo</h3>
 <img src='./demos/twcenter_demo.gif' height=500 width=700 title='TWCenter Demo'/>
 </div>
-
+<br></br>
 <div align=center>
+<h3>TWTop/TWBottom Demo</h3>
 <img src='./demos/twtop_twbottom_demo.gif' height=500 width=700 title='TWTop/TWBottom Demo'/>
 </div>
 
