@@ -11,9 +11,16 @@ M.config = {
 	enable_with_zen_mode = true,
 	enable_with_true_zen = true,
 	keep_cursor_position = true,
+	enable_notifications = true, -- New config option
 }
 
 local typewriter_active = false
+
+local function notify(message)
+	if M.config.enable_notifications then
+		vim.notify(message, vim.log.levels.INFO)
+	end
+end
 
 local function center_cursor()
 	if not typewriter_active then
@@ -28,7 +35,7 @@ local function enable_typewriter_mode()
 		typewriter_active = true
 		-- Set autocommands for normal, insert, and visual modes
 		api.nvim_command('autocmd CursorMoved,CursorMovedI * lua require("typewriter").center_cursor()')
-		print("Typewriter mode enabled")
+		notify("Typewriter mode enabled")
 	end
 end
 
@@ -37,7 +44,7 @@ local function disable_typewriter_mode()
 		typewriter_active = false
 		-- Clear the autocommand group for TypewriterMode
 		api.nvim_command("autocmd! TypewriterMode")
-		print("Typewriter mode disabled")
+		notify("Typewriter mode disabled")
 	end
 end
 
@@ -90,6 +97,8 @@ local function center_block_and_cursor()
 	else
 		vim.cmd("normal! zz")
 	end
+
+	notify("Code block centered")
 end
 
 local function move_to_top_of_block()
@@ -141,6 +150,8 @@ local function move_to_top_of_block()
 			vim.api.nvim_win_set_cursor(0, { start_row + 1 + cursor_row, cursor_col })
 		end)
 	end
+
+	notify("Code block aligned with the top")
 end
 
 local function move_to_bottom_of_block()
@@ -192,6 +203,8 @@ local function move_to_bottom_of_block()
 			vim.api.nvim_win_set_cursor(0, { start_row + 1 + cursor_row, cursor_col })
 		end)
 	end
+
+	notify("Code block aligned with the bottom")
 end
 
 local function setup(user_config)
