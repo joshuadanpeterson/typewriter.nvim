@@ -21,10 +21,11 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             ## New Features
-            - Added new `:TWTop` and `:TWBottom` commands to align the current code block with the top or bottom of the screen, respectively.
-            - Introduced `keep_cursor_position` option to maintain cursor's relative position within the text when using `:TWCenter`, `:TWTop`, and `:TWBottom`.
+            - Introduced `enable_notifications` option to control notifications for actions like enabling/disabling typewriter mode, and aligning code blocks.
 
             ## Previous Changes
+            - Added new `:TWTop` and `:TWBottom` commands to align the current code block with the top or bottom of the screen, respectively.
+            - Introduced `keep_cursor_position` option to maintain cursor's relative position within the text when using `:TWCenter`, `:TWTop`, and `:TWBottom`.
             - Added `:TWCenter` command to center the view around the current code block or function using Tree-sitter.
             - Introduced Tree-sitter as a dependency for intelligent code block detection.
             - Updated installation instructions to include Tree-sitter setup.
