@@ -19,6 +19,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - `:TWTop` command to move the top of the current code block to the top of the screen.
 - `:TWBottom` command to move the bottom of the current code block to the bottom of the screen.
 - Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view or using TWTop/TWBottom.
+- Set `enable_notifications` to `true` in plugin config to enable or disable notifications for actions like enabling/disabling typewriter mode, and aligning code blocks.
 
 <div align=center>
 <h3>TWCenter Demo</h3>
@@ -127,6 +128,7 @@ require('packer').startup(function()
                 enable_with_zen_mode = true,
                 enable_with_true_zen = true,
                 keep_cursor_position = true,
+                enable_notifications = true,
             })
         end
     }
@@ -182,6 +184,7 @@ lazy.setup({
                 enable_with_zen_mode = true,
                 enable_with_true_zen = true,
                 keep_cursor_position = true,
+                enable_notifications = true,
             })
         end,
         opts = {}
@@ -226,6 +229,7 @@ lazy.setup({
 
 - [Home: Overview](https://github.com/joshuadanpeterson/typewriter.nvim/wiki)
 - [Demos](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Demos)
+- [Enable Notifications](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Enable-Notifications)
 - [Installation Guide](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Installation-Guide)
 - [Integration Guide](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Integration-Guide)
 - [Tree‐sitter Integration for :TWCenter Command](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Tree%E2%80%90sitter-Integration-for-:TWCenter-Command)
