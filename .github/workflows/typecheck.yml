@@ -1,9 +1,11 @@
 name: Type Check Code Base
 on:
-  pull_request: ~
+  pull_request:
+    branches:
+      - main
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -11,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
       - name: Checkout Code
         uses: actions/checkout@v3
 
