@@ -41,3 +41,11 @@ jobs:
             For more details, please check the [README](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/README.md).
           draft: false
           prerelease: false
+      - name: Commit and push changelog
+        run: |
+          git config --global user.name 'Josh Peterson'
+          git config --global user.email 'joshuadanpeterson@gmail.com'
+          git pull origin main # Ensure the local branch is up-to-date
+          git add CHANGELOG.md
+          git commit -m 'Update changelog'
+          git push origin HEAD:main
