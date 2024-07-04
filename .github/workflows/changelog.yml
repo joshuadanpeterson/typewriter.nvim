@@ -1,23 +1,19 @@
 name: Generate Changelog
-
 on:
   push:
     tags:
       - "v*.*.*"
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   generate-changelog:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch all history for all tags and branches
+          fetch-depth: 0
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -28,8 +24,6 @@ jobs:
         run: gem install github_changelog_generator
 
       - name: Generate Changelog
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           github_changelog_generator --user joshuadanpeterson --project typewriter.nvim --token ${{ secrets.GITHUB_TOKEN }}
 
