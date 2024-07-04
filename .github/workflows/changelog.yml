@@ -3,8 +3,8 @@ name: Generate Changelog
 on:
   push:
     tags:
-      - "v*.*.*" # This will trigger on version tags like v0.0.1, v0.1.0, v1.0.0, etc.
-  workflow_dispatch: # This allows manual triggering of the workflow from the GitHub Actions tab.
+      - "v*.*.*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,29 +15,30 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 # Updated to use Node.js 20
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all tags and branches
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0" # Specify the version of Ruby
+          ruby-version: "3.0"
 
       - name: Install github_changelog_generator
         run: gem install github_changelog_generator
 
-      - name: Update remote URL
-        run: git remote set-url origin https://github.com/joshuadanpeterson/typewriter.nvim.git
-
       - name: Generate Changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           github_changelog_generator --user joshuadanpeterson --project typewriter.nvim --token ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit and push changelog
         run: |
-          git config --global user.name 'Josh Peterson'
-          git config --global user.email 'joshuadanpeterson@gmail.com'
+          git config --local user.name 'GitHub Action'
+          git config --local user.email 'action@github.com'
           git add CHANGELOG.md
-          git commit -m 'Update changelog'
-          git push origin HEAD:${{ github.event.repository.default_branch }}
+          git commit -m 'Update changelog' || echo "No changes to commit"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
