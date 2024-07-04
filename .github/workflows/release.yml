@@ -9,11 +9,17 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Create GitHub Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1.1.1 # Updated version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
