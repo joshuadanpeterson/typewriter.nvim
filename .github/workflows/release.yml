@@ -2,7 +2,7 @@ name: Create Release
 on:
   push:
     tags:
-      - "v*.*.*" # This will trigger on version tags like v0.0.1, v0.1.0, v1.0.0, etc.
+      - "v*.*.*"
 permissions:
   contents: write
 jobs:
@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
@@ -21,9 +22,10 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             ## New Features
-            - Introduced `enable_notifications` option to control notifications for actions like enabling/disabling typewriter mode, and aligning code blocks.
+            - Fixed issue where \`$\` command in normal mode did not reach the end of the line, causing incorrect cursor placement.
 
             ## Previous Changes
+            - Introduced `enable_notifications` option to control notifications for actions like enabling/disabling typewriter mode, and aligning code blocks.
             - Added new `:TWTop` and `:TWBottom` commands to align the current code block with the top or bottom of the screen, respectively.
             - Introduced `keep_cursor_position` option to maintain cursor's relative position within the text when using `:TWCenter`, `:TWTop`, and `:TWBottom`.
             - Added `:TWCenter` command to center the view around the current code block or function using Tree-sitter.
