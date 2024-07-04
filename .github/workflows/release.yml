@@ -21,9 +21,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create ${{ github.ref_name }} \
-            --title "Release ${{ github.ref_name }}" \
-            --notes-file - <<EOF
+          RELEASE_NOTES=$(cat <<EOF
           ## New Features
           - Fixed issue where \`$\` command in normal mode did not reach the end of the line, causing incorrect cursor placement.
 
@@ -44,15 +42,19 @@ jobs:
 
           For more details, please check the [README](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/README.md).
           EOF
+          )
+          gh release create ${GITHUB_REF#refs/tags/} \
+            --title "Release ${GITHUB_REF#refs/tags/}" \
+            --notes "$RELEASE_NOTES"
 
       - name: Generate Changelog
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh api repos/${{ github.repository }}/releases/generate-notes \
-            -F tag_name=${{ github.ref_name }} \
+            -F tag_name=${GITHUB_REF#refs/tags/} \
             -F target_commitish=main \
-            -F previous_tag_name=$(git describe --tags --abbrev=0 ${{ github.ref_name }}^ 2>/dev/null || echo '') \
+            -F previous_tag_name=$(git describe --tags --abbrev=0 ${GITHUB_REF#refs/tags/}^ 2>/dev/null || echo '') \
             --jq .body > CHANGELOG.md
 
       - name: Commit and push changelog
