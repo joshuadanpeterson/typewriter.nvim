@@ -46,15 +46,11 @@ jobs:
 
       - name: Set up Neovim
         run: |
-          curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-          tar xzf nvim-linux64.tar.gz
-          sudo mv nvim-linux64 /usr/local/
+          sudo add-apt-repository ppa:neovim-ppa/unstable -y
+          sudo apt-get update
+          sudo apt-get install -y neovim
 
-      - name: Install lazy.nvim
-        run: |
-          git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable ~/.local/share/nvim/site/pack/lazy/start/lazy.nvim
-
-      - name: Install plugin dependencies
+      - name: Set up Neovim configuration
         run: |
           mkdir -p ~/.config/nvim
           echo 'require("lazy").setup({' > ~/.config/nvim/init.lua
