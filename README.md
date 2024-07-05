@@ -20,6 +20,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - `:TWBottom` command to move the bottom of the current code block to the bottom of the screen.
 - Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view or using TWTop/TWBottom.
 - Set `enable_notifications` to `true` in plugin config to enable or disable notifications for actions like enabling/disabling typewriter mode, and aligning code blocks.
+- Enable horizontal scrolling in Typewriter mode and center the cursor by setting `enable_horizontal_scroll` to `true` in the plugin configuration.
 
 <div align=center>
 <h3>TWCenter Demo</h3>
@@ -29,6 +30,11 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 <div align=center>
 <h3>TWTop/TWBottom Demo</h3>
 <img src='./demos/twtop_twbottom_demo.gif' height=500 width=700 title='TWTop/TWBottom Demo'/>
+</div>
+<br></br>
+<div align=center>
+<h3>Horizontal Scrolling Demo</h3>
+<img src='./demos/horizontal_scrolling.gif' height=500 width=700 title='Horizontal Scrolling Demo'/>
 </div>
 
 ## Installation
