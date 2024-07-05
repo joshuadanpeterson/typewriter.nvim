@@ -54,7 +54,7 @@ jobs:
           nvim --headless +'lua require("typewriter").setup({ enable_horizontal_scroll = true })' +'autocmd BufEnter * normal! zt' +'qall'
 
       - name: Set up Lua environment
-        run: echo "$HOME/work/typewriter.nvim/typewriter.nvim/.lua/bin" >> $GITHUB_PATH
+        run: echo "${{ github.workspace }}/.lua/bin" >> $GITHUB_PATH
 
       - name: Verify Lua installation
         run: lua -v
