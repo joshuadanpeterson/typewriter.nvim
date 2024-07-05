@@ -12,6 +12,41 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Lua
+        uses: leafo/gh-actions-lua@v2
+        with:
+          luaVersion: "5.1"
+
+      - name: Install dependencies for Lua
+        run: luarocks install busted
+
+      - name: Run Lua tests
+        run: busted
+
+      - name: Set up Neovim
+        run: |
+          curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+          tar xzf nvim-linux64.tar.gz
+          sudo mv nvim-linux64 /usr/local/
+
+      - name: Install lazy.nvim
+        run: |
+          git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable ~/.local/share/nvim/site/pack/lazy/start/lazy.nvim
+
+      - name: Install plugin dependencies
+        run: |
+          mkdir -p ~/.config/nvim
+          echo 'require("lazy").setup({' > ~/.config/nvim/init.lua
+          echo '  "nvim-treesitter/nvim-treesitter",' >> ~/.config/nvim/init.lua
+          echo '  "nvim-lua/plenary.nvim",' >> ~/.config/nvim/init.lua
+          echo '  "lewis6991/gitsigns.nvim",' >> ~/.config/nvim/init.lua
+          echo '})' >> ~/.config/nvim/init.lua
+          nvim --headless -c 'quitall'
+
+      - name: Test horizontal scrolling
+        run: |
+          nvim --headless +'lua require("typewriter").setup({ enable_horizontal_scroll = true })' +'autocmd BufEnter * normal! zt' +'qall'
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
@@ -22,7 +57,8 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             ## New Features
-            - Fixed issue where \`$\` command in normal mode did not reach the end of the line, causing incorrect cursor placement.
+            - Refactored code to modularize the plugin structure while preserving functionality.
+            - Ensured horizontal scrolling works correctly with the new modular structure.
 
             ## Previous Changes
             - Introduced `enable_notifications` option to control notifications for actions like enabling/disabling typewriter mode, and aligning code blocks.
