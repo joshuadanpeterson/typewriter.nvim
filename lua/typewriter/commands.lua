@@ -25,7 +25,9 @@ function M.enable_typewriter_mode()
 		api.nvim_command("augroup TypewriterMode")
 		api.nvim_command("autocmd!")
 		api.nvim_command('autocmd CursorMoved,CursorMovedI * lua require("typewriter.commands").center_cursor()')
-		api.nvim_command("autocmd CursorMoved,CursorMovedI * lua center_cursor_horizontally()")
+		api.nvim_command(
+			'autocmd CursorMoved,CursorMovedI * lua require("typewriter.utils").center_cursor_horizontally()'
+		)
 		api.nvim_command("augroup END")
 		utils.notify("Typewriter mode enabled")
 	end

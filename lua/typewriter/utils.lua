@@ -11,7 +11,7 @@ function M.notify(message)
 	end
 end
 
-_G.center_cursor_horizontally = function()
+function M.center_cursor_horizontally()
 	if not config.config.enable_horizontal_scroll then
 		return
 	end
