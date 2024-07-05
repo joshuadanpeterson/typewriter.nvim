@@ -3,25 +3,6 @@
 </div>
 
 <div align="center">
-  <style>
-    .badge-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      align-items: center;
-      justify-content: center; /* Center the badges */
-    }
-    .badge-container a img {
-      border-radius: 0; /* Hard corners */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s;
-    }
-    .badge-container a img:hover {
-      transform: scale(1.05);
-    }
-  </style>
-
-  <div class="badge-container">
     <a href="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim">
       <img src="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim/shield?style=for-the-badge" alt="Dotfyle Plugin">
     </a>
@@ -61,7 +42,6 @@
     <a href="https://github.com/joshuadanpeterson/typewriter.nvim/commits">
       <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge&color=orange">
     </a>
-  </div>
 </div>
 </br>
 
