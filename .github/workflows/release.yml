@@ -25,6 +25,9 @@ jobs:
         with:
           luaVersion: "5.1"
 
+      - name: Set up LuaRocks
+        uses: leafo/gh-actions-luarocks@v4
+
       - name: Install dependencies for Lua
         run: luarocks install busted
 
