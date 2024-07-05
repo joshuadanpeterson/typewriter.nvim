@@ -1,8 +1,32 @@
 # Changelog
 
+## [Unreleased](https://github.com/joshuadanpeterson/typewriter.nvim/tree/HEAD)
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.0...HEAD)
+
+**Fixed bugs:**
+
+- Fix `$` Command Issue in Normal Mode [\#2](https://github.com/joshuadanpeterson/typewriter.nvim/pull/2) ([joshuadanpeterson](https://github.com/joshuadanpeterson))
+
+## [v0.4.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.0) (2024-07-05)
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.3.2...v0.4.0)
+
+**Fixed bugs:**
+
+- In normal mode with plugin installed using command $ - end of line not reached. [\#1](https://github.com/joshuadanpeterson/typewriter.nvim/issues/1)
+
+## [v0.3.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.3.2) (2024-07-04)
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.3.0...v0.3.2)
+
 ## [v0.3.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.3.0) (2024-07-01)
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.2.0...v0.3.0)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.3.1...v0.3.0)
+
+## [v0.3.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.3.1) (2024-07-01)
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.2.0...v0.3.1)
 
 ## [v0.2.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.2.0) (2024-06-30)
 
