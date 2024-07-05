@@ -1,8 +1,69 @@
-# Typewriter
+<div align=center>
+<h1>Typewriter</h1>
+</div>
 
-<a href="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim">
-  <img src="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim/shield" />
-</a>
+<div align="center">
+  <style>
+    .badge-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      align-items: center;
+      justify-content: center; /* Center the badges */
+    }
+    .badge-container a img {
+      border-radius: 0; /* Hard corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+    .badge-container a img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+
+  <div class="badge-container">
+    <a href="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim">
+      <img src="https://dotfyle.com/plugins/joshuadanpeterson/typewriter.nvim/shield?style=for-the-badge" alt="Dotfyle Plugin">
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+      <img src="https://img.shields.io/badge/License-MIT-blue.svg?logo=open-source-initiative&style=for-the-badge" alt="License: MIT">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/releases">
+      <img alt="GitHub Release Version" src="https://img.shields.io/github/v/release/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/releases">
+      <img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim">
+      <img alt="GitHub Code Size" src="https://img.shields.io/github/languages/code-size/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/issues">
+      <img alt="GitHub Issues" src="https://img.shields.io/github/issues/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge&color=darkblue">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/pulls">
+      <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/commits">
+      <img alt="GitHub Commits Since Latest Release" src="https://img.shields.io/github/commits-since/joshuadanpeterson/typewriter.nvim/latest?logo=github&style=for-the-badge">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim">
+      <img alt="GitHub Language" src="https://img.shields.io/badge/lua-100000?style=for-the-badge&logo=lua&logoColor=white&label=language&color=purple">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/stargazers">
+      <img alt="GitHub Stars" src="https://img.shields.io/github/stars/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge&color=gold">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/network/members">
+      <img alt="GitHub Forks" src="https://img.shields.io/github/forks/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge&color=teal">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/graphs/contributors">
+      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge&color=lightgrey">
+    </a>
+    <a href="https://github.com/joshuadanpeterson/typewriter.nvim/commits">
+      <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge&color=orange">
+    </a>
+  </div>
+</div>
+</br>
 
 A Neovim plugin that emulates a typewriter, keeping the cursor centered on the screen for a focused writing experience, and provides advanced code block navigation.
 
