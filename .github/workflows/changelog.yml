@@ -1,6 +1,10 @@
 name: Generate Changelog
+
 on:
   push:
+    branches:
+      - main
+      - center-horizontally
     tags:
       - "v*.*.*"
   workflow_dispatch:
@@ -33,6 +37,6 @@ jobs:
           git config --local user.email 'action@github.com'
           git add CHANGELOG.md
           git commit -m 'Update changelog' || echo "No changes to commit"
-          git push
+          git push origin HEAD:${GITHUB_REF#refs/heads/}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
