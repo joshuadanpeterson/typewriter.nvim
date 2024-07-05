@@ -1,4 +1,6 @@
 -- lua/typewriter/utils/center_block_config.lua
+-- Configuration for significant code blocks to center in Typewriter.nvim
+
 local M = {}
 
 M.expand = {
