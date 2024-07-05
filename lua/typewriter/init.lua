@@ -11,7 +11,8 @@ M.config = {
 	enable_with_zen_mode = true,
 	enable_with_true_zen = true,
 	keep_cursor_position = true,
-	enable_notifications = true, -- New config option
+	enable_notifications = true,
+	enable_horizontal_scroll = true, -- New config option
 }
 
 local typewriter_active = false
@@ -20,6 +21,18 @@ local function notify(message)
 	if M.config.enable_notifications then
 		vim.notify(message, vim.log.levels.INFO)
 	end
+end
+
+-- Horizontal scroll function
+_G.center_cursor_horizontally = function()
+	if not M.config.enable_horizontal_scroll then
+		return
+	end
+	local win_width = vim.api.nvim_win_get_width(0)
+	local cursor_col = vim.fn.virtcol(".")
+	local left_col = math.max(cursor_col - math.floor(win_width / 2), 0) + 10 -- Adjusted by adding 10 for fine-tuning
+	vim.api.nvim_win_set_option(0, "wrap", false) -- Disable line wrapping to ensure horizontal scrolling
+	vim.fn.winrestview({ leftcol = left_col })
 end
 
 local function center_cursor()
@@ -38,7 +51,11 @@ local function enable_typewriter_mode()
 	if not typewriter_active then
 		typewriter_active = true
 		-- Set autocommands for normal, insert, and visual modes
+		api.nvim_command("augroup TypewriterMode")
+		api.nvim_command("autocmd!")
 		api.nvim_command('autocmd CursorMoved,CursorMovedI * lua require("typewriter").center_cursor()')
+		api.nvim_command("autocmd CursorMoved,CursorMovedI * lua center_cursor_horizontally()") -- Add horizontal scrolling
+		api.nvim_command("augroup END")
 		notify("Typewriter mode enabled")
 	end
 end
@@ -47,7 +64,9 @@ local function disable_typewriter_mode()
 	if typewriter_active then
 		typewriter_active = false
 		-- Clear the autocommand group for TypewriterMode
-		api.nvim_command("autocmd! TypewriterMode")
+		api.nvim_command("augroup TypewriterMode")
+		api.nvim_command("autocmd!")
+		api.nvim_command("augroup END")
 		notify("Typewriter mode disabled")
 	end
 end
