@@ -125,7 +125,7 @@ jobs:
         run: |
           NEW_VERSION='${{ steps.determine_version.outputs.NEW_VERSION }}'
           CHANGELOG='${{ steps.get_changelog.outputs.CHANGELOG }}'
-          CURRENT_DATE=$(date +%Y-%m-%d)
+          CURRENT_DATE=$(TZ='America/Denver' date +%Y-%m-%d)
           REPO_URL="https://github.com/joshuadanpeterson/typewriter.nvim"
 
           format_entry() {
@@ -152,8 +152,24 @@ jobs:
               version="${version:1:-1}"
               date_part="${BASH_REMATCH[2]}"
               date=$(echo "$date_part" | grep -oP '\(\K[0-9]{4}-[0-9]{2}-[0-9]{2}(?=\))' || echo "Unknown Date")
-              content=$(sed -n '/^##/,/^##/{ /^##/!p; }' CHANGELOG.md | sed '/^$/N;/^\n$/D')
+              
+              # Convert date to Mountain Time if it's not "Unknown Date"
+              if [ "$date" != "Unknown Date" ]; then
+                date=$(TZ='America/Denver' date -d "$date" +%Y-%m-%d)
+              fi
+              
+              # Extract content up to the next version header
+              content=$(sed -n "/^## \[$version\]/,/^## \[v[0-9]/{ /^## \[v[0-9]/d; p; }" CHANGELOG.md)
+              
+              # Remove all existing Full Changelog links
+              content=$(echo "$content" | sed '/^\[Full Changelog\]/d')
+              
+              # Trim leading and trailing whitespace
+              content=$(echo "$content" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+              
+              # Format the entry with a single Full Changelog link
               format_entry "$version" "$date" "$content" "$prev_version" >> temp_changelog.md
+              
               prev_version="$version"
             elif [[ ! $line =~ ^#[[:space:]]+Changelog ]]; then
               echo "$line" >> temp_changelog.md
