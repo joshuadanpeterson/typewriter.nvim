@@ -140,6 +140,10 @@ jobs:
             echo
           }
 
+          remove_duplicates() {
+            echo "$1" | awk '!seen[$0]++'
+          }
+
           echo "# Changelog" > temp_changelog.md
           echo >> temp_changelog.md
 
@@ -163,6 +167,9 @@ jobs:
               
               # Remove all existing Full Changelog links
               content=$(echo "$content" | sed '/^\[Full Changelog\]/d')
+
+              # Remove duplicate lines
+              content=$(remove_duplicates "$content")
               
               # Trim leading and trailing whitespace
               content=$(echo "$content" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
