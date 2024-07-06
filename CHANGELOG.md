@@ -1,3 +1,9 @@
+# v0.4.2
+
+- fix(ci): resolve sed error in CHANGELOG update step
+- fix(ci): resolve syntax error in CHANGELOG update step
+- feat(ci): implement automated CHANGELOG.md updates in release workflow
+
 # Changelog
 
 ## [Unreleased](https://github.com/joshuadanpeterson/typewriter.nvim/tree/HEAD)
