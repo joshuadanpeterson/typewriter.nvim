@@ -1,4 +1,6 @@
-# v0.4.3 (2024-07-06)
+# Changelog
+
+## [v0.4.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.3) (2024-07-06)
 
 - Merge branch center-horizontally of https://github.com/joshuadanpeterson/typewriter.nvim into center-horizontally Update local branch with remote CHANGELOG generation
 - feat(ci): standardize all CHANGELOG entries with dates and changelog links
@@ -6,14 +8,12 @@
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.2...v0.4.3)
 
-# v0.4.2 (Unknown Date)
-
+## [v0.4.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.2) (2024-07-06)
 
 - fix(ci): resolve sed error in CHANGELOG update step
 - fix(ci): resolve syntax error in CHANGELOG update step
 - feat(ci): implement automated CHANGELOG.md updates in release workflow
 
-# Changelog
 
 ## [Unreleased](https://github.com/joshuadanpeterson/typewriter.nvim/tree/HEAD)
 
