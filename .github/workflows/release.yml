@@ -123,17 +123,20 @@ jobs:
 
       - name: Update CHANGELOG.md
         run: |
-          NEW_VERSION=${{ steps.determine_version.outputs.NEW_VERSION }}
-          CHANGELOG=${{ steps.get_changelog.outputs.CHANGELOG }}
+          NEW_VERSION='${{ steps.determine_version.outputs.NEW_VERSION }}'
+          CHANGELOG='${{ steps.get_changelog.outputs.CHANGELOG }}'
+
+          # Escape special characters in CHANGELOG
+          CHANGELOG_ESCAPED=$(echo "$CHANGELOG" | sed 's/[&/\]/\\&/g')
 
           # Prepend new changes to CHANGELOG.md
-          echo -e "# $NEW_VERSION\n\n$CHANGELOG\n\n$(cat CHANGELOG.md)" > CHANGELOG.md
+          sed -i "1i# ${NEW_VERSION}\n\n${CHANGELOG_ESCAPED}\n" CHANGELOG.md
 
           # Commit and push the updated CHANGELOG.md
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add CHANGELOG.md
-          git commit -m "docs: update CHANGELOG.md for $NEW_VERSION"
+          git commit -m "docs: update CHANGELOG.md for ${NEW_VERSION}"
           git push
 
       - name: Create GitHub Release
