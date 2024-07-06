@@ -147,39 +147,35 @@ jobs:
           echo "# Changelog" > temp_changelog.md
           echo >> temp_changelog.md
 
+          # Add new version
           format_entry "$NEW_VERSION" "$CURRENT_DATE" "$CHANGELOG" "${{ steps.determine_version.outputs.LATEST_TAG }}" >> temp_changelog.md
 
           prev_version="$NEW_VERSION"
+          declare -A processed_versions
+
           while IFS= read -r line; do
             if [[ $line =~ ^##[[:space:]]+(\[v[0-9]+\.[0-9]+\.[0-9]+\])(.*)$ ]]; then
               version="${BASH_REMATCH[1]}"
               version="${version:1:-1}"
+              if [[ -n "${processed_versions[$version]}" ]]; then
+                continue
+              fi
+              processed_versions[$version]=1
+
               date_part="${BASH_REMATCH[2]}"
               date=$(echo "$date_part" | grep -oP '\(\K[0-9]{4}-[0-9]{2}-[0-9]{2}(?=\))' || echo "Unknown Date")
               
-              # Convert date to Mountain Time if it's not "Unknown Date"
               if [ "$date" != "Unknown Date" ]; then
                 date=$(TZ='America/Denver' date -d "$date" +%Y-%m-%d)
               fi
               
-              # Extract content up to the next version header
               content=$(sed -n "/^## \[$version\]/,/^## \[v[0-9]/{ /^## \[v[0-9]/d; p; }" CHANGELOG.md)
-              
-              # Remove all existing Full Changelog links
-              content=$(echo "$content" | sed '/^\[Full Changelog\]/d')
-
-              # Remove duplicate lines
+              content=$(echo "$content" | sed '/^\[Full Changelog\]/d' | sed '/^$/N;/^\n$/D')
               content=$(remove_duplicates "$content")
               
-              # Trim leading and trailing whitespace
-              content=$(echo "$content" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-              
-              # Format the entry with a single Full Changelog link
               format_entry "$version" "$date" "$content" "$prev_version" >> temp_changelog.md
               
               prev_version="$version"
-            elif [[ ! $line =~ ^#[[:space:]]+Changelog ]]; then
-              echo "$line" >> temp_changelog.md
             fi
           done < CHANGELOG.md
 
@@ -193,7 +189,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add CHANGELOG.md
-          git commit -m "docs: update CHANGELOG.md for ${NEW_VERSION} and standardize all entries"
+          git commit -m "docs: update CHANGELOG.md for ${NEW_VERSION} and remove duplicate entries"
           git push
 
       - name: Create GitHub Release
