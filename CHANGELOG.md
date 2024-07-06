@@ -19,7 +19,7 @@
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.7...v0.4.8)
 
 
-## [v0.4.7](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.7) (2024-07-06)
+## [v0.4.7](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.7) (2024-07-05)
 
 - Update CHANGELOG.md
 - docs: update CHANGELOG.md for v0.4.6 and standardize all entries
@@ -33,7 +33,7 @@
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.6...v0.4.7)
 
 
-## [v0.4.6](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.6) (2024-07-06)
+## [v0.4.6](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.6) (2024-07-05)
 
 - Merge branch center-horizontally of https://github.com/joshuadanpeterson/typewriter.nvim into center-horizontally Bringing local repo into line with remote repo
 - refactor(ci): optimize CHANGELOG update process in release workflow
@@ -48,7 +48,7 @@
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.5...v0.4.6)
 
-## [v0.4.5](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.5) (2024-07-06)
+## [v0.4.5](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.5) (2024-07-05)
 
 - Update CHANGELOG.md
 - docs: update CHANGELOG.md for v0.4.4 and standardize all entries
