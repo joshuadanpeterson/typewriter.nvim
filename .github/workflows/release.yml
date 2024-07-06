@@ -121,6 +121,21 @@ jobs:
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
+      - name: Update CHANGELOG.md
+        run: |
+          NEW_VERSION=${{ steps.determine_version.outputs.NEW_VERSION }}
+          CHANGELOG=${{ steps.get_changelog.outputs.CHANGELOG }}
+
+          # Prepend new changes to CHANGELOG.md
+          echo -e "# $NEW_VERSION\n\n$CHANGELOG\n\n$(cat CHANGELOG.md)" > CHANGELOG.md
+
+          # Commit and push the updated CHANGELOG.md
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add CHANGELOG.md
+          git commit -m "docs: update CHANGELOG.md for $NEW_VERSION"
+          git push
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
@@ -133,6 +148,8 @@ jobs:
             ## Changes in this Release
 
             ${{ steps.get_changelog.outputs.CHANGELOG }}
+
+            For full changelog, see [CHANGELOG.md](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/CHANGELOG.md)
 
             ## Core Features
             - Keeps the cursor centered on the screen while typing or navigating.
