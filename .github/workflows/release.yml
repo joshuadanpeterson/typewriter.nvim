@@ -125,25 +125,62 @@ jobs:
         run: |
           NEW_VERSION='${{ steps.determine_version.outputs.NEW_VERSION }}'
           CHANGELOG='${{ steps.get_changelog.outputs.CHANGELOG }}'
+          CURRENT_DATE=$(date +%Y-%m-%d)
+          REPO_URL="https://github.com/joshuadanpeterson/typewriter.nvim"
 
-          # Create a temporary file with the new content
-          cat << EOF > temp_changelog.md
-          # ${NEW_VERSION}
+          # Function to format a single changelog entry
+          format_entry() {
+            local version=$1
+            local date=$2
+            local content=$3
+            local prev_version=$4
+            echo "# $version ($date)"
+            echo
+            echo "$content"
+            echo
+            echo "[Full Changelog]($REPO_URL/compare/$prev_version...$version)"
+            echo
+          }
 
-          ${CHANGELOG}
+          # Create a temporary file for the new changelog
+          touch temp_changelog.md
 
-          EOF
+          # Add the new version
+          format_entry "$NEW_VERSION" "$CURRENT_DATE" "$CHANGELOG" "${{ steps.determine_version.outputs.LATEST_TAG }}" > temp_changelog.md
 
-          # Prepend the new content to the existing CHANGELOG.md
-          cat temp_changelog.md CHANGELOG.md > updated_changelog.md
-          mv updated_changelog.md CHANGELOG.md
-          rm temp_changelog.md
+          # Process existing entries
+          prev_version="$NEW_VERSION"
+          while IFS= read -r line; do
+            if [[ $line =~ ^#[[:space:]]+(v[0-9]+\.[0-9]+\.[0-9]+)(.*)$ ]]; then
+              version="${BASH_REMATCH[1]}"
+              date_part="${BASH_REMATCH[2]}"
+              if [[ $date_part =~ \(([0-9]{4}-[0-9]{2}-[0-9]{2})\) ]]; then
+                date="${BASH_REMATCH[1]}"
+              else
+                date="Unknown Date"
+              fi
+              content=""
+              while IFS= read -r content_line && [[ ! $content_line =~ ^#[[:space:]]+v[0-9]+ ]]; do
+                content+="$content_line"$'\n'
+              done
+              format_entry "$version" "$date" "$content" "$prev_version" >> temp_changelog.md
+              prev_version="$version"
+              if [[ ! -z "$content_line" ]]; then
+                echo "$content_line" >> temp_changelog.md
+              fi
+            else
+              echo "$line" >> temp_changelog.md
+            fi
+          done < CHANGELOG.md
+
+          # Replace the old CHANGELOG with the new one
+          mv temp_changelog.md CHANGELOG.md
 
           # Commit and push the updated CHANGELOG.md
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add CHANGELOG.md
-          git commit -m "docs: update CHANGELOG.md for ${NEW_VERSION}"
+          git commit -m "docs: update CHANGELOG.md for ${NEW_VERSION} and standardize all entries"
           git push
 
       - name: Create GitHub Release
