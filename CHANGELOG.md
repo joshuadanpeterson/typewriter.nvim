@@ -1,3 +1,10 @@
+# v0.4.5 (2024-07-06)
+
+- Update CHANGELOG.md
+- docs: update CHANGELOG.md for v0.4.4 and standardize all entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.4...v0.4.5)
+
 # Changelog
 
 # [v0.4.4](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.4) (2024-07-05)
