@@ -126,11 +126,18 @@ jobs:
           NEW_VERSION='${{ steps.determine_version.outputs.NEW_VERSION }}'
           CHANGELOG='${{ steps.get_changelog.outputs.CHANGELOG }}'
 
-          # Escape special characters in CHANGELOG
-          CHANGELOG_ESCAPED=$(echo "$CHANGELOG" | sed 's/[&/\]/\\&/g')
+          # Create a temporary file with the new content
+          cat << EOF > temp_changelog.md
+          # ${NEW_VERSION}
 
-          # Prepend new changes to CHANGELOG.md
-          sed -i "1i# ${NEW_VERSION}\n\n${CHANGELOG_ESCAPED}\n" CHANGELOG.md
+          ${CHANGELOG}
+
+          EOF
+
+          # Prepend the new content to the existing CHANGELOG.md
+          cat temp_changelog.md CHANGELOG.md > updated_changelog.md
+          mv updated_changelog.md CHANGELOG.md
+          rm temp_changelog.md
 
           # Commit and push the updated CHANGELOG.md
           git config --local user.email "action@github.com"
