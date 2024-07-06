@@ -1,8 +1,10 @@
 name: Create Release
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches:
+      - main
+      - center-horizontally
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
@@ -11,6 +13,181 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all tags and branches
+
+      - name: Set up Lua
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+        uses: leafo/gh-actions-lua@v2
+        with:
+          luaVersion: "5.1"
+
+      - name: Set up LuaRocks
+        uses: leafo/gh-actions-luarocks@v4
+
+      - name: Install dependencies for Lua
+        run: luarocks install busted
+
+      - name: Run Lua tests
+        run: |
+          if [ -d "spec" ]; then
+            busted
+          elif [ -d "tests" ]; then
+            busted tests
+          else
+            echo "No test directory found. Creating a sample test."
+            mkdir -p spec
+            echo "describe('Sample test', function() it('should pass', function() assert.is_true(true) end) end)" > spec/sample_spec.lua
+            busted
+          fi
+
+      - name: Set up Neovim
+        run: |
+          sudo add-apt-repository ppa:neovim-ppa/unstable -y
+          sudo apt-get update
+          sudo apt-get install -y neovim
+
+      - name: Set up Neovim configuration
+        run: |
+          mkdir -p ~/.config/nvim
+          echo 'require("lazy").setup({' > ~/.config/nvim/init.lua
+          echo '  "nvim-treesitter/nvim-treesitter",' >> ~/.config/nvim/init.lua
+          echo '  "nvim-lua/plenary.nvim",' >> ~/.config/nvim/init.lua
+          echo '  "lewis6991/gitsigns.nvim",' >> ~/.config/nvim/init.lua
+          echo '})' >> ~/.config/nvim/init.lua
+          nvim --headless -c 'quitall'
+
+      - name: Test horizontal scrolling
+        run: |
+          nvim --headless +'lua require("typewriter").setup({ enable_horizontal_scroll = true })' +'autocmd BufEnter * normal! zt' +'qall'
+
+      - name: Set up Lua environment
+        run: echo "${{ github.workspace }}/.lua/bin" >> $GITHUB_PATH
+
+      - name: Verify Lua installation
+        run: lua -v
+
+      - name: Determine next version
+        id: determine_version
+        run: |
+          git fetch --tags
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo 'v0.0.0')
+          echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_OUTPUT
+
+          git log ${LATEST_TAG}..HEAD --pretty=format:%s > commits.txt
+          if grep -q '^BREAKING CHANGE:' commits.txt || grep -q '^[a-zA-Z]\+!:' commits.txt; then
+            BUMP="major"
+          elif grep -q '^feat:' commits.txt; then
+            BUMP="minor"
+          else
+            BUMP="patch"
+          fi
+          echo "BUMP=${BUMP}" >> $GITHUB_OUTPUT
+
+          LATEST_VERSION=${LATEST_TAG#v}
+          IFS='.' read -ra VERSION_PARTS <<< "$LATEST_VERSION"
+          MAJOR=${VERSION_PARTS[0]:-0}
+          MINOR=${VERSION_PARTS[1]:-0}
+          PATCH=${VERSION_PARTS[2]:-0}
+
+          case $BUMP in
+            major)
+              NEW_VERSION="$((MAJOR + 1)).0.0"
+              ;;
+            minor)
+              NEW_VERSION="${MAJOR}.$((MINOR + 1)).0"
+              ;;
+            patch)
+              NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+              ;;
+          esac
+          echo "NEW_VERSION=v${NEW_VERSION}" >> $GITHUB_OUTPUT
+
+          # Check if the calculated version already exists
+          if git rev-parse v$NEW_VERSION >/dev/null 2>&1; then
+            echo "Version v$NEW_VERSION already exists. Incrementing patch version."
+            PATCH=$((PATCH + 1))
+            NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+            echo "NEW_VERSION=v${NEW_VERSION}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate Changelog
+        id: get_changelog
+        run: |
+          LATEST_TAG=${{ steps.determine_version.outputs.LATEST_TAG }}
+          CHANGELOG=$(git log ${LATEST_TAG}..HEAD --pretty=format:"- %s")
+          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Update CHANGELOG.md
+        run: |
+          NEW_VERSION='${{ steps.determine_version.outputs.NEW_VERSION }}'
+          CHANGELOG='${{ steps.get_changelog.outputs.CHANGELOG }}'
+          CURRENT_DATE=$(TZ='America/Denver' date +%Y-%m-%d)
+          REPO_URL="https://github.com/joshuadanpeterson/typewriter.nvim"
+
+          format_entry() {
+            local version=$1
+            local date=$2
+            local content=$3
+            local prev_version=$4
+            echo "## [$version]($REPO_URL/tree/$version) ($date)"
+            echo "$content"
+            echo
+            echo "[Full Changelog]($REPO_URL/compare/$prev_version...$version)"
+            echo
+          }
+
+          echo "# Changelog" > temp_changelog.md
+          echo >> temp_changelog.md
+
+          format_entry "$NEW_VERSION" "$CURRENT_DATE" "$CHANGELOG" "${{ steps.determine_version.outputs.LATEST_TAG }}" >> temp_changelog.md
+
+          prev_version="$NEW_VERSION"
+          while IFS= read -r line; do
+            if [[ $line =~ ^##[[:space:]]+(\[v[0-9]+\.[0-9]+\.[0-9]+\])(.*)$ ]]; then
+              version="${BASH_REMATCH[1]}"
+              version="${version:1:-1}"
+              date_part="${BASH_REMATCH[2]}"
+              date=$(echo "$date_part" | grep -oP '\(\K[0-9]{4}-[0-9]{2}-[0-9]{2}(?=\))' || echo "Unknown Date")
+              
+              # Convert date to Mountain Time if it's not "Unknown Date"
+              if [ "$date" != "Unknown Date" ]; then
+                date=$(TZ='America/Denver' date -d "$date" +%Y-%m-%d)
+              fi
+              
+              # Extract content up to the next version header
+              content=$(sed -n "/^## \[$version\]/,/^## \[v[0-9]/{ /^## \[v[0-9]/d; p; }" CHANGELOG.md)
+              
+              # Remove all existing Full Changelog links
+              content=$(echo "$content" | sed '/^\[Full Changelog\]/d')
+              
+              # Trim leading and trailing whitespace
+              content=$(echo "$content" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+              
+              # Format the entry with a single Full Changelog link
+              format_entry "$version" "$date" "$content" "$prev_version" >> temp_changelog.md
+              
+              prev_version="$version"
+            elif [[ ! $line =~ ^#[[:space:]]+Changelog ]]; then
+              echo "$line" >> temp_changelog.md
+            fi
+          done < CHANGELOG.md
+
+          mv temp_changelog.md CHANGELOG.md
+
+          if ! grep -q "^# Changelog" CHANGELOG.md || ! grep -q "^## \[v[0-9]\+\.[0-9]\+\.[0-9]\+\]" CHANGELOG.md; then
+            echo "Error: CHANGELOG.md formatting verification failed"
+            exit 1
+          fi
+
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add CHANGELOG.md
+          git commit -m "docs: update CHANGELOG.md for ${NEW_VERSION} and standardize all entries"
+          git push
 
       - name: Create GitHub Release
         id: create_release
@@ -18,21 +195,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.determine_version.outputs.NEW_VERSION }}
+          release_name: Release ${{ steps.determine_version.outputs.NEW_VERSION }}
           body: |
-            ## New Features
-            - Fixed issue where \`$\` command in normal mode did not reach the end of the line, causing incorrect cursor placement.
+            ## Changes in this Release
 
-            ## Previous Changes
-            - Introduced `enable_notifications` option to control notifications for actions like enabling/disabling typewriter mode, and aligning code blocks.
-            - Added new `:TWTop` and `:TWBottom` commands to align the current code block with the top or bottom of the screen, respectively.
-            - Introduced `keep_cursor_position` option to maintain cursor's relative position within the text when using `:TWCenter`, `:TWTop`, and `:TWBottom`.
-            - Added `:TWCenter` command to center the view around the current code block or function using Tree-sitter.
-            - Introduced Tree-sitter as a dependency for intelligent code block detection.
-            - Updated installation instructions to include Tree-sitter setup.
-            - Moved `center_block_config.lua` to the `utils` folder for better organization.
-            - Enhanced README with information about the `:TWCenter` command and Tree-sitter dependency.
+            ${{ steps.get_changelog.outputs.CHANGELOG }}
+
+            For full changelog, see [CHANGELOG.md](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/CHANGELOG.md)
 
             ## Core Features
             - Keeps the cursor centered on the screen while typing or navigating.

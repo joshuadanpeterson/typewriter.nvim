@@ -6,3 +6,4 @@ TODO.md
 *.cast
 *.txt
 demos/typewriter_demo.gif
+.github/workflows/changelog.yml
