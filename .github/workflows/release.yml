@@ -1,5 +1,4 @@
 name: Create Release
-
 on:
   push:
     branches:
@@ -9,14 +8,14 @@ on:
       - "v*.*.*"
 permissions:
   contents: write
-
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all tags and branches
 
       - name: Set up Lua
         env:
@@ -70,28 +69,70 @@ jobs:
       - name: Verify Lua installation
         run: lua -v
 
+      - name: Determine next version
+        id: determine_version
+        run: |
+          git fetch --tags
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo 'v0.0.0')
+          echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_OUTPUT
+
+          git log ${LATEST_TAG}..HEAD --pretty=format:%s > commits.txt
+          if grep -q '^BREAKING CHANGE:' commits.txt || grep -q '^[a-zA-Z]\+!:' commits.txt; then
+            echo "BUMP=major" >> $GITHUB_OUTPUT
+          elif grep -q '^feat:' commits.txt; then
+            echo "BUMP=minor" >> $GITHUB_OUTPUT
+          else
+            echo "BUMP=patch" >> $GITHUB_OUTPUT
+          fi
+
+          LATEST_VERSION=${LATEST_TAG#v}
+          IFS='.' read -ra VERSION_PARTS <<< "$LATEST_VERSION"
+          MAJOR=${VERSION_PARTS[0]:-0}
+          MINOR=${VERSION_PARTS[1]:-0}
+          PATCH=${VERSION_PARTS[2]:-0}
+
+          case ${{ steps.determine_version.outputs.BUMP }} in
+            major)
+              NEW_VERSION="$((MAJOR + 1)).0.0"
+              ;;
+            minor)
+              NEW_VERSION="${MAJOR}.$((MINOR + 1)).0"
+              ;;
+            patch)
+              NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+              ;;
+          esac
+          echo "NEW_VERSION=v${NEW_VERSION}" >> $GITHUB_OUTPUT
+
+          # Check if the calculated version already exists
+          if git rev-parse $NEW_VERSION >/dev/null 2>&1; then
+            echo "Version $NEW_VERSION already exists. Incrementing patch version."
+            PATCH=$((PATCH + 1))
+            NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+            echo "NEW_VERSION=v${NEW_VERSION}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate Changelog
+        id: get_changelog
+        run: |
+          LATEST_TAG=${{ steps.determine_version.outputs.LATEST_TAG }}
+          CHANGELOG=$(git log ${LATEST_TAG}..HEAD --pretty=format:"- %s")
+          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.determine_version.outputs.NEW_VERSION }}
+          release_name: Release ${{ steps.determine_version.outputs.NEW_VERSION }}
           body: |
-            ## New Features
-            - Refactored code to modularize the plugin structure while preserving functionality.
-            - Ensured horizontal scrolling works correctly with the new modular structure.
+            ## Changes in this Release
 
-            ## Previous Changes
-            - Introduced `enable_notifications` option to control notifications for actions like enabling/disabling typewriter mode, and aligning code blocks.
-            - Added new `:TWTop` and `:TWBottom` commands to align the current code block with the top or bottom of the screen, respectively.
-            - Introduced `keep_cursor_position` option to maintain cursor's relative position within the text when using `:TWCenter`, `:TWTop`, and `:TWBottom`.
-            - Added `:TWCenter` command to center the view around the current code block or function using Tree-sitter.
-            - Introduced Tree-sitter as a dependency for intelligent code block detection.
-            - Updated installation instructions to include Tree-sitter setup.
-            - Moved `center_block_config.lua` to the `utils` folder for better organization.
-            - Enhanced README with information about the `:TWCenter` command and Tree-sitter dependency.
+            ${{ steps.get_changelog.outputs.CHANGELOG }}
 
             ## Core Features
             - Keeps the cursor centered on the screen while typing or navigating.
