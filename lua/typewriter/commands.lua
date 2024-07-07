@@ -1,5 +1,6 @@
--- lua/typewriter/commands.lua
--- Commands for Typewriter.nvim functionality
+--- Commands for Typewriter.nvim functionality
+--- @module typewriter.commands
+--- @file lua/typewriter/commands.lua
 
 local api = vim.api
 local ts_utils = require("nvim-treesitter.ts_utils")
@@ -10,6 +11,7 @@ local center_block_config = require("typewriter.utils.center_block_config")
 local M = {}
 local typewriter_active = false
 
+--- Center the cursor on the screen
 function M.center_cursor()
 	if not typewriter_active then
 		return
@@ -19,6 +21,7 @@ function M.center_cursor()
 	api.nvim_win_set_cursor(0, cursor)
 end
 
+--- Enable typewriter mode
 function M.enable_typewriter_mode()
 	if not typewriter_active then
 		typewriter_active = true
@@ -33,6 +36,7 @@ function M.enable_typewriter_mode()
 	end
 end
 
+--- Disable typewriter mode
 function M.disable_typewriter_mode()
 	if typewriter_active then
 		typewriter_active = false
@@ -43,6 +47,7 @@ function M.disable_typewriter_mode()
 	end
 end
 
+--- Toggle typewriter mode
 function M.toggle_typewriter_mode()
 	if typewriter_active then
 		M.disable_typewriter_mode()
@@ -51,7 +56,8 @@ function M.toggle_typewriter_mode()
 	end
 end
 
-local function center_block_and_cursor()
+--- Center the current code block and cursor
+function M.center_block_and_cursor()
 	local function is_significant_block(node)
 		local node_type = node:type()
 		return center_block_config.expand[node_type] == true
@@ -91,7 +97,8 @@ local function center_block_and_cursor()
 	utils.notify("Code block centered")
 end
 
-local function move_to_top_of_block()
+--- Move the top of the current code block to the top of the screen
+function M.move_to_top_of_block()
 	local function is_significant_block(node)
 		local node_type = node:type()
 		return center_block_config.expand[node_type] == true
@@ -138,7 +145,8 @@ local function move_to_top_of_block()
 	utils.notify("Code block aligned with the top")
 end
 
-local function move_to_bottom_of_block()
+--- Move the bottom of the current code block to the bottom of the screen
+function M.move_to_bottom_of_block()
 	local function is_significant_block(node)
 		local node_type = node:type()
 		return center_block_config.expand[node_type] == true

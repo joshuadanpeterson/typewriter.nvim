@@ -1,16 +1,25 @@
--- lua/typewriter/utils.lua
--- Utility functions for Typewriter.nvim
+--- Utility functions for Typewriter.nvim
+---
+--- This module contains utility functions used in Typewriter.nvim.
+---
+--- @module typewriter.utils
+--- @file lua/typewriter/utils.lua
+--- @tag typewriter-utils
 
 local config = require("typewriter.config")
 
 local M = {}
 
+--- Notify the user with a message if notifications are enabled
+---
+--- @param message string: The message to display
 function M.notify(message)
 	if config.config.enable_notifications then
 		vim.notify(message, vim.log.levels.INFO)
 	end
 end
 
+--- Center the cursor horizontally if horizontal scrolling is enabled
 function M.center_cursor_horizontally()
 	if not config.config.enable_horizontal_scroll then
 		return

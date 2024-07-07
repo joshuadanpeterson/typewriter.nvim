@@ -1,8 +1,14 @@
--- lua/typewriter/utils/center_block_config.lua
--- Configuration for significant code blocks to center in Typewriter.nvim
+--- Configuration for significant code blocks to center in Typewriter.nvim
+---
+--- This module defines the types of code blocks that should be centered in Typewriter.nvim.
+---
+--- @module typewriter.utils.center_block_config
+--- @file lua/typewriter/utils/center_block_config.lua
+--- @tag typewriter-center-block-config
 
 local M = {}
 
+--- Table indicating which code blocks should be expanded and centered
 M.expand = {
 	["function"] = true,
 	["body"] = true,
