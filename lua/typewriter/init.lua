@@ -1,15 +1,44 @@
--- lua/typewriter/init.lua
--- This plugin provides typewriter scrolling for neovim.
--- Entry point to set up Typewriter.nvim
+--- Typewriter.nvim
+---
+--- This plugin provides typewriter-style scrolling for Neovim.
+--- It keeps the cursor centered on the screen and provides advanced code block navigation.
+---
+--- Features:
+--- * Centered cursor while typing and scrolling
+--- * Integration with Zen Mode and True Zen
+--- * Advanced code block navigation
+--- * Customizable behavior through configuration options
+---
+--- @module typewriter
+--- @file lua/typewriter/init.lua
+--- @tag typewriter.nvim
+--- @author Your Name
+--- @license MIT
 
-local config = require("typewriter.config")
-local autocommands = require("typewriter.autocommands")
-
+--- Import required modules
+--- local config = require("typewriter.config")
+--- local autocommands = require("typewriter.autocommands")
 local M = {}
 
-function M.setup(user_config)
-	config.setup(user_config)
-	autocommands.setup()
+--- Setup the Typewriter.nvim plugin
+---
+--- This function initializes the plugin with the provided user configuration
+--- and sets up the necessary autocommands.
+---
+--- @param user_config table User configuration options (optional)
+--- @usage
+--- require('typewriter').setup({
+---     enable_with_zen_mode = false,
+---     keep_cursor_position = true
+--- })
+
+M.setup = function(user_config)
+	config = require("typewriter.config")
+
+	autocommands = require("typewriter.autocommands")
+
+	config.config_setup(user_config or {})
+	autocommands.autocmd_setup()
 end
 
 return M

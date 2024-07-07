@@ -1,8 +1,33 @@
--- lua/typewriter/utils/center_block_config.lua
--- Configuration for significant code blocks to center in Typewriter.nvim
+--- Configuration for significant code blocks to center in Typewriter.nvim
+---
+--- This module defines the types of code blocks that should be centered when using
+--- Typewriter.nvim's block centering features. It provides a configuration table
+--- that determines which syntax tree nodes are considered "significant" and should
+--- trigger centering behavior.
+---
+--- @module typewriter.utils.center_block_config
+--- @file lua/typewriter/utils/center_block_config.lua
+--- @tag typewriter-center-block-config
 
 local M = {}
 
+--- Table indicating which code blocks should be expanded and centered
+---
+--- This table maps syntax tree node types to boolean values. When a node type
+--- is set to `true`, it will be considered a significant block and will trigger
+--- centering behavior in Typewriter.nvim's block navigation functions.
+---
+--- Users can modify this table to customize which types of code blocks are
+--- considered significant in their workflow.
+---
+--- @type table<string, boolean>
+--- @usage
+--- -- To add a new node type or modify an existing one:
+--- local center_block_config = require("typewriter.utils.center_block_config")
+--- center_block_config.expand["my_custom_node"] = true
+---
+--- -- To disable centering for a specific node type:
+--- center_block_config.expand["function"] = false
 M.expand = {
 	["function"] = true,
 	["body"] = true,
@@ -54,5 +79,16 @@ M.expand = {
 	["throw_statement"] = true,
 	["await_expression"] = true,
 }
+
+--- Get the expansion status for a given node type
+---
+--- @param node_type string The type of the syntax tree node
+--- @return boolean Whether the node type should be expanded and centered
+--- @usage
+--- local center_block_config = require("typewriter.utils.center_block_config")
+--- local should_expand = center_block_config.should_expand("function")
+function M.should_expand(node_type)
+	return M.expand[node_type] == true
+end
 
 return M

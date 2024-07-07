@@ -1,0 +1,17 @@
+M	typewriter.txt	/*M*
+M.autocmd_setup()	typewriter.txt	/*M.autocmd_setup()*
+M.center_block_and_cursor()	typewriter.txt	/*M.center_block_and_cursor()*
+M.center_cursor()	typewriter.txt	/*M.center_cursor()*
+M.center_cursor_horizontally()	typewriter.txt	/*M.center_cursor_horizontally()*
+M.config	typewriter.txt	/*M.config*
+M.config_setup()	typewriter.txt	/*M.config_setup()*
+M.default_config	typewriter.txt	/*M.default_config*
+M.disable_typewriter_mode()	typewriter.txt	/*M.disable_typewriter_mode()*
+M.enable_typewriter_mode()	typewriter.txt	/*M.enable_typewriter_mode()*
+M.expand	typewriter.txt	/*M.expand*
+M.get_config()	typewriter.txt	/*M.get_config()*
+M.move_to_bottom_of_block()	typewriter.txt	/*M.move_to_bottom_of_block()*
+M.move_to_top_of_block()	typewriter.txt	/*M.move_to_top_of_block()*
+M.notify()	typewriter.txt	/*M.notify()*
+M.should_expand()	typewriter.txt	/*M.should_expand()*
+M.toggle_typewriter_mode()	typewriter.txt	/*M.toggle_typewriter_mode()*

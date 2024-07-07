@@ -7,3 +7,4 @@ TODO.md
 *.txt
 demos/typewriter_demo.gif
 .github/workflows/changelog.yml
+scripts/*

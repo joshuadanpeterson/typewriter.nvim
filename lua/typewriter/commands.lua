@@ -1,5 +1,11 @@
--- lua/typewriter/commands.lua
--- Commands for Typewriter.nvim functionality
+--- Commands for Typewriter.nvim functionality
+---
+--- This module provides the core functionality for Typewriter.nvim,
+--- including cursor centering, typewriter mode toggling, and block navigation.
+---
+--- @module typewriter.commands
+--- @file lua/typewriter/commands.lua
+--- @tag typewriter-commands
 
 local api = vim.api
 local ts_utils = require("nvim-treesitter.ts_utils")
@@ -10,6 +16,12 @@ local center_block_config = require("typewriter.utils.center_block_config")
 local M = {}
 local typewriter_active = false
 
+--- Center the cursor on the screen
+---
+--- This function moves the view so that the cursor is centered vertically
+--- on the screen. It's the core of the typewriter-style scrolling.
+---
+--- @usage require("typewriter.commands").center_cursor()
 function M.center_cursor()
 	if not typewriter_active then
 		return
@@ -19,6 +31,12 @@ function M.center_cursor()
 	api.nvim_win_set_cursor(0, cursor)
 end
 
+--- Enable typewriter mode
+---
+--- Activates the typewriter mode, which keeps the cursor centered
+--- on the screen as you type or move through the document.
+---
+--- @usage require("typewriter.commands").enable_typewriter_mode()
 function M.enable_typewriter_mode()
 	if not typewriter_active then
 		typewriter_active = true
@@ -33,6 +51,11 @@ function M.enable_typewriter_mode()
 	end
 end
 
+--- Disable typewriter mode
+---
+--- Deactivates the typewriter mode, returning to normal scrolling behavior.
+---
+--- @usage require("typewriter.commands").disable_typewriter_mode()
 function M.disable_typewriter_mode()
 	if typewriter_active then
 		typewriter_active = false
@@ -43,6 +66,11 @@ function M.disable_typewriter_mode()
 	end
 end
 
+--- Toggle typewriter mode
+---
+--- Switches between enabled and disabled states of typewriter mode.
+---
+--- @usage require("typewriter.commands").toggle_typewriter_mode()
 function M.toggle_typewriter_mode()
 	if typewriter_active then
 		M.disable_typewriter_mode()
@@ -51,12 +79,20 @@ function M.toggle_typewriter_mode()
 	end
 end
 
-local function center_block_and_cursor()
+--- Center the current code block and cursor
+---
+--- This function centers both the current code block and the cursor on the screen.
+--- It's useful for focusing on a specific block of code.
+---
+--- @usage require("typewriter.commands").center_block_and_cursor()
+function M.center_block_and_cursor()
+	-- Helper function to determine if a node is a significant block
 	local function is_significant_block(node)
 		local node_type = node:type()
 		return center_block_config.expand[node_type] == true
 	end
 
+	-- Helper function to get the root of the expandable block
 	local function get_expand_root(node)
 		while node do
 			if is_significant_block(node) then
@@ -91,21 +127,14 @@ local function center_block_and_cursor()
 	utils.notify("Code block centered")
 end
 
-local function move_to_top_of_block()
-	local function is_significant_block(node)
-		local node_type = node:type()
-		return center_block_config.expand[node_type] == true
-	end
-
-	local function get_expand_root(node)
-		while node do
-			if is_significant_block(node) then
-				return node
-			end
-			node = node:parent()
-		end
-		return nil
-	end
+--- Move the top of the current code block to the top of the screen
+---
+--- This function aligns the top of the current code block with the top of the screen,
+--- providing a clear view of the entire block.
+---
+--- @usage require("typewriter.commands").move_to_top_of_block()
+function M.move_to_top_of_block()
+	-- Helper functions (is_significant_block and get_expand_root) are the same as in center_block_and_cursor
 
 	local node = ts_utils.get_node_at_cursor()
 	if not node then
@@ -138,21 +167,14 @@ local function move_to_top_of_block()
 	utils.notify("Code block aligned with the top")
 end
 
-local function move_to_bottom_of_block()
-	local function is_significant_block(node)
-		local node_type = node:type()
-		return center_block_config.expand[node_type] == true
-	end
-
-	local function get_expand_root(node)
-		while node do
-			if is_significant_block(node) then
-				return node
-			end
-			node = node:parent()
-		end
-		return nil
-	end
+--- Move the bottom of the current code block to the bottom of the screen
+---
+--- This function aligns the bottom of the current code block with the bottom of the screen,
+--- allowing you to see the end of the block and what follows it.
+---
+--- @usage require("typewriter.commands").move_to_bottom_of_block()
+function M.move_to_bottom_of_block()
+	-- Helper functions (is_significant_block and get_expand_root) are the same as in center_block_and_cursor
 
 	local node = ts_utils.get_node_at_cursor()
 	if not node then
@@ -184,9 +206,5 @@ local function move_to_bottom_of_block()
 
 	utils.notify("Code block aligned with the bottom")
 end
-
-M.center_block_and_cursor = center_block_and_cursor
-M.move_to_top_of_block = move_to_top_of_block
-M.move_to_bottom_of_block = move_to_bottom_of_block
 
 return M
