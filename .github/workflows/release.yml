@@ -148,7 +148,8 @@ jobs:
           echo >> temp_changelog.md
 
           # Add new version
-          format_entry "$NEW_VERSION" "$CURRENT_DATE" "$CHANGELOG" "${{ steps.determine_version.outputs.LATEST_TAG }}" >> temp_changelog.md
+          NEW_CHANGELOG=$(remove_duplicates "$CHANGELOG")
+          format_entry "$NEW_VERSION" "$CURRENT_DATE" "$NEW_CHANGELOG" "${{ steps.determine_version.outputs.LATEST_TAG }}" >> temp_changelog.md
 
           prev_version="$NEW_VERSION"
           declare -A processed_versions
@@ -157,7 +158,7 @@ jobs:
             if [[ $line =~ ^##[[:space:]]+(\[v[0-9]+\.[0-9]+\.[0-9]+\])(.*)$ ]]; then
               version="${BASH_REMATCH[1]}"
               version="${version:1:-1}"
-              if [[ -n "${processed_versions[$version]}" ]]; then
+              if [[ -n "${processed_versions[$version]}" ]] || [[ "$version" == "$NEW_VERSION" ]]; then
                 continue
               fi
               processed_versions[$version]=1
@@ -192,7 +193,17 @@ jobs:
           git commit -m "docs: update CHANGELOG.md for ${NEW_VERSION} and remove duplicate entries"
           git push
 
+      - name: Check if release exists
+        id: check_release
+        run: |
+          if git ls-remote --exit-code --tags origin refs/tags/${{ steps.determine_version.outputs.NEW_VERSION }} >/dev/null 2>&1; then
+            echo "RELEASE_EXISTS=true" >> $GITHUB_OUTPUT
+          else
+            echo "RELEASE_EXISTS=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Create GitHub Release
+        if: steps.check_release.outputs.RELEASE_EXISTS == 'false'
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -215,3 +226,34 @@ jobs:
             For more details, please check the [README](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/README.md).
           draft: false
           prerelease: false
+
+      - name: Update existing release
+        if: steps.check_release.outputs.RELEASE_EXISTS == 'true'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require('fs');
+            const { NEW_VERSION } = process.env;
+            const changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
+
+            const releases = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const existingRelease = releases.data.find(release => release.tag_name === NEW_VERSION);
+
+            if (existingRelease) {
+              await github.rest.repos.updateRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                release_id: existingRelease.id,
+                body: `## Changes in this Release\n\n${changelog}\n\nFor full changelog, see [CHANGELOG.md](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/CHANGELOG.md)\n\n## Core Features\n- Keeps the cursor centered on the screen while typing or navigating.\n- Simple commands to enable, disable, and toggle the typewriter mode.\n- Integrates with ZenMode and True Zen for a seamless distraction-free environment.\n\nFor more details, please check the [README](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/README.md).`,
+              });
+              console.log(`Updated existing release ${NEW_VERSION}`);
+            } else {
+              console.log(`Release ${NEW_VERSION} not found`);
+            }
+        env:
+          NEW_VERSION: ${{ steps.determine_version.outputs.NEW_VERSION }}

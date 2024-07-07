@@ -23,7 +23,7 @@ local typewriter_active = false
 ---
 --- @usage require("typewriter.commands").center_cursor()
 function M.center_cursor()
-	if not typewriter_active then
+	if not utils.is_typewriter_active() then
 		return
 	end
 	local cursor = api.nvim_win_get_cursor(0)
@@ -38,15 +38,15 @@ end
 ---
 --- @usage require("typewriter.commands").enable_typewriter_mode()
 function M.enable_typewriter_mode()
-	if not typewriter_active then
-		typewriter_active = true
-		api.nvim_command("augroup TypewriterMode")
-		api.nvim_command("autocmd!")
-		api.nvim_command('autocmd CursorMoved,CursorMovedI * lua require("typewriter.commands").center_cursor()')
-		api.nvim_command(
-			'autocmd CursorMoved,CursorMovedI * lua require("typewriter.utils").center_cursor_horizontally()'
-		)
-		api.nvim_command("augroup END")
+	if not utils.is_typewriter_active() then
+		utils.set_typewriter_active(true)
+		api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+			group = api.nvim_create_augroup("TypewriterMode", { clear = true }),
+			callback = function()
+				M.center_cursor()
+				utils.center_cursor_horizontally()
+			end,
+		})
 		utils.notify("Typewriter mode enabled")
 	end
 end
@@ -57,11 +57,9 @@ end
 ---
 --- @usage require("typewriter.commands").disable_typewriter_mode()
 function M.disable_typewriter_mode()
-	if typewriter_active then
-		typewriter_active = false
-		api.nvim_command("augroup TypewriterMode")
-		api.nvim_command("autocmd!")
-		api.nvim_command("augroup END")
+	if utils.is_typewriter_active() then
+		utils.set_typewriter_active(false)
+		api.nvim_clear_autocmds({ group = "TypewriterMode" })
 		utils.notify("Typewriter mode disabled")
 	end
 end
@@ -72,13 +70,12 @@ end
 ---
 --- @usage require("typewriter.commands").toggle_typewriter_mode()
 function M.toggle_typewriter_mode()
-	if typewriter_active then
+	if utils.is_typewriter_active() then
 		M.disable_typewriter_mode()
 	else
 		M.enable_typewriter_mode()
 	end
 end
-
 --- Center the current code block and cursor
 ---
 --- This function centers both the current code block and the cursor on the screen.

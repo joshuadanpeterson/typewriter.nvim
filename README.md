@@ -62,6 +62,9 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view or using TWTop/TWBottom. 📌
 - Set `enable_notifications` to `true` in plugin config to enable or disable notifications for actions like enabling/disabling typewriter mode, and aligning code blocks. 🔔
 - Enable horizontal scrolling in Typewriter mode and center the cursor by setting `enable_horizontal_scroll` to `true` in the plugin configuration. ↔️
+- Robust state tracking with `is_typewriter_active()`, `set_typewriter_active()`, and `toggle_typewriter_active()` functions for programmatic control. 🎛️
+- `TypewriterStateChanged` event for reacting to Typewriter mode state changes in your own scripts or plugins. 🔄
+- Comprehensive in-editor help documentation accessible via `:help typewriter`. 📚
 
 <div align=center>
   <h3>TWCenter Demo 🎥</h3>
@@ -274,18 +277,29 @@ lazy.setup({
 })
 ```
 
+## Documentation 📚
+
+Typewriter.nvim now comes with comprehensive documentation to help you make the most of its features:
+
+- **In-Editor Help**: Access detailed documentation directly in Neovim by running `:help typewriter`.
+- **API Documentation**: For developers looking to integrate with Typewriter.nvim, check out our [API wiki article](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Typewriter.nvim-API).
+- **State Tracking**: Learn about the new state tracking functionality in our [State Tracking wiki article](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/State-Tracking).
+
 ## Wiki 📚
 
 - [Home: Overview](https://github.com/joshuadanpeterson/typewriter.nvim/wiki)
+- [Commands](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Typewriter.nvim-Commands)
 - [Demos](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Demos)
 - [Enable Notifications](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Enable-Notifications)
 - [Enabling Horizontal Scrolling](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Enabling-Horizontal-Scrolling)
+- [Help Documentation](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Help-Documentation)
 - [Installation Guide](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Installation-Guide)
 - [Integration Guide](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Integration-Guide)
+- [Media](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Media)
+- [State Tracking](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/State-Tracking)
 - [Tree‐sitter Integration for :TWCenter Command](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Tree%E2%80%90sitter-Integration-for-:TWCenter-Command)
 - [TW `keep_cursor_position` Feature](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/TW-%60keep_cursor_position%60-Feature)
 - [Typewriter.nvim API](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Typewriter.nvim-API)
-- [Typewriter.nvim Commands](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Typewriter.nvim-Commands)
 
 ## Inspiration 💡
 
