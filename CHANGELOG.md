@@ -9,6 +9,7 @@
 - Merge branch dev of https://github.com/joshuadanpeterson/typewriter.nvim into dev Update local remote with remote changes
 - docs(README): add new features and link to wiki articles
 - feat(core): add state tracking and update documentation
+- Merge pull request #5 from joshuadanpeterson/dev
 - docs: update CHANGELOG.md for v0.4.15 and remove duplicate entries
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.15...v0.4.16)
