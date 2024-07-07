@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.4.18](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.18) (2024-07-07)
+- Merge pull request #6 from joshuadanpeterson/dev
+- docs: update CHANGELOG.md for v0.4.17 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.17...v0.4.18)
+
 ## [v0.4.17](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.17) (2024-07-07)
 - Merge branch main into dev
 - docs: update CHANGELOG.md for v0.4.16 and remove duplicate entries
@@ -11,7 +17,7 @@
 - docs(README): add new features and link to wiki articles
 - feat(core): add state tracking and update documentation
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.16...v0.4.17)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.18...v0.4.17)
 
 ## [v0.4.16](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.16) (2024-07-07)
 - Merge branch dev of https://github.com/joshuadanpeterson/typewriter.nvim into dev Update local repo with remote changes
