@@ -15,10 +15,9 @@
 --- @author Your Name
 --- @license MIT
 
--- Import required modules
-local config = require("typewriter.config")
-local autocommands = require("typewriter.autocommands")
-
+--- Import required modules
+--- local config = require("typewriter.config")
+--- local autocommands = require("typewriter.autocommands")
 local M = {}
 
 --- Setup the Typewriter.nvim plugin
@@ -32,27 +31,14 @@ local M = {}
 ---     enable_with_zen_mode = false,
 ---     keep_cursor_position = true
 --- })
-function M.setup(user_config)
-	print("Typewriter setup function called")
-	print("User config:", vim.inspect(user_config))
 
-	-- Configure the plugin
-	local status, err = pcall(function()
-		config.config_setup(user_config or {})
-	end)
-	if not status then
-		print("Error in config setup:", err)
-		return
-	end
+M.setup = function(user_config)
+	config = require("typewriter.config")
 
-	-- Set up autocommands
-	status, err = pcall(function()
-		autocommands.autocmd_setup()
-	end)
-	if not status then
-		print("Error in autocommand setup:", err)
-		return
-	end
+	autocommands = require("typewriter.autocommands")
 
-	print("Typewriter setup completed successfully")
+	config.config_setup(user_config or {})
+	autocommands.autocmd_setup()
 end
+
+return M
