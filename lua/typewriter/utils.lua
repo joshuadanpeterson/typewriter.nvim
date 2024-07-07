@@ -1,13 +1,17 @@
 --- Utility functions for Typewriter.nvim
 ---
 --- This module contains utility functions used throughout Typewriter.nvim.
---- It provides functionality for user notifications and horizontal cursor centering.
+--- It provides functionality for user notifications, horizontal cursor centering,
+--- and Typewriter mode state management.
 ---
 --- @module typewriter.utils
 --- @file lua/typewriter/utils.lua
 --- @tag typewriter-utils
 
 local config = require("typewriter.config")
+
+-- Private variable to store the active state
+local typewriter_active = false
 
 local M = {}
 
@@ -41,22 +45,47 @@ function M.center_cursor_horizontally()
 	if not config.config.enable_horizontal_scroll then
 		return
 	end
-
-	-- Get the width of the current window
 	local win_width = vim.api.nvim_win_get_width(0)
-
-	-- Get the current cursor column (in virtual columns)
 	local cursor_col = vim.fn.virtcol(".")
-
-	-- Calculate the leftmost column to display
-	-- We add 10 to shift the cursor slightly to the right of center
 	local left_col = math.max(cursor_col - math.floor(win_width / 2), 0) + 10
-
-	-- Disable line wrapping
 	vim.api.nvim_win_set_option(0, "wrap", false)
-
-	-- Adjust the view
 	vim.fn.winrestview({ leftcol = left_col })
+end
+
+--- Check if Typewriter mode is currently active
+---
+--- @return boolean True if Typewriter mode is active, false otherwise
+--- @usage
+--- local utils = require("typewriter.utils")
+--- if utils.is_typewriter_active() then
+---     print("Typewriter mode is active")
+--- end
+function M.is_typewriter_active()
+	return typewriter_active
+end
+
+--- Set the active state of Typewriter mode
+---
+--- @param active boolean The new active state
+--- @usage
+--- local utils = require("typewriter.utils")
+--- utils.set_typewriter_active(true)
+function M.set_typewriter_active(active)
+	typewriter_active = active
+	vim.api.nvim_exec_autocmds("User", { pattern = "TypewriterStateChanged" })
+end
+
+--- Toggle the active state of Typewriter mode
+---
+--- @return boolean The new active state
+--- @usage
+--- local utils = require("typewriter.utils")
+--- local new_state = utils.toggle_typewriter_active()
+--- print("Typewriter mode is now: " .. (new_state and "active" or "inactive"))
+function M.toggle_typewriter_active()
+	typewriter_active = not typewriter_active
+	M.set_typewriter_active(typewriter_active)
+	return typewriter_active
 end
 
 return M
