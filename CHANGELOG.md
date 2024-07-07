@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.4.16](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.16) (2024-07-07)
+- Merge pull request #5 from joshuadanpeterson/dev
+- docs: update CHANGELOG.md for v0.4.15 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.15...v0.4.16)
+
 ## [v0.4.15](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.15) (2024-07-06)
 - chore(ci): Update push branches
 - docs(help): improve and expand plugin documentation
@@ -9,7 +15,7 @@
 - docs(help): generate initial plugin documentation
 - docs: update CHANGELOG.md for v0.4.14 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.14...v0.4.15)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.16...v0.4.15)
 
 ## [v0.4.14](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.14) (2024-07-05)
 - Merge branch main of https://github.com/joshuadanpeterson/typewriter.nvim Update local repo with remote changes
