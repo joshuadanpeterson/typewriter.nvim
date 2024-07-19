@@ -1,16 +1,37 @@
 # Changelog
 
+<<<<<<< HEAD
 ## [v0.4.23](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.23) (2024-07-19)
 - Merge pull request #11 from joshuadanpeterson/dev
 - docs: update CHANGELOG.md for v0.4.22 and remove duplicate entries
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.22...v0.4.23)
 
+||||||| parent of da09d20 (docs: update CHANGELOG.md for v0.4.24 and remove duplicate entries)
+=======
+## [v0.4.24](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.24) (2024-07-19)
+- style(commands): Remove debug print statements
+- feat(center_block_config): Add new node
+- refactor(center_block_and_cursor): Add new nodes
+- feat(center_block_config): Add declaration_list to node list
+- fix: Improve get_expand_root logic for better PHP block handling
+- fix: Improve center_block_and_cursor function for better PHP block handling
+- feat(commands): Correctly center code block even when near bottom of the file
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.23...v0.4.24)
+
+>>>>>>> da09d20 (docs: update CHANGELOG.md for v0.4.24 and remove duplicate entries)
 ## [v0.4.22](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.22) (2024-07-19)
 - fix(commands): Move helper functions outside specific functions to avoid nil error
 - docs: update CHANGELOG.md for v0.4.21 and remove duplicate entries
 
+<<<<<<< HEAD
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.23...v0.4.22)
+||||||| parent of da09d20 (docs: update CHANGELOG.md for v0.4.24 and remove duplicate entries)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.21...v0.4.22)
+=======
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.24...v0.4.22)
+>>>>>>> da09d20 (docs: update CHANGELOG.md for v0.4.24 and remove duplicate entries)
 
 ## [v0.4.21](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.21) (2024-07-18)
 - Merge pull request #10 from joshuadanpeterson/dev
