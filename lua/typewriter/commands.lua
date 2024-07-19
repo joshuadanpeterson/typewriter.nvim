@@ -20,7 +20,7 @@ local typewriter_active = false
 local function is_significant_block(node)
 	local node_type = node:type()
 	print("Node type: ", node_type)
-	return node_type == "function" or node_type == "method" or node_type == "class"
+	return center_block_config.should_expand(node_type)
 end
 
 --- Helper function to get the root of the expandable block
@@ -33,7 +33,6 @@ local function get_expand_root(node)
 	end
 	return nil
 end
-
 
 --- Center the cursor on the screen
 ---
@@ -102,6 +101,7 @@ end
 --- It's useful for focusing on a specific block of code.
 ---
 --- @usage require("typewriter.commands").center_block_and_cursor()
+--- Center the current code block and cursor
 function M.center_block_and_cursor()
 	local node = ts_utils.get_node_at_cursor()
 	if not node then
