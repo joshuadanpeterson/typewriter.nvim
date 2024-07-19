@@ -114,11 +114,27 @@ function M.center_block_and_cursor()
 	local start_row, _, end_row, _ = node:range()
 	local middle_line = math.floor((start_row + end_row) / 2)
 
+	-- Check for edge cases
+	local line_count = api.nvim_buf_line_count(0)
+	if middle_line < 0 then middle_line = 0 end
+	if middle_line >= line_count then middle_line = line_count - 1 end
+
 	if config.config.keep_cursor_position then
 		local cursor = api.nvim_win_get_cursor(0)
+		-- Save current cursor position
+		local cursor_row = cursor[1]
+		local cursor_col = cursor[2]
+
+		-- Move cursor to the middle line of the block and center the view
+		api.nvim_win_set_cursor(0, { middle_line + 1, 0 })
 		vim.cmd("normal! zz")
-		api.nvim_win_set_cursor(0, cursor)
+
+		-- Adjust if the middle line is too close to the end of the file
+		local new_cursor_row = math.min(cursor_row, line_count)
+		api.nvim_win_set_cursor(0, { new_cursor_row, cursor_col })
 	else
+		-- Move cursor to the middle line of the block and center the view
+		api.nvim_win_set_cursor(0, { middle_line + 1, 0 })
 		vim.cmd("normal! zz")
 	end
 
