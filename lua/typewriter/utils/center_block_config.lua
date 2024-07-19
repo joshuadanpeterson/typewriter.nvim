@@ -29,6 +29,7 @@ local M = {}
 --- -- To disable centering for a specific node type:
 --- center_block_config.expand["function"] = false
 M.expand = {
+	["comment"] = true,
 	["function"] = true,
 	["body"] = true,
 	["method"] = true,
@@ -79,6 +80,8 @@ M.expand = {
 	["throw_statement"] = true,
 	["await_expression"] = true,
 	["declaration_list"] = true,
+	["compound_statement"] = true,
+	["method_declaration"] = true,
 }
 
 --- Get the expansion status for a given node type
