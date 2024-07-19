@@ -1,11 +1,17 @@
 # Changelog
 
+## [v0.4.21](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.21) (2024-07-18)
+- Merge pull request #10 from joshuadanpeterson/dev
+- docs: update CHANGELOG.md for v0.4.20 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.20...v0.4.21)
+
 ## [v0.4.20](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.20) (2024-07-18)
 - Merge branch dev of https://github.com/joshuadanpeterson/typewriter.nvim into dev
 - feat(docs): Update CHANGELOG and TODO in help docs
 - docs: update CHANGELOG.md for v0.4.19 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.19...v0.4.20)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.21...v0.4.20)
 
 ## [v0.4.19](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.19) (2024-07-18)
 - feat(docs): Add top-level tag to typewriter help file
