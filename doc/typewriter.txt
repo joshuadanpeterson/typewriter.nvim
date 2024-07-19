@@ -1,0 +1,356 @@
+==============================================================================
+*typewriter.txt*   Typewriter Plugin Documentation
+
+Typewriter Plugin for Neovim                            *typewriter*
+
+==============================================================================
+
+DESCRIPTION                                               *typewriter-description*
+    A Neovim plugin that emulates a typewriter, keeping the cursor centered on
+    the screen for a focused writing experience.
+
+FEATURES                                                  *typewriter-features*
+    - Keeps the cursor centered on the screen while you type or navigate.
+    - Simple commands to enable or disable typewriter mode.
+    - Configuration options to customize the behavior.
+
+CHANGELOG                                                 *typewriter-changelog*
+    - Summary of recent changes:
+    - v0.0.9 (2024-06-15): Minor updates and fixes.
+    - v0.0.8 (2024-06-15): Performance improvements.
+    - v0.0.7 (2024-06-15): Initial release.
+
+TODO                                                      *typewriter-todo*
+    - Potential enhancements:
+    - Customizable Centering Behavior.
+    - Horizontal Centering.
+
+------------------------------------------------------------------------------
+Autocommands setup for Typewriter.nvim
+
+This module defines and sets up autocommands and user commands related to Typewriter.nvim.
+It handles the creation of user commands for controlling Typewriter mode and
+integrates with Zen Mode and True Zen plugins.
+
+@module typewriter.autocommands
+@file lua/typewriter/autocommands.lua
+@tag typewriter-autocommands
+
+------------------------------------------------------------------------------
+                                                             *M.autocmd_setup()*
+                              `M.autocmd_setup`()
+Setup autocommands and user commands
+
+This function creates user commands for controlling Typewriter mode and sets up
+autocommands for integration with Zen Mode and True Zen plugins.
+
+User commands created:
+- TWEnable: Enable typewriter mode
+- TWDisable: Disable typewriter mode
+- TWToggle: Toggle typewriter mode
+- TWCenter: Center the current code block and cursor
+- TWTop: Move the top of the current code block to the top of the screen
+- TWBottom: Move the bottom of the current code block to the bottom of the screen
+
+@usage require("typewriter.autocommands").autocmd_setup()
+
+
+==============================================================================
+------------------------------------------------------------------------------
+Commands for Typewriter.nvim functionality
+
+This module provides the core functionality for Typewriter.nvim,
+including cursor centering, typewriter mode toggling, and block navigation.
+
+@module typewriter.commands
+@file lua/typewriter/commands.lua
+@tag typewriter-commands
+
+------------------------------------------------------------------------------
+                                                             *M.center_cursor()*
+                              `M.center_cursor`()
+Center the cursor on the screen
+
+This function moves the view so that the cursor is centered vertically
+on the screen. It's the core of the typewriter-style scrolling.
+
+@usage require("typewriter.commands").center_cursor()
+
+------------------------------------------------------------------------------
+                                                    *M.enable_typewriter_mode()*
+                          `M.enable_typewriter_mode`()
+Enable typewriter mode
+
+Activates the typewriter mode, which keeps the cursor centered
+on the screen as you type or move through the document.
+
+@usage require("typewriter.commands").enable_typewriter_mode()
+
+------------------------------------------------------------------------------
+                                                   *M.disable_typewriter_mode()*
+                         `M.disable_typewriter_mode`()
+Disable typewriter mode
+
+Deactivates the typewriter mode, returning to normal scrolling behavior.
+
+@usage require("typewriter.commands").disable_typewriter_mode()
+
+------------------------------------------------------------------------------
+                                                    *M.toggle_typewriter_mode()*
+                          `M.toggle_typewriter_mode`()
+Toggle typewriter mode
+
+Switches between enabled and disabled states of typewriter mode.
+
+@usage require("typewriter.commands").toggle_typewriter_mode()
+
+------------------------------------------------------------------------------
+                                                   *M.center_block_and_cursor()*
+                         `M.center_block_and_cursor`()
+Center the current code block and cursor
+
+This function centers both the current code block and the cursor on the screen.
+It's useful for focusing on a specific block of code.
+
+@usage require("typewriter.commands").center_block_and_cursor()
+
+------------------------------------------------------------------------------
+                                                      *M.move_to_top_of_block()*
+                           `M.move_to_top_of_block`()
+Move the top of the current code block to the top of the screen
+
+This function aligns the top of the current code block with the top of the screen,
+providing a clear view of the entire block.
+
+@usage require("typewriter.commands").move_to_top_of_block()
+
+------------------------------------------------------------------------------
+                                                   *M.move_to_bottom_of_block()*
+                         `M.move_to_bottom_of_block`()
+Move the bottom of the current code block to the bottom of the screen
+
+This function aligns the bottom of the current code block with the bottom of the screen,
+allowing you to see the end of the block and what follows it.
+
+@usage require("typewriter.commands").move_to_bottom_of_block()
+
+
+==============================================================================
+------------------------------------------------------------------------------
+Configuration management for Typewriter.nvim
+
+This module handles the configuration options for Typewriter.nvim,
+allowing users to customize the plugin's behavior.
+
+@module typewriter.config
+@file lua/typewriter/config.lua
+@tag typewriter-config
+
+------------------------------------------------------------------------------
+                                                              *M.default_config*
+                               `M.default_config`
+Default configuration options for Typewriter.nvim
+
+These values will be used if the user doesn't override them.
+
+@type table
+
+------------------------------------------------------------------------------
+                                                                      *M.config*
+                                   `M.config`
+Current configuration
+
+This table holds the active configuration, which is a combination of
+default values and user-provided overrides.
+
+@type table
+
+------------------------------------------------------------------------------
+                                                              *M.config_setup()*
+                        `M.config_setup`({user_config})
+Setup the configuration
+
+This function merges the user-provided configuration with the default configuration.
+It allows users to override only the options they want to change.
+
+@param user_config table User configuration options
+@usage
+require('typewriter.config').config_setup({
+    enable_with_zen_mode = false,
+    enable_notifications = false
+})
+
+------------------------------------------------------------------------------
+                                                                *M.get_config()*
+                                `M.get_config`()
+Get the current configuration
+
+This function returns the current active configuration.
+
+@return table Current configuration
+@usage
+local current_config = require('typewriter.config').get_config()
+
+
+==============================================================================
+------------------------------------------------------------------------------
+Typewriter.nvim
+
+This plugin provides typewriter-style scrolling for Neovim.
+It keeps the cursor centered on the screen and provides advanced code block navigation.
+
+Features:
+* Centered cursor while typing and scrolling
+* Integration with Zen Mode and True Zen
+* Advanced code block navigation
+* Customizable behavior through configuration options
+
+@module typewriter
+@file lua/typewriter/init.lua
+@tag typewriter.nvim
+@author Your Name
+@license MIT
+
+------------------------------------------------------------------------------
+                                                                             *M*
+                                      `M`
+Import required modules
+local config = require("typewriter.config")
+local autocommands = require("typewriter.autocommands")
+
+------------------------------------------------------------------------------
+Setup the Typewriter.nvim plugin
+
+This function initializes the plugin with the provided user configuration
+and sets up the necessary autocommands.
+
+@param user_config table User configuration options (optional)
+@usage
+require('typewriter').setup({
+    enable_with_zen_mode = false,
+    keep_cursor_position = true
+})
+
+
+==============================================================================
+------------------------------------------------------------------------------
+Configuration for significant code blocks to center in Typewriter.nvim
+
+This module defines the types of code blocks that should be centered when using
+Typewriter.nvim's block centering features. It provides a configuration table
+that determines which syntax tree nodes are considered "significant" and should
+trigger centering behavior.
+
+@module typewriter.utils.center_block_config
+@file lua/typewriter/utils/center_block_config.lua
+@tag typewriter-center-block-config
+
+------------------------------------------------------------------------------
+                                                                      *M.expand*
+                                   `M.expand`
+Table indicating which code blocks should be expanded and centered
+
+This table maps syntax tree node types to boolean values. When a node type
+is set to `true`, it will be considered a significant block and will trigger
+centering behavior in Typewriter.nvim's block navigation functions.
+
+Users can modify this table to customize which types of code blocks are
+considered significant in their workflow.
+
+@type table<string, boolean>
+@usage
+-- To add a new node type or modify an existing one:
+local center_block_config = require("typewriter.utils.center_block_config")
+center_block_config.expand["my_custom_node"] = true
+
+-- To disable centering for a specific node type:
+center_block_config.expand["function"] = false
+
+------------------------------------------------------------------------------
+                                                             *M.should_expand()*
+                         `M.should_expand`({node_type})
+Get the expansion status for a given node type
+
+@param node_type string The type of the syntax tree node
+@return boolean Whether the node type should be expanded and centered
+@usage
+local center_block_config = require("typewriter.utils.center_block_config")
+local should_expand = center_block_config.should_expand("function")
+
+
+==============================================================================
+------------------------------------------------------------------------------
+Utility functions for Typewriter.nvim
+
+This module contains utility functions used throughout Typewriter.nvim.
+It provides functionality for user notifications, horizontal cursor centering,
+and Typewriter mode state management.
+
+@module typewriter.utils
+@file lua/typewriter/utils.lua
+@tag typewriter-utils
+
+------------------------------------------------------------------------------
+                                                                    *M.notify()*
+                             `M.notify`({message})
+Notify the user with a message if notifications are enabled
+
+This function displays a notification to the user using Neovim's built-in
+notification system. The notification will only be shown if the
+`enable_notifications` option is set to true in the plugin's configuration.
+
+@param message string The message to display in the notification
+@usage
+local utils = require("typewriter.utils")
+utils.notify("Typewriter mode enabled")
+
+------------------------------------------------------------------------------
+                                                *M.center_cursor_horizontally()*
+                        `M.center_cursor_horizontally`()
+Center the cursor horizontally if horizontal scrolling is enabled
+
+This function centers the cursor horizontally in the window by adjusting
+the view. It only takes effect if the `enable_horizontal_scroll` option
+is set to true in the plugin's configuration. The function also disables
+line wrapping to allow for horizontal scrolling.
+
+@usage
+local utils = require("typewriter.utils")
+utils.center_cursor_horizontally()
+
+------------------------------------------------------------------------------
+                                                      *M.is_typewriter_active()*
+                           `M.is_typewriter_active`()
+Check if Typewriter mode is currently active
+
+@return boolean True if Typewriter mode is active, false otherwise
+@usage
+local utils = require("typewriter.utils")
+if utils.is_typewriter_active() then
+    print("Typewriter mode is active")
+end
+
+------------------------------------------------------------------------------
+                                                     *M.set_typewriter_active()*
+                      `M.set_typewriter_active`({active})
+Set the active state of Typewriter mode
+
+@param active boolean The new active state
+@usage
+local utils = require("typewriter.utils")
+utils.set_typewriter_active(true)
+
+------------------------------------------------------------------------------
+                                                  *M.toggle_typewriter_active()*
+                         `M.toggle_typewriter_active`()
+Toggle the active state of Typewriter mode
+
+@return boolean The new active state
+@usage
+local utils = require("typewriter.utils")
+local new_state = utils.toggle_typewriter_active()
+print("Typewriter mode is now: " .. (new_state and "active" or "inactive"))
+
+
+ vim:tw=78:ts=8:noet:ft=help:norl:
+

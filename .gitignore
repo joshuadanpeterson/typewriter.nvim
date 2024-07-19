@@ -4,7 +4,9 @@ TODO.md
 *.vhs
 *.tape
 *.cast
-*.txt
 demos/typewriter_demo.gif
 .github/workflows/changelog.yml
+demo.txt
+
+# Folders
 scripts/*
