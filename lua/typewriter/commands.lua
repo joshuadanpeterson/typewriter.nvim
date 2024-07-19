@@ -19,7 +19,6 @@ local typewriter_active = false
 --- Helper function to determine if a node is a significant block
 local function is_significant_block(node)
 	local node_type = node:type()
-	print("Node type: ", node_type)
 	return center_block_config.should_expand(node_type)
 end
 
@@ -31,9 +30,9 @@ local function get_expand_root(node)
 			return node
 		end
 		-- Stop traversal if we reach high-level nodes
-		if node_type == "class_declaration" or node_type == "program" then
-			return nil
-		end
+		-- if node_type == "class_declaration" or node_type == "program" then
+		-- 	return nil
+		-- end
 		node = node:parent()
 	end
 	return nil
@@ -110,20 +109,16 @@ end
 function M.center_block_and_cursor()
 	local node = ts_utils.get_node_at_cursor()
 	if not node then
-		print("No node at cursor")
 		return
 	end
 
 	node = get_expand_root(node)
 	if not node then
-		print("No expandable root node")
 		return
 	end
 
 	local start_row, _, end_row, _ = node:range()
-	print("Start row: ", start_row, "End row: ", end_row)
 	local middle_line = math.floor((start_row + end_row) / 2)
-	print("Middle line: ", middle_line)
 
 	-- Check for edge cases
 	local line_count = vim.api.nvim_buf_line_count(0)
@@ -134,7 +129,6 @@ function M.center_block_and_cursor()
 	local win_height = vim.api.nvim_win_get_height(0)
 	local top_visible_line = math.max(middle_line - math.floor(win_height / 2), 0)
 	local bottom_visible_line = math.min(middle_line + math.floor(win_height / 2), line_count - 1)
-	print("Top visible line: ", top_visible_line, "Bottom visible line: ", bottom_visible_line)
 
 	if config.config.keep_cursor_position then
 		local cursor = vim.api.nvim_win_get_cursor(0)
@@ -152,7 +146,6 @@ function M.center_block_and_cursor()
 		vim.cmd(string.format("normal! %dGzz", middle_line + 1))
 	end
 
-	print("Code block centered")
 	utils.notify("Code block centered")
 end
 
