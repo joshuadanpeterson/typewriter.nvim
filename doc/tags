@@ -18,3 +18,9 @@ M.set_typewriter_active()	typewriter.txt	/*M.set_typewriter_active()*
 M.should_expand()	typewriter.txt	/*M.should_expand()*
 M.toggle_typewriter_active()	typewriter.txt	/*M.toggle_typewriter_active()*
 M.toggle_typewriter_mode()	typewriter.txt	/*M.toggle_typewriter_mode()*
+typewriter	typewriter.txt	/*typewriter*
+typewriter-changelog	typewriter.txt	/*typewriter-changelog*
+typewriter-description	typewriter.txt	/*typewriter-description*
+typewriter-features	typewriter.txt	/*typewriter-features*
+typewriter-todo	typewriter.txt	/*typewriter-todo*
+typewriter.txt	typewriter.txt	/*typewriter.txt*
