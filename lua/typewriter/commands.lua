@@ -25,14 +25,9 @@ end
 --- Helper function to get the root of the expandable block
 local function get_expand_root(node)
 	while node do
-		local node_type = node:type()
 		if is_significant_block(node) then
 			return node
 		end
-		-- Stop traversal if we reach high-level nodes
-		-- if node_type == "class_declaration" or node_type == "program" then
-		-- 	return nil
-		-- end
 		node = node:parent()
 	end
 	return nil
