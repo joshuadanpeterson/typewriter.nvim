@@ -82,6 +82,7 @@ M.expand = {
 	["declaration_list"] = true,
 	["compound_statement"] = true,
 	["method_declaration"] = true,
+	["class_declaration"] = true,
 }
 
 --- Get the expansion status for a given node type
