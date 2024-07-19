@@ -19,7 +19,8 @@ local typewriter_active = false
 --- Helper function to determine if a node is a significant block
 local function is_significant_block(node)
 	local node_type = node:type()
-	return center_block_config.expand[node_type] == true
+	print("Node type: ", node_type)
+	return node_type == "function" or node_type == "method" or node_type == "class"
 end
 
 --- Helper function to get the root of the expandable block
@@ -32,6 +33,7 @@ local function get_expand_root(node)
 	end
 	return nil
 end
+
 
 --- Center the cursor on the screen
 ---
@@ -103,41 +105,49 @@ end
 function M.center_block_and_cursor()
 	local node = ts_utils.get_node_at_cursor()
 	if not node then
+		print("No node at cursor")
 		return
 	end
 
 	node = get_expand_root(node)
 	if not node then
+		print("No expandable root node")
 		return
 	end
 
 	local start_row, _, end_row, _ = node:range()
+	print("Start row: ", start_row, "End row: ", end_row)
 	local middle_line = math.floor((start_row + end_row) / 2)
+	print("Middle line: ", middle_line)
 
 	-- Check for edge cases
-	local line_count = api.nvim_buf_line_count(0)
+	local line_count = vim.api.nvim_buf_line_count(0)
 	if middle_line < 0 then middle_line = 0 end
 	if middle_line >= line_count then middle_line = line_count - 1 end
 
+	-- Determine the visible window range
+	local win_height = vim.api.nvim_win_get_height(0)
+	local top_visible_line = math.max(middle_line - math.floor(win_height / 2), 0)
+	local bottom_visible_line = math.min(middle_line + math.floor(win_height / 2), line_count - 1)
+	print("Top visible line: ", top_visible_line, "Bottom visible line: ", bottom_visible_line)
+
 	if config.config.keep_cursor_position then
-		local cursor = api.nvim_win_get_cursor(0)
+		local cursor = vim.api.nvim_win_get_cursor(0)
 		-- Save current cursor position
 		local cursor_row = cursor[1]
 		local cursor_col = cursor[2]
 
 		-- Move cursor to the middle line of the block and center the view
-		api.nvim_win_set_cursor(0, { middle_line + 1, 0 })
-		vim.cmd("normal! zz")
+		vim.cmd(string.format("normal! %dGzz", middle_line + 1))
 
-		-- Adjust if the middle line is too close to the end of the file
-		local new_cursor_row = math.min(cursor_row, line_count)
-		api.nvim_win_set_cursor(0, { new_cursor_row, cursor_col })
+		-- Restore original cursor position
+		vim.api.nvim_win_set_cursor(0, { cursor_row, cursor_col })
 	else
 		-- Move cursor to the middle line of the block and center the view
-		api.nvim_win_set_cursor(0, { middle_line + 1, 0 })
-		vim.cmd("normal! zz")
+		vim.cmd(string.format("normal! %dGzz", middle_line + 1))
 	end
 
+	print("Code block centered")
 	utils.notify("Code block centered")
 end
 
