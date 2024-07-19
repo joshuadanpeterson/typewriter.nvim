@@ -16,6 +16,23 @@ local center_block_config = require("typewriter.utils.center_block_config")
 local M = {}
 local typewriter_active = false
 
+--- Helper function to determine if a node is a significant block
+local function is_significant_block(node)
+	local node_type = node:type()
+	return center_block_config.expand[node_type] == true
+end
+
+--- Helper function to get the root of the expandable block
+local function get_expand_root(node)
+	while node do
+		if is_significant_block(node) then
+			return node
+		end
+		node = node:parent()
+	end
+	return nil
+end
+
 --- Center the cursor on the screen
 ---
 --- This function moves the view so that the cursor is centered vertically
@@ -76,6 +93,7 @@ function M.toggle_typewriter_mode()
 		M.enable_typewriter_mode()
 	end
 end
+
 --- Center the current code block and cursor
 ---
 --- This function centers both the current code block and the cursor on the screen.
@@ -83,23 +101,6 @@ end
 ---
 --- @usage require("typewriter.commands").center_block_and_cursor()
 function M.center_block_and_cursor()
-	-- Helper function to determine if a node is a significant block
-	local function is_significant_block(node)
-		local node_type = node:type()
-		return center_block_config.expand[node_type] == true
-	end
-
-	-- Helper function to get the root of the expandable block
-	local function get_expand_root(node)
-		while node do
-			if is_significant_block(node) then
-				return node
-			end
-			node = node:parent()
-		end
-		return nil
-	end
-
 	local node = ts_utils.get_node_at_cursor()
 	if not node then
 		return
@@ -131,8 +132,6 @@ end
 ---
 --- @usage require("typewriter.commands").move_to_top_of_block()
 function M.move_to_top_of_block()
-	-- Helper functions (is_significant_block and get_expand_root) are the same as in center_block_and_cursor
-
 	local node = ts_utils.get_node_at_cursor()
 	if not node then
 		return
@@ -171,8 +170,6 @@ end
 ---
 --- @usage require("typewriter.commands").move_to_bottom_of_block()
 function M.move_to_bottom_of_block()
-	-- Helper functions (is_significant_block and get_expand_root) are the same as in center_block_and_cursor
-
 	local node = ts_utils.get_node_at_cursor()
 	if not node then
 		return
