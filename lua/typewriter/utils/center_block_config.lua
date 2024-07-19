@@ -78,6 +78,7 @@ M.expand = {
 	["return_statement"] = true,
 	["throw_statement"] = true,
 	["await_expression"] = true,
+	["declaration_list"] = true,
 }
 
 --- Get the expansion status for a given node type
