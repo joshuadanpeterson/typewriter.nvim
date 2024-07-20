@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.4.26](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.26) (2024-07-19)
+- refactor(CHANGELOG): Update CHANGELOG
+- docs: update CHANGELOG.md for v0.4.25 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.25...v0.4.26)
+
 ## [v0.4.25](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.25) (2024-07-19)
 
 - feat(workflow): Integrate CHANGELOG generation into release action
@@ -19,7 +25,7 @@
 - Merge branch 'main' into dev
 - docs: update CHANGELOG.md for v0.4.23 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.24...v0.4.25)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.26...v0.4.25)
 
 ## [v0.4.24](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.24) (2024-07-19)
 
@@ -215,9 +221,7 @@
 ## [v0.4.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.1) (2024-07-05)
 
 ## [Unreleased](https://github.com/joshuadanpeterson/typewriter.nvim/tree/HEAD)
-
 **Fixed bugs:**
-
 - Fix `$` Command Issue in Normal Mode [\#2](https://github.com/joshuadanpeterson/typewriter.nvim/pull/2) ([joshuadanpeterson](https://github.com/joshuadanpeterson))
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.2...v0.4.1)
@@ -225,84 +229,102 @@
 ## [v0.4.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.0) (2024-07-05)
 
 **Fixed bugs:**
-
 - In normal mode with plugin installed using command $ - end of line not reached. [\#1](https://github.com/joshuadanpeterson/typewriter.nvim/issues/1)
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.1...v0.4.0)
 
 ## [v0.3.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.3.2) (2024-07-04)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.0...v0.3.2)
 
 ## [v0.3.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.3.0) (2024-07-01)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.3.2...v0.3.0)
 
 ## [v0.3.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.3.1) (2024-07-01)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.3.0...v0.3.1)
 
 ## [v0.2.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.2.0) (2024-06-30)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.3.1...v0.2.0)
 
 ## [v0.1.5](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.1.5) (2024-06-16)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.2.0...v0.1.5)
 
 ## [v0.1.4](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.1.4) (2024-06-16)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.1.5...v0.1.4)
 
 ## [v0.1.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.1.3) (2024-06-16)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.1.4...v0.1.3)
 
 ## [v0.1.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.1.2) (2024-06-16)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.1.3...v0.1.2)
 
 ## [v0.1.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.1.1) (2024-06-16)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.1.2...v0.1.1)
 
 ## [v0.1.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.1.0) (2024-06-16)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.1.1...v0.1.0)
 
 ## [v0.0.9](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.9) (2024-06-15)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.1.0...v0.0.9)
 
 ## [v0.0.8](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.8) (2024-06-15)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.9...v0.0.8)
 
 ## [v0.0.7](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.7) (2024-06-15)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.8...v0.0.7)
 
 ## [v0.0.4](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.4) (2024-06-15)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.7...v0.0.4)
 
 ## [v0.0.5](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.5) (2024-06-15)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.4...v0.0.5)
 
 ## [v0.0.6](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.6) (2024-06-15)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.5...v0.0.6)
 
 ## [v0.0.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.3) (2024-06-15)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.6...v0.0.3)
 
 ## [v0.0.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.2) (2024-06-15)
 
+
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.3...v0.0.2)
 
 ## [v0.0.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.0.1) (2024-06-15)
+
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.2...v0.0.1)
 
@@ -311,3 +333,4 @@
 \* _This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)_
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.0.1...v1.0.0)
+
