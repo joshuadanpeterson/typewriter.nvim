@@ -55,6 +55,16 @@ M.expand = {
 	["function_call"] = true,
 	["assignment_statement"] = true,
 	["return_statement"] = true,
+	["block"] = true,
+	["parameters"] = true,
+	["body"] = true,
+	["condition"] = true,
+	["property_name"] = true,
+	["integer_value"] = true,
+	["unit"] = true,
+	["plain_value"] = true,
+	["color_value"] = true,
+	["tag_name"] = true,
 
 	-- Language-specific significant blocks
 	-- PHP
@@ -64,10 +74,7 @@ M.expand = {
 	["foreach_statement"] = true,
 
 	-- Lua
-	["block"] = true,
-	["parameters"] = true,
-	["body"] = true,
-	["condition"] = true,
+	-- moved to common significant blocks
 
 	-- Go
 	["package_clause"] = true,
@@ -140,7 +147,6 @@ M.expand = {
 	["doctype"] = true,
 	["element"] = true,
 	["start_tag"] = true,
-	["tag_name"] = true,
 	["attribute"] = true,
 	["text"] = true,
 	["end_tag"] = true,
@@ -148,9 +154,13 @@ M.expand = {
 	["script_element"] = true,
 
 	-- CSS
-	["rule"] = true,
-	["media"] = true,
-	["keyframes"] = true,
+	["rule_set"] = true,
+	["selectors"] = true,
+	["class_selector"] = true,
+	["pseudo_class_selector"] = true,
+	["attribute_selector"] = true,
+	["media_statement"] = true,
+	["feature_query"] = true,
 
 	-- Bash
 	["for_statement"] = true,
