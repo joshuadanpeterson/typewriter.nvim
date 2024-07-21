@@ -71,6 +71,9 @@ M.expand = {
 	["call_expression"] = true,
 	["function_body"] = true,
 	["parameter"] = true,
+	["return_statement"] = true,
+	["identifier"] = true,
+	["expression_statement"] = true,
 
 	-- Language-specific significant blocks
 	-- PHP
@@ -135,7 +138,6 @@ M.expand = {
 	-- JavaScript
 	["lexical_declaration"] = true,
 	["for_in_statement"] = true,
-	["expression_statement"] = true,
 	["function_expression"] = true,
 
 	-- Python
@@ -221,6 +223,17 @@ M.expand = {
 	-- Swift
 	["inheritance_specifier"] = true,
 	["class_body"] = true,
+
+	-- C++
+	["preproc_include"] = true,
+	["class_specifier"] = true,
+	["field_initializer_list"] = true,
+	["field_initializer"] = true,
+	["binary_expression"] = true,
+	["declaration"] = true,
+	["init_declarator"] = true,
+	["for_range_loop"] = true,
+	["string_literal"] = true,
 }
 
 --- Get the expansion status for a given node type
