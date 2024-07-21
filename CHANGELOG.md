@@ -1,10 +1,18 @@
 # Changelog
 
+## [v0.5.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.5.0) (2024-07-20)
+- Merge branch 'dev' of https://github.com/joshuadanpeterson/typewriter.nvim into dev
+- feat: Update significant node types for centering
+- refactor(test): Remove test.txt
+- docs: update CHANGELOG.md for v0.4.26 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.26...v0.5.0)
+
 ## [v0.4.26](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.26) (2024-07-19)
 - refactor(CHANGELOG): Update CHANGELOG
 - docs: update CHANGELOG.md for v0.4.25 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.4.25...v0.4.26)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.5.0...v0.4.26)
 
 ## [v0.4.25](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.25) (2024-07-19)
 
