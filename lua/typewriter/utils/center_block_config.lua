@@ -239,6 +239,21 @@ M.expand = {
 	["parameter_declaration"] = true,
 	["compound_statement"] = true,
 	["struct_specifier"] = true,
+
+	-- Zig
+	["line_comment"] = true,
+	["Decl"] = true,
+	["VarDecl"] = true,
+	["FnProto"] = true,
+	["AssignExpr"] = true,
+	["BinaryExpr"] = true,
+	["Block"] = true,
+	["Statement"] = true,
+	["IfStatement"] = true,
+	["ForStatement"] = true,
+	["WhileStatement"] = true,
+	["SwitchExpr"] = true,
+	["SwitchProng"] = true,
 }
 
 --- Get the expansion status for a given node type
