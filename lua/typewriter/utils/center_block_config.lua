@@ -81,6 +81,11 @@ M.expand = {
 	-- Python
 	["except_clause"] = true,
 	["def"] = true,
+	["import_statement"] = true,
+	["import_from_statement"] = true,
+	["expression_statement"] = true,
+	["decorated_definition"] = true,
+	["function_definition"] = true,
 
 	-- HTML
 	["tag"] = true,
