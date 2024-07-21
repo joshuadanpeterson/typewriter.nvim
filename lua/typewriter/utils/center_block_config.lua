@@ -137,9 +137,15 @@ M.expand = {
 	["decorated_definition"] = true,
 
 	-- HTML
-	["tag"] = true,
-	["script"] = true,
-	["style"] = true,
+	["doctype"] = true,
+	["element"] = true,
+	["start_tag"] = true,
+	["tag_name"] = true,
+	["attribute"] = true,
+	["text"] = true,
+	["end_tag"] = true,
+	["style_element"] = true,
+	["script_element"] = true,
 
 	-- CSS
 	["rule"] = true,
@@ -162,6 +168,21 @@ M.expand = {
 	["begin_statement"] = true,
 	["commit_statement"] = true,
 	["rollback_statement"] = true,
+
+	-- YAML
+	["document"] = true,
+	["block_node"] = true,
+	["block_mapping"] = true,
+	["block_mapping_pair"] = true,
+	["key: flow_node"] = true,
+	["value: flow_node"] = true,
+	["plain_scalar"] = true,
+	["string_scalar"] = true,
+	["block_sequence"] = true,
+	["block_sequence_item"] = true,
+	["block_scalar"] = true,
+	["integer_scalar"] = true,
+	["boolean_scalar"] = true,
 }
 
 --- Get the expansion status for a given node type
