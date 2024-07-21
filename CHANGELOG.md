@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.6.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.2) (2024-07-21)
+- Merge branch 'main' into dev
+- docs: update CHANGELOG.md for v0.6.1 and remove duplicate entries
+- docs: update CHANGELOG.md for v0.5.1 and remove duplicate entries
+- Merge pull request #14 from joshuadanpeterson/dev
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.1...v0.6.2)
+
 ## [v0.6.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.1) (2024-07-21)
 - Merge branch 'dev' of https://github.com/joshuadanpeterson/typewriter.nvim into dev
 - feat(README): Add supported filetypes/languages section to README
