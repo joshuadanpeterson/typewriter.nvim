@@ -72,6 +72,10 @@ M.expand = {
 	["mod"] = true,
 
 	-- JavaScript
+	["lexical_declaration"] = true,
+	["arrow_function"] = true,
+	["for_in_statement"] = true,
+	["expression_statement"] = true,
 	["function_expression"] = true,
 
 	-- Python
