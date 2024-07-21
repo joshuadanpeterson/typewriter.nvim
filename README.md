@@ -153,6 +153,32 @@ Here is a markdown table that summarizes the commands available in Typewriter.nv
 
 These commands allow you to control the typewriter mode in Neovim and navigate code blocks, enhancing your writing and coding experience by maintaining focus and reducing distractions. The `:TWCenter`, `:TWTop`, and `:TWBottom` commands leverage Tree-sitter to intelligently manipulate the view of your code blocks, providing a more focused and flexible coding experience.
 
+## Supported Filetypes/Languages 🌐
+
+Typewriter.nvim supports a variety of filetypes and languages, ensuring that your code navigation and centering experience is smooth across different programming environments. Below is a list of supported filetypes and languages. If you don't see your filetype listed, we still encourage you to download the plugin, as the common significant blocks section of the [center_block_config.lua](https://github.com/joshuadanpeterson/typewriter.nvim/blob/main/lua/typewriter/utils/center_block_config.lua) file supports many filetypes by default. If you download the plugin and it doesn't work as expected even with Treesitter installed and set up as a dependency, please open up an [issue](https://github.com/joshuadanpeterson/typewriter.nvim/issues).
+
+- PHP
+- Go
+- Rust
+- JavaScript
+- Python
+- HTML
+- CSS
+- Bash
+- SQL
+- YAML
+- JSON
+- Dart
+- Swift
+- C++
+- C#
+- C
+- Zig
+- OCaml
+- Java
+
+If you don't see your filetype supported, propose it via [issue](https://github.com/joshuadanpeterson/typewriter.nvim/issues) or a [pull request](https://github.com/joshuadanpeterson/typewriter.nvim/pulls)!
+
 ## [ZenMode and True Zen Configuration](https://github.com/joshuadanpeterson/typewriter.nvim/wiki/Integration-Guide)
 
 ### ZenMode 🧘

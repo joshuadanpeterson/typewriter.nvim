@@ -7,6 +7,7 @@ TODO.md
 demos/typewriter_demo.gif
 .github/workflows/changelog.yml
 demo.txt
+test.*
 
 # Folders
 scripts/*
