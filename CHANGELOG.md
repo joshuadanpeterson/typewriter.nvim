@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.6.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.1) (2024-07-21)
+- Merge branch 'dev' of https://github.com/joshuadanpeterson/typewriter.nvim into dev
+- feat(README): Add supported filetypes/languages section to README
+- docs: update CHANGELOG.md for v0.6.0 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.0...v0.6.1)
+
 ## [v0.6.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.0) (2024-07-21)
 - feat: Add throw_statement to Java significant blocks
 - feat: Add OCaml significant node types to M.expand table for centering
@@ -23,7 +30,7 @@
 - feat: Add significant Bash node types for centering
 - docs: update CHANGELOG.md for v0.5.0 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.5.0...v0.6.0)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.1...v0.6.0)
 
 ## [v0.5.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.5.0) (2024-07-20)
 - Merge branch 'dev' of https://github.com/joshuadanpeterson/typewriter.nvim into dev
