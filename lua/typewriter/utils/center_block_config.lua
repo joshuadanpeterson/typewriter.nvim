@@ -29,60 +29,79 @@ local M = {}
 --- -- To disable centering for a specific node type:
 --- center_block_config.expand["function"] = false
 M.expand = {
-	["comment"] = true,
+	-- Common significant blocks across many languages
 	["function"] = true,
-	["body"] = true,
 	["method"] = true,
-	["table"] = true,
 	["if_statement"] = true,
-	["class"] = true,
-	["block"] = true,
-	["module"] = true,
-	["namespace"] = true,
-	["program"] = true,
-	["source"] = true,
 	["for_loop"] = true,
 	["while_loop"] = true,
-	["conditional"] = true,
+	["switch_statement"] = true,
+	["case_statement"] = true,
 	["try_statement"] = true,
 	["catch_clause"] = true,
 	["finally_clause"] = true,
-	["switch_statement"] = true,
-	["case_statement"] = true,
-	["else_clause"] = true,
 	["do_statement"] = true,
 	["repeat_statement"] = true,
-	["function_call"] = true,
-	["function_definition"] = true,
+	["function_declaration"] = true,
+	["class"] = true,
+	["class_declaration"] = true,
+	["method_declaration"] = true,
 	["arrow_function"] = true,
-	["function_expression"] = true,
 	["generator_function"] = true,
 	["async_function"] = true,
-	["object"] = true,
-	["array"] = true,
-	["property"] = true,
-	["field"] = true,
-	["parameter"] = true,
-	["constructor"] = true,
-	["decorator"] = true,
-	["import_statement"] = true,
-	["export_statement"] = true,
-	["try_expression"] = true,
+	["local_declaration"] = true,
+	-- ["declaration_list"] = true,
+	["function_call"] = true,
+
+	-- Language-specific significant blocks
+	-- PHP
+	["namespace"] = true,
+
+	-- Lua
+	-- (covered by common significant blocks)
+
+	-- Go
+	["package"] = true,
+
+	-- Rust
 	["match_statement"] = true,
-	["enum_declaration"] = true,
-	["interface_declaration"] = true,
-	["type_alias"] = true,
-	["variable_declaration"] = true,
-	["lexical_declaration"] = true,
-	["assignment"] = true,
-	["expression_statement"] = true,
-	["return_statement"] = true,
-	["throw_statement"] = true,
-	["await_expression"] = true,
-	["declaration_list"] = true,
-	["compound_statement"] = true,
-	["method_declaration"] = true,
-	["class_declaration"] = true,
+	["impl_block"] = true,
+	["struct"] = true,
+	["enum"] = true,
+	["trait"] = true,
+	["mod"] = true,
+
+	-- JavaScript
+	["function_expression"] = true,
+
+	-- Python
+	["except_clause"] = true,
+	["def"] = true,
+
+	-- HTML
+	["tag"] = true,
+	["script"] = true,
+	["style"] = true,
+
+	-- CSS
+	["rule"] = true,
+	["media"] = true,
+	["keyframes"] = true,
+
+	-- Bash
+	-- (covered by common significant blocks)
+
+	-- SQL
+	["select_statement"] = true,
+	["insert_statement"] = true,
+	["update_statement"] = true,
+	["delete_statement"] = true,
+	["create_statement"] = true,
+	["alter_statement"] = true,
+	["drop_statement"] = true,
+	["begin_statement"] = true,
+	["commit_statement"] = true,
+	["rollback_statement"] = true,
 }
 
 --- Get the expansion status for a given node type
