@@ -5,7 +5,7 @@
 - feat(README): Add supported filetypes/languages section to README
 - docs: update CHANGELOG.md for v0.6.0 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.0...v0.6.1)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.2...v0.6.1)
 
 ## [v0.6.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.0) (2024-07-21)
 - feat: Add throw_statement to Java significant blocks
@@ -32,13 +32,19 @@
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.1...v0.6.0)
 
+## [v0.5.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.5.1) (2024-07-20)
+- Merge pull request #14 from joshuadanpeterson/dev
+- docs: update CHANGELOG.md for v0.5.0 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.0...v0.5.1)
+
 ## [v0.5.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.5.0) (2024-07-20)
 - Merge branch 'dev' of https://github.com/joshuadanpeterson/typewriter.nvim into dev
 - feat: Update significant node types for centering
 - refactor(test): Remove test.txt
 - docs: update CHANGELOG.md for v0.4.26 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.0...v0.5.0)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.5.1...v0.5.0)
 
 ## [v0.4.26](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.4.26) (2024-07-19)
 - refactor(CHANGELOG): Update CHANGELOG
