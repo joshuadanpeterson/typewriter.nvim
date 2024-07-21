@@ -273,6 +273,9 @@ M.expand = {
 	["variant_declaration"] = true,
 	["constructor_name"] = true,
 	["let_expression"] = true,
+
+	-- Java-specific significant blocks
+	["throw_statement"] = true,
 }
 
 --- Get the expansion status for a given node type
