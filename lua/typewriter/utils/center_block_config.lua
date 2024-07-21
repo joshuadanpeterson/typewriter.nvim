@@ -80,6 +80,8 @@ M.expand = {
 	["foreach_statement"] = true,
 	["init_declarator"] = true,
 	["preproc_include"] = true,
+	["constructor_declaration"] = true,
+	["field_declaration"] = true,
 
 	-- Language-specific significant blocks
 	-- PHP
@@ -230,9 +232,7 @@ M.expand = {
 	["using_directive"] = true,
 	["namespace_declaration"] = true,
 	["modifier"] = true,
-	["field_declaration"] = true,
 	["variable_declaration"] = true,
-	["constructor_declaration"] = true,
 
 	-- C
 	["parameter_list"] = true,
@@ -254,6 +254,25 @@ M.expand = {
 	["WhileStatement"] = true,
 	["SwitchExpr"] = true,
 	["SwitchProng"] = true,
+
+	-- OCaml
+	["comment"] = true,
+	["type_definition"] = true,
+	["type_binding"] = true,
+	["type_constructor"] = true,
+	["record_declaration"] = true,
+	["field_name"] = true,
+	["type_constructor_path"] = true,
+	["value_definition"] = true,
+	["let_binding"] = true,
+	["value_name"] = true,
+	["record_expression"] = true,
+	["application_expression"] = true,
+	["if_expression"] = true,
+	["match_expression"] = true,
+	["variant_declaration"] = true,
+	["constructor_name"] = true,
+	["let_expression"] = true,
 }
 
 --- Get the expansion status for a given node type
