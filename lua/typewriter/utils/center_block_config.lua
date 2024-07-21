@@ -53,13 +53,21 @@ M.expand = {
 	["local_declaration"] = true,
 	["declaration_list"] = true,
 	["function_call"] = true,
+	["assignment_statement"] = true,
+	["return_statement"] = true,
 
 	-- Language-specific significant blocks
 	-- PHP
 	["namespace"] = true,
+	["php_tag"] = true,
+	["property_declaration"] = true,
+	["foreach_statement"] = true,
 
 	-- Lua
-	-- (covered by common significant blocks)
+	["block"] = true,
+	["parameters"] = true,
+	["body"] = true,
+	["condition"] = true,
 
 	-- Go
 	["package_clause"] = true,
@@ -72,12 +80,9 @@ M.expand = {
 	["selector_expression"] = true,
 	["argument_list"] = true,
 	["short_var_declaration"] = true,
-	["assignment_statement"] = true,
-	["return_statement"] = true,
 	["expression_list"] = true,
 	["for_clause"] = true,
 	["initializer"] = true,
-	["condition"] = true,
 	["update"] = true,
 	["inc_statement"] = true,
 	["expression_switch_statement"] = true,
@@ -93,7 +98,6 @@ M.expand = {
 	["scoped_identifier"] = true,
 	["use_wildcard"] = true,
 	["primitive_type"] = true,
-	["parameters"] = true,
 	["parameter"] = true,
 	["pattern"] = true,
 	["struct_expression"] = true,
