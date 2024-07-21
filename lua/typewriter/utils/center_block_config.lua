@@ -50,7 +50,7 @@ M.expand = {
 	["generator_function"] = true,
 	["async_function"] = true,
 	["local_declaration"] = true,
-	-- ["declaration_list"] = true,
+	["declaration_list"] = true,
 	["function_call"] = true,
 
 	-- Language-specific significant blocks
@@ -89,7 +89,11 @@ M.expand = {
 	["keyframes"] = true,
 
 	-- Bash
-	-- (covered by common significant blocks)
+	["function_definition"] = true,
+	["for_statement"] = true,
+	["while_statement"] = true,
+	["if_statement"] = true,
+	["declaration_command"] = true,
 
 	-- SQL
 	["select_statement"] = true,
