@@ -65,6 +65,7 @@ M.expand = {
 	["plain_value"] = true,
 	["color_value"] = true,
 	["tag_name"] = true,
+	["string_content"] = true,
 
 	-- Language-specific significant blocks
 	-- PHP
@@ -113,7 +114,6 @@ M.expand = {
 	["macro_invocation"] = true,
 	["token_tree"] = true,
 	["tuple_expression"] = true,
-	["string_content"] = true,
 	["field_expression"] = true,
 	["enum_variant_list"] = true,
 	["enum_variant"] = true,
@@ -193,6 +193,17 @@ M.expand = {
 	["block_scalar"] = true,
 	["integer_scalar"] = true,
 	["boolean_scalar"] = true,
+
+
+	-- JSON
+	["object"] = true,
+	["pair"] = true,
+	["key: string"] = true,
+	["value: string"] = true,
+	["value: object"] = true,
+	["value: array"] = true,
+	["escape_sequence"] = true,
+	["value: number"] = true,
 }
 
 --- Get the expansion status for a given node type
