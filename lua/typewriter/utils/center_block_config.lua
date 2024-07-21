@@ -78,14 +78,13 @@ M.expand = {
 	["argument_list"] = true,
 	["binary_expression"] = true,
 	["foreach_statement"] = true,
+	["init_declarator"] = true,
+	["preproc_include"] = true,
 
 	-- Language-specific significant blocks
 	-- PHP
 	["namespace"] = true,
 	["php_tag"] = true,
-
-	-- Lua
-	-- moved to common significant blocks
 
 	-- Go
 	["package_clause"] = true,
@@ -223,9 +222,7 @@ M.expand = {
 	["class_body"] = true,
 
 	-- C++
-	["preproc_include"] = true,
 	["class_specifier"] = true,
-	["init_declarator"] = true,
 	["for_range_loop"] = true,
 	["string_literal"] = true,
 
@@ -236,6 +233,12 @@ M.expand = {
 	["field_declaration"] = true,
 	["variable_declaration"] = true,
 	["constructor_declaration"] = true,
+
+	-- C
+	["parameter_list"] = true,
+	["parameter_declaration"] = true,
+	["compound_statement"] = true,
+	["struct_specifier"] = true,
 }
 
 --- Get the expansion status for a given node type
