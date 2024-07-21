@@ -1,10 +1,15 @@
 # Changelog
 
+## [v0.6.4](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.4) (2024-07-21)
+- docs: update CHANGELOG.md for v0.6.3 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.3...v0.6.4)
+
 ## [v0.6.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.3) (2024-07-21)
 - Merge pull request #15 from joshuadanpeterson/dev
 - docs: update CHANGELOG.md for v0.6.2 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.2...v0.6.3)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.4...v0.6.3)
 
 ## [v0.6.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.2) (2024-07-21)
 - Merge branch 'main' into dev
