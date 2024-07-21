@@ -54,7 +54,6 @@ M.expand = {
 	["declaration_list"] = true,
 	["function_call"] = true,
 	["assignment_statement"] = true,
-	["return_statement"] = true,
 	["block"] = true,
 	["parameters"] = true,
 	["body"] = true,
@@ -66,12 +65,17 @@ M.expand = {
 	["color_value"] = true,
 	["tag_name"] = true,
 	["string_content"] = true,
+	["import_declaration"] = true,
+	["property_declaration"] = true,
+	["type_identifier"] = true,
+	["call_expression"] = true,
+	["function_body"] = true,
+	["parameter"] = true,
 
 	-- Language-specific significant blocks
 	-- PHP
 	["namespace"] = true,
 	["php_tag"] = true,
-	["property_declaration"] = true,
 	["foreach_statement"] = true,
 
 	-- Lua
@@ -79,7 +83,6 @@ M.expand = {
 
 	-- Go
 	["package_clause"] = true,
-	["import_declaration"] = true,
 	["type_declaration"] = true,
 	["type_spec"] = true,
 	["struct_type"] = true,
@@ -106,7 +109,6 @@ M.expand = {
 	["scoped_identifier"] = true,
 	["use_wildcard"] = true,
 	["primitive_type"] = true,
-	["parameter"] = true,
 	["pattern"] = true,
 	["struct_expression"] = true,
 	["field_initializer_list"] = true,
@@ -212,12 +214,13 @@ M.expand = {
 	["declaration"] = true,
 	["import_or_export"] = true,
 	["constructor_signature"] = true,
-	["parameter"] = true,
 	["argument_part"] = true,
-	["function_body"] = true,
-	["type_identifier"] = true,
 	["local_variable_declaration"] = true,
 	["initialized_variable_definition"] = true,
+
+	-- Swift
+	["inheritance_specifier"] = true,
+	["class_body"] = true,
 }
 
 --- Get the expansion status for a given node type
