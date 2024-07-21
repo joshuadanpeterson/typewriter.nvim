@@ -204,6 +204,20 @@ M.expand = {
 	["value: array"] = true,
 	["escape_sequence"] = true,
 	["value: number"] = true,
+
+	-- Dart
+	["class_definition"] = true,
+	["function_signature"] = true,
+	["method_signature"] = true,
+	["declaration"] = true,
+	["import_or_export"] = true,
+	["constructor_signature"] = true,
+	["parameter"] = true,
+	["argument_part"] = true,
+	["function_body"] = true,
+	["type_identifier"] = true,
+	["local_variable_declaration"] = true,
+	["initialized_variable_definition"] = true,
 }
 
 --- Get the expansion status for a given node type
