@@ -74,12 +74,15 @@ M.expand = {
 	["return_statement"] = true,
 	["identifier"] = true,
 	["expression_statement"] = true,
+	["declaration"] = true,
+	["argument_list"] = true,
+	["binary_expression"] = true,
+	["foreach_statement"] = true,
 
 	-- Language-specific significant blocks
 	-- PHP
 	["namespace"] = true,
 	["php_tag"] = true,
-	["foreach_statement"] = true,
 
 	-- Lua
 	-- moved to common significant blocks
@@ -89,10 +92,7 @@ M.expand = {
 	["type_declaration"] = true,
 	["type_spec"] = true,
 	["struct_type"] = true,
-	["parameter_list"] = true,
-	["parameter_declaration"] = true,
 	["selector_expression"] = true,
-	["argument_list"] = true,
 	["short_var_declaration"] = true,
 	["expression_list"] = true,
 	["for_clause"] = true,
@@ -198,7 +198,6 @@ M.expand = {
 	["integer_scalar"] = true,
 	["boolean_scalar"] = true,
 
-
 	-- JSON
 	["object"] = true,
 	["pair"] = true,
@@ -213,7 +212,6 @@ M.expand = {
 	["class_definition"] = true,
 	["function_signature"] = true,
 	["method_signature"] = true,
-	["declaration"] = true,
 	["import_or_export"] = true,
 	["constructor_signature"] = true,
 	["argument_part"] = true,
@@ -227,13 +225,17 @@ M.expand = {
 	-- C++
 	["preproc_include"] = true,
 	["class_specifier"] = true,
-	["field_initializer_list"] = true,
-	["field_initializer"] = true,
-	["binary_expression"] = true,
-	["declaration"] = true,
 	["init_declarator"] = true,
 	["for_range_loop"] = true,
 	["string_literal"] = true,
+
+	-- C#
+	["using_directive"] = true,
+	["namespace_declaration"] = true,
+	["modifier"] = true,
+	["field_declaration"] = true,
+	["variable_declaration"] = true,
+	["constructor_declaration"] = true,
 }
 
 --- Get the expansion status for a given node type
