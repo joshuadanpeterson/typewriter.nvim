@@ -33,8 +33,8 @@ CHANGELOG                                                 *typewriter-changelog*
 
 TODO                                                      *typewriter-todo*
     - Potential enhancements:
-    - Fix issue where TWCenter centers the current line instead of the code block as per documentation.
-    - Resolve error with TWTop & TWBottom commands caused by an undefined function get_expand_root.
+    - Continue to add language support
+    - Add typing sounds
 
 ------------------------------------------------------------------------------
 Autocommands setup for Typewriter.nvim
