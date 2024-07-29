@@ -53,6 +53,42 @@ function M.autocmd_setup()
 		commands.move_to_bottom_of_block()
 	end, { desc = "Move the bottom of the current code block to the bottom of the screen" })
 
+	-- Preserve column position when moving between lines of different lengths
+	local target_col = nil
+	local last_line = nil
+
+	vim.api.nvim_create_autocmd("CursorMoved", {
+		pattern = "*",
+		callback = function()
+			local current_line, current_col = unpack(vim.api.nvim_win_get_cursor(0))
+			local line_length = vim.fn.col('$') - 1 -- Get the actual length of the current line
+
+			-- If we've moved to a new line
+			if last_line ~= current_line then
+				-- If target_col is not set, use the current column
+				if target_col == nil then
+					target_col = current_col
+				end
+
+				-- If the current line is shorter than target_col, move to the end of the line
+				if line_length < target_col then
+					vim.api.nvim_win_set_cursor(0, { current_line, line_length })
+					-- If the current line is long enough, move to the target column
+				elseif current_col ~= target_col then
+					vim.api.nvim_win_set_cursor(0, { current_line, target_col })
+				end
+			else
+				-- If we're on the same line, update the target column
+				target_col = current_col
+			end
+
+			last_line = current_line
+
+			-- Center the cursor
+			commands.center_cursor()
+		end
+	})
+
 	-- Autocommands for ZenMode integration
 	if config.config.enable_with_zen_mode then
 		vim.api.nvim_create_autocmd("User", {
