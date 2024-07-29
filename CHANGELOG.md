@@ -1,9 +1,15 @@
 # Changelog
 
+## [v0.6.5](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.5) (2024-07-29)
+- feat(autocommands): Preserve column position when moving between lines of different lengths
+- docs: update CHANGELOG.md for v0.6.4 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.4...v0.6.5)
+
 ## [v0.6.4](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.4) (2024-07-21)
 - docs: update CHANGELOG.md for v0.6.3 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.3...v0.6.4)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.5...v0.6.4)
 
 ## [v0.6.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.3) (2024-07-21)
 - Merge pull request #15 from joshuadanpeterson/dev
