@@ -10,8 +10,70 @@
 
 local config = require("typewriter.config")
 local commands = require("typewriter.commands")
+local ts_utils = require('nvim-treesitter.ts_utils')
+local ts_parsers = require('nvim-treesitter.parsers')
 
 local M = {}
+
+--- Move cursor to the first match found by Treesitter
+---
+--- @param search_pattern string The search pattern to match against nodes
+local function move_cursor_to_treesitter_match(search_pattern)
+	local bufnr = vim.api.nvim_get_current_buf()
+	local lang = ts_parsers.get_buf_lang(bufnr)
+	if not lang then
+		print("Treesitter parser not available for this buffer.")
+		return
+	end
+
+	local root = ts_utils.get_root_for_position(0, 0, bufnr)
+	if not root then
+		return
+	end
+
+	-- Define a query to capture specific node types
+	local query = vim.treesitter.query.parse(lang, [[
+        (identifier) @match
+        (string) @match
+        (comment) @match
+        (function_declaration name: (identifier) @match)
+        (variable_declaration name: (identifier) @match)
+        (property_identifier) @match
+        (function_name) @match
+        (type_identifier) @match
+    ]])
+
+	if not query then
+		print("No Treesitter query available for this language.")
+		return
+	end
+
+	-- Preprocess the search pattern to handle special characters and word boundaries
+	local regex_pattern = string.format("\\b%s\\b", search_pattern:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"))
+
+	-- Iterate over captures and match against the search pattern
+	local cursor_position
+	query:for_each_match(root, bufnr, 0, function(_, match, _)
+		for _, node in ipairs(match) do
+			local node_text = ts_utils.get_node_text(node, bufnr)[1]
+			if node_text then
+				-- Find the exact position of the match within the node
+				local start_pos, end_pos = node_text:find(regex_pattern)
+				if start_pos then
+					local start_row, start_col = node:start()
+					cursor_position = { start_row + 1, start_col + start_pos - 1 } -- Adjust for zero-based index
+					return true                 -- Stop iteration after finding the first match
+				end
+			end
+		end
+	end)
+
+	if cursor_position then
+		vim.api.nvim_win_set_cursor(0, cursor_position)
+	else
+		print("No match found with Treesitter.")
+	end
+end
 
 --- Setup autocommands and user commands
 ---
@@ -53,36 +115,14 @@ function M.autocmd_setup()
 		commands.move_to_bottom_of_block()
 	end, { desc = "Move the bottom of the current code block to the bottom of the screen" })
 
-	-- Preserve column position when moving between lines of different lengths
-	local target_col = nil
-	local last_line = nil
-
-	vim.api.nvim_create_autocmd("CursorMoved", {
+	-- Autocommand to handle cursor positioning during search navigation
+	vim.api.nvim_create_autocmd({ "CursorMoved", "CmdlineLeave" }, {
 		pattern = "*",
 		callback = function()
-			local current_line, current_col = unpack(vim.api.nvim_win_get_cursor(0))
-			local line_length = vim.fn.col('$') - 1 -- Get the actual length of the current line
-
-			-- If we've moved to a new line
-			if last_line ~= current_line then
-				-- If target_col is not set, use the current column
-				if target_col == nil then
-					target_col = current_col
-				end
-
-				-- If the current line is shorter than target_col, move to the end of the line
-				if line_length < target_col then
-					vim.api.nvim_win_set_cursor(0, { current_line, line_length })
-					-- If the current line is long enough, move to the target column
-				elseif current_col ~= target_col then
-					vim.api.nvim_win_set_cursor(0, { current_line, target_col })
-				end
-			else
-				-- If we're on the same line, update the target column
-				target_col = current_col
+			if vim.v.hlsearch == 1 and vim.fn.mode() == "n" then
+				local search_pattern = vim.fn.getreg("/")
+				move_cursor_to_treesitter_match(search_pattern)
 			end
-
-			last_line = current_line
 
 			-- Center the cursor
 			commands.center_cursor()
