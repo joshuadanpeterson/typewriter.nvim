@@ -15,20 +15,44 @@ local ts_parsers = require('nvim-treesitter.parsers')
 
 local M = {}
 
---- Move cursor to the first match found by Treesitter
+--- Move cursor to the best match found using Treesitter and LSP
 ---
---- @param search_pattern string The search pattern to match against nodes
-local function move_cursor_to_treesitter_match(search_pattern)
+--- @param search_pattern string The search pattern to match against symbols and nodes
+local function move_cursor_to_combined_match(search_pattern)
 	local bufnr = vim.api.nvim_get_current_buf()
+
+	-- Treesitter Phase
+	local ts_position = get_treesitter_match(bufnr, search_pattern)
+	if ts_position then
+		-- Validate Treesitter position with LSP
+		local validated_position = validate_position_with_lsp(ts_position, search_pattern)
+		if validated_position then
+			vim.api.nvim_win_set_cursor(0, validated_position)
+			return
+		else
+			vim.api.nvim_win_set_cursor(0, ts_position)
+			return
+		end
+	end
+
+	-- Fallback to regex if both Treesitter and LSP fail
+	move_cursor_to_regex_match(bufnr, search_pattern)
+end
+
+--- Get match position using Treesitter
+---
+--- @param bufnr number Buffer number
+--- @param search_pattern string Search pattern
+--- @return table|nil Cursor position
+local function get_treesitter_match(bufnr, search_pattern)
 	local lang = ts_parsers.get_buf_lang(bufnr)
 	if not lang then
-		print("Treesitter parser not available for this buffer.")
-		return
+		return nil
 	end
 
 	local root = ts_utils.get_root_for_position(0, 0, bufnr)
 	if not root then
-		return
+		return nil
 	end
 
 	-- Define a query to capture specific node types
@@ -44,8 +68,7 @@ local function move_cursor_to_treesitter_match(search_pattern)
     ]])
 
 	if not query then
-		print("No Treesitter query available for this language.")
-		return
+		return nil
 	end
 
 	-- Preprocess the search pattern to handle special characters and word boundaries
@@ -58,7 +81,7 @@ local function move_cursor_to_treesitter_match(search_pattern)
 			local node_text = ts_utils.get_node_text(node, bufnr)[1]
 			if node_text then
 				-- Find the exact position of the match within the node
-				local start_pos, end_pos = node_text:find(regex_pattern)
+				local start_pos = node_text:find(regex_pattern)
 				if start_pos then
 					local start_row, start_col = node:start()
 					cursor_position = { start_row + 1, start_col + start_pos - 1 } -- Adjust for zero-based index
@@ -68,10 +91,63 @@ local function move_cursor_to_treesitter_match(search_pattern)
 		end
 	end)
 
-	if cursor_position then
-		vim.api.nvim_win_set_cursor(0, cursor_position)
-	else
-		print("No match found with Treesitter.")
+	return cursor_position
+end
+
+--- Validate position with LSP
+---
+--- @param position table Initial position from Treesitter
+--- @param search_pattern string Search pattern
+--- @return table|nil Validated cursor position
+local function validate_position_with_lsp(position, search_pattern)
+	local bufnr = vim.api.nvim_get_current_buf()
+	local params = { textDocument = vim.lsp.util.make_text_document_params() }
+
+	-- Use LSP to get document symbols
+	local result = vim.lsp.buf_request_sync(bufnr, 'textDocument/documentSymbol', params, 1000)
+
+	if not result or vim.tbl_isempty(result) then
+		return nil
+	end
+
+	for _, res in pairs(result) do
+		for _, symbol in ipairs(res.result or {}) do
+			if symbol.name:find(search_pattern) then
+				local range = symbol.location.range
+				local lsp_position = { range.start.line + 1, range.start.character }
+
+				if lsp_position[1] == position[1] and lsp_position[2] == position[2] then
+					return lsp_position
+				end
+			end
+
+			if symbol.children then
+				local child_position = validate_position_with_lsp(symbol.children, search_pattern)
+				if child_position then
+					return child_position
+				end
+			end
+		end
+	end
+
+	return nil
+end
+
+--- Fallback to regex match
+---
+--- @param bufnr number Buffer number
+--- @param search_pattern string Search pattern
+local function move_cursor_to_regex_match(bufnr, search_pattern)
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+	local regex_pattern = string.format("\\b%s\\b", search_pattern:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"))
+
+	for line_num, line in ipairs(lines) do
+		local start_pos = line:find(regex_pattern)
+		if start_pos then
+			local cursor_position = { line_num, start_pos - 1 }
+			vim.api.nvim_win_set_cursor(0, cursor_position)
+			return
+		end
 	end
 end
 
@@ -116,16 +192,18 @@ function M.autocmd_setup()
 	end, { desc = "Move the bottom of the current code block to the bottom of the screen" })
 
 	-- Autocommand to handle cursor positioning during search navigation
-	vim.api.nvim_create_autocmd({ "CursorMoved", "CmdlineLeave" }, {
+	vim.api.nvim_create_autocmd({ "CursorMoved", "CmdlineLeave", "CmdlineEnter" }, {
 		pattern = "*",
 		callback = function()
 			if vim.v.hlsearch == 1 and vim.fn.mode() == "n" then
 				local search_pattern = vim.fn.getreg("/")
-				move_cursor_to_treesitter_match(search_pattern)
+				move_cursor_to_combined_match(search_pattern)
 			end
 
-			-- Center the cursor
-			commands.center_cursor()
+			-- Ensure the Typewriter command works
+			if commands and commands.center_cursor then
+				commands.center_cursor()
+			end
 		end
 	})
 

@@ -39,6 +39,7 @@ M.default_config = {
 	--- When true, the plugin will center text horizontally as well as vertically.
 	--- @type boolean
 	enable_horizontal_scroll = true,
+
 }
 
 --- Current configuration
