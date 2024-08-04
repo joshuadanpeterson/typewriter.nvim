@@ -15,6 +15,62 @@ local ts_parsers = require('nvim-treesitter.parsers')
 
 local M = {}
 
+--- Flag to determine if a search is active
+local search_active = false
+
+--- Preserve column position when moving between lines of different lengths
+local target_col = nil
+local last_line = nil
+
+--- Function to handle column preservation
+local function handle_column_preservation()
+	-- Skip column preservation if a search is currently active
+	if search_active then
+		return
+	end
+
+	local current_line, current_col = unpack(vim.api.nvim_win_get_cursor(0))
+	local line_length = vim.fn.col('$') - 1 -- Get the actual length of the current line
+
+	-- If we've moved to a new line
+	if last_line ~= current_line then
+		-- If target_col is not set, use the current column
+		if target_col == nil then
+			target_col = current_col
+		end
+
+		-- If the current line is shorter than target_col, move to the end of the line
+		if line_length < target_col then
+			vim.api.nvim_win_set_cursor(0, { current_line, line_length })
+		elseif current_col ~= target_col then
+			-- If the current line is long enough, move to the target column
+			vim.api.nvim_win_set_cursor(0, { current_line, target_col })
+		end
+	else
+		-- If we're on the same line, update the target column
+		target_col = current_col
+	end
+
+	last_line = current_line
+end
+
+--- Function to handle search activation
+local function handle_search_activation()
+	search_active = true
+end
+
+--- Function to handle search completion
+local function handle_search_completion()
+	-- Only run search completion logic if we're leaving search mode
+	if vim.fn.mode() == "n" then
+		search_active = false
+		if vim.v.hlsearch == 1 then
+			local search_pattern = vim.fn.getreg("/")
+			move_cursor_to_combined_match(search_pattern)
+		end
+	end
+end
+
 --- Move cursor to the best match found using Treesitter and LSP
 ---
 --- @param search_pattern string The search pattern to match against symbols and nodes
@@ -191,20 +247,22 @@ function M.autocmd_setup()
 		commands.move_to_bottom_of_block()
 	end, { desc = "Move the bottom of the current code block to the bottom of the screen" })
 
-	-- Autocommand to handle cursor positioning during search navigation
-	vim.api.nvim_create_autocmd({ "CursorMoved", "CmdlineLeave", "CmdlineEnter" }, {
+	-- Autocommand for column preservation
+	vim.api.nvim_create_autocmd("CursorMoved", {
 		pattern = "*",
-		callback = function()
-			if vim.v.hlsearch == 1 and vim.fn.mode() == "n" then
-				local search_pattern = vim.fn.getreg("/")
-				move_cursor_to_combined_match(search_pattern)
-			end
+		callback = handle_column_preservation,
+	})
 
-			-- Ensure the Typewriter command works
-			if commands and commands.center_cursor then
-				commands.center_cursor()
-			end
-		end
+	-- Autocommand for search activation
+	vim.api.nvim_create_autocmd("CmdlineEnter", {
+		pattern = "/,?",
+		callback = handle_search_activation,
+	})
+
+	-- Autocommand for search completion
+	vim.api.nvim_create_autocmd("CmdlineLeave", {
+		pattern = "/,?",
+		callback = handle_search_completion,
 	})
 
 	-- Autocommands for ZenMode integration
