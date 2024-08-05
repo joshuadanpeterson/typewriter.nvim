@@ -1,9 +1,5 @@
 --- Autocommands setup for Typewriter.nvim
 ---
---- This module defines and sets up autocommands and user commands related to Typewriter.nvim.
---- It handles the creation of user commands for controlling Typewriter mode and
---- integrates with Zen Mode and True Zen plugins.
----
 --- @module typewriter.autocommands
 --- @file lua/typewriter/autocommands.lua
 --- @tag typewriter-autocommands
@@ -15,55 +11,56 @@ local ts_parsers = require('nvim-treesitter.parsers')
 
 local M = {}
 
---- Flag to determine if a search is active
-local search_active = false
+-- State management
+local State = {
+	NORMAL = 1,
+	SEARCH = 2,
+	PRESERVE_COLUMN = 3
+}
 
---- Preserve column position when moving between lines of different lengths
+local current_state = State.NORMAL
 local target_col = nil
 local last_line = nil
 
---- Function to handle column preservation
+-- Helper function to set state
+local function set_state(new_state)
+	current_state = new_state
+end
+
+-- Function to handle column preservation
 local function handle_column_preservation()
-	-- Skip column preservation if a search is currently active
-	if search_active then
-		return
-	end
+	if current_state ~= State.PRESERVE_COLUMN then return end
 
 	local current_line, current_col = unpack(vim.api.nvim_win_get_cursor(0))
-	local line_length = vim.fn.col('$') - 1 -- Get the actual length of the current line
+	local line_length = vim.fn.col('$') - 1
 
-	-- If we've moved to a new line
 	if last_line ~= current_line then
-		-- If target_col is not set, use the current column
 		if target_col == nil then
 			target_col = current_col
 		end
 
-		-- If the current line is shorter than target_col, move to the end of the line
 		if line_length < target_col then
 			vim.api.nvim_win_set_cursor(0, { current_line, line_length })
 		elseif current_col ~= target_col then
-			-- If the current line is long enough, move to the target column
 			vim.api.nvim_win_set_cursor(0, { current_line, target_col })
 		end
 	else
-		-- If we're on the same line, update the target column
 		target_col = current_col
 	end
 
 	last_line = current_line
+	commands.center_cursor()
 end
 
---- Function to handle search activation
+-- Function to handle search activation
 local function handle_search_activation()
-	search_active = true
+	set_state(State.SEARCH)
 end
 
---- Function to handle search completion
+-- Function to handle search completion
 local function handle_search_completion()
-	-- Only run search completion logic if we're leaving search mode
 	if vim.fn.mode() == "n" then
-		search_active = false
+		set_state(State.NORMAL)
 		if vim.v.hlsearch == 1 then
 			local search_pattern = vim.fn.getreg("/")
 			move_cursor_to_combined_match(search_pattern)
@@ -247,10 +244,16 @@ function M.autocmd_setup()
 		commands.move_to_bottom_of_block()
 	end, { desc = "Move the bottom of the current code block to the bottom of the screen" })
 
-	-- Autocommand for column preservation
+	-- Autocommand for cursor movement
 	vim.api.nvim_create_autocmd("CursorMoved", {
 		pattern = "*",
-		callback = handle_column_preservation,
+		callback = function()
+			if current_state == State.PRESERVE_COLUMN then
+				handle_column_preservation()
+			elseif current_state == State.NORMAL then
+				commands.center_cursor()
+			end
+		end,
 	})
 
 	-- Autocommand for search activation
@@ -265,6 +268,20 @@ function M.autocmd_setup()
 		callback = handle_search_completion,
 	})
 
+	-- Toggle column preservation mode
+	vim.api.nvim_create_user_command("TWPreserveColumn", function()
+		if current_state == State.PRESERVE_COLUMN then
+			set_state(State.NORMAL)
+			print("Column preservation disabled")
+		else
+			set_state(State.PRESERVE_COLUMN)
+			target_col = nil
+			last_line = nil
+			print("Column preservation enabled")
+		end
+	end, { desc = "Toggle column preservation mode" })
+
+	-- ZenMode and True Zen integration (same as before)
 	-- Autocommands for ZenMode integration
 	if config.config.enable_with_zen_mode then
 		vim.api.nvim_create_autocmd("User", {
