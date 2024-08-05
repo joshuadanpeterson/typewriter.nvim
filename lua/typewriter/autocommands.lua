@@ -216,6 +216,7 @@ end
 --- - TWCenter: Center the current code block and cursor
 --- - TWTop: Move the top of the current code block to the top of the screen
 --- - TWBottom: Move the bottom of the current code block to the bottom of the screen
+--- - TWPreserveColumn: Toggle column preservation on or off
 ---
 --- @usage require("typewriter.autocommands").autocmd_setup()
 function M.autocmd_setup()
@@ -244,6 +245,19 @@ function M.autocmd_setup()
 		commands.move_to_bottom_of_block()
 	end, { desc = "Move the bottom of the current code block to the bottom of the screen" })
 
+	-- Toggle column preservation mode
+	vim.api.nvim_create_user_command("TWPreserveColumn", function()
+		if current_state == State.PRESERVE_COLUMN then
+			set_state(State.NORMAL)
+			print("Column preservation disabled")
+		else
+			set_state(State.PRESERVE_COLUMN)
+			target_col = nil
+			last_line = nil
+			print("Column preservation enabled")
+		end
+	end, { desc = "Toggle column preservation mode" })
+
 	-- Autocommand for cursor movement
 	vim.api.nvim_create_autocmd("CursorMoved", {
 		pattern = "*",
@@ -267,19 +281,6 @@ function M.autocmd_setup()
 		pattern = "/,?",
 		callback = handle_search_completion,
 	})
-
-	-- Toggle column preservation mode
-	vim.api.nvim_create_user_command("TWPreserveColumn", function()
-		if current_state == State.PRESERVE_COLUMN then
-			set_state(State.NORMAL)
-			print("Column preservation disabled")
-		else
-			set_state(State.PRESERVE_COLUMN)
-			target_col = nil
-			last_line = nil
-			print("Column preservation enabled")
-		end
-	end, { desc = "Toggle column preservation mode" })
 
 	-- ZenMode and True Zen integration (same as before)
 	-- Autocommands for ZenMode integration
