@@ -223,6 +223,7 @@ function M.autocmd_setup()
 	-- User commands
 	vim.api.nvim_create_user_command("TWEnable", function()
 		commands.enable_typewriter_mode()
+		set_state(State.PRESERVE_COLUMN) -- Enable column preservation when typewriter mode is active
 	end, { desc = "Enable Typewriter mode" })
 
 	vim.api.nvim_create_user_command("TWDisable", function()
@@ -275,10 +276,14 @@ function M.autocmd_setup()
 	vim.api.nvim_create_autocmd("CursorMoved", {
 		pattern = "*",
 		callback = function()
-			if current_state == State.PRESERVE_COLUMN then
+			-- Only preserve column if typewriter mode is active
+			if current_state == State.PRESERVE_COLUMN and utils.is_typewriter_active() then
 				handle_column_preservation()
 			elseif current_state == State.NORMAL then
 				commands.center_cursor()
+				-- Default Neovim behavior (no column preservation)
+				-- We don't interfere with the default behavior when not in typewriter mode
+				return
 			end
 		end,
 	})
