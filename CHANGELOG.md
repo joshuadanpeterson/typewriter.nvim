@@ -1,9 +1,16 @@
 # Changelog
 
+## [v0.6.10](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.10) (2024-10-19)
+- Merge pull request #24 from joshuadanpeterson/twdisable-autocmd-column-preservation
+- fix(autocommands): Fix issue with column preservation in TWDisable command
+- docs: update CHANGELOG.md for v0.6.9 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.9...v0.6.10)
+
 ## [v0.6.9](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.9) (2024-10-19)
 - Merge pull request #23 from joshuadanpeterson/21-searching-doesnt-move-cursor-to-the-correct-place
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.8...v0.6.9)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.10...v0.6.9)
 
 ## [v0.6.6](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.6) (2024-07-29)
 - Merge pull request #17 from joshuadanpeterson/dev
