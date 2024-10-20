@@ -1,10 +1,15 @@
 # Changelog
 
+## [v0.6.9](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.9) (2024-10-19)
+- Merge pull request #23 from joshuadanpeterson/21-searching-doesnt-move-cursor-to-the-correct-place
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.8...v0.6.9)
+
 ## [v0.6.6](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.6) (2024-07-29)
 - Merge pull request #17 from joshuadanpeterson/dev
 - docs: update CHANGELOG.md for v0.6.5 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.5...v0.6.6)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.9...v0.6.6)
 
 ## [v0.6.5](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.5) (2024-07-29)
 - feat(autocommands): Preserve column position when moving between lines of different lengths
