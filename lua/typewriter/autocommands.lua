@@ -226,8 +226,21 @@ function M.autocmd_setup()
 	end, { desc = "Enable Typewriter mode" })
 
 	vim.api.nvim_create_user_command("TWDisable", function()
+		-- Disable typewriter mode
 		commands.disable_typewriter_mode()
-	end, { desc = "Disable Typewriter mode" })
+
+		-- Check if column preservation is active, and reset state to NORMAL
+		if current_state == State.PRESERVE_COLUMN then
+			set_state(State.NORMAL)
+			print("Column preservation disabled")
+		end
+
+		-- Clear any autocmds related to column preservation or cursor movement
+		vim.api.nvim_clear_autocmds({
+			event = "CursorMoved",
+			buffer = 0, -- for the current buffer
+		})
+	end, { desc = "Disable Typewriter mode and column preservation" })
 
 	vim.api.nvim_create_user_command("TWToggle", function()
 		commands.toggle_typewriter_mode()
