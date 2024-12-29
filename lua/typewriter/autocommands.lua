@@ -8,6 +8,7 @@ local config = require("typewriter.config")
 local commands = require("typewriter.commands")
 local ts_utils = require('nvim-treesitter.ts_utils')
 local ts_parsers = require('nvim-treesitter.parsers')
+local utils = require('typewriter.utils')
 
 local M = {}
 
