@@ -50,8 +50,12 @@ local function handle_column_preservation()
     end
 
     last_line = current_line
-    commands.center_cursor()
-    vim.api.nvim_command('redraw') -- Force screen refresh
+
+    -- Debounce cursor centering
+    vim.defer_fn(function()
+        commands.center_cursor()
+        vim.api.nvim_command('redraw') -- Force screen refresh
+    end, 10) -- 10ms delay
 end
 
 -- Function to handle search activation
