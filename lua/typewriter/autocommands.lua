@@ -51,11 +51,13 @@ local function handle_column_preservation()
 
     last_line = current_line
 
-    -- Debounce cursor centering
+    -- Debounce cursor centering and clear virtual text markers
     vim.defer_fn(function()
+        vim.api.nvim_buf_clear_namespace(0, -1, 0, -1) -- Clear all virtual text
         commands.center_cursor()
-        vim.api.nvim_command('redraw') -- Force screen refresh
+        vim.cmd('redraw!') -- Force full screen refresh
     end, 10) -- 10ms delay
+end
 end
 
 -- Function to handle search activation
