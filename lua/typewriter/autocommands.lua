@@ -30,27 +30,28 @@ end
 
 -- Function to handle column preservation
 local function handle_column_preservation()
-	if current_state ~= State.PRESERVE_COLUMN then return end
+    if current_state ~= State.PRESERVE_COLUMN then return end
 
-	local current_line, current_col = unpack(vim.api.nvim_win_get_cursor(0))
-	local line_length = vim.fn.col('$') - 1
+    local current_line, current_col = unpack(vim.api.nvim_win_get_cursor(0))
+    local line_length = vim.fn.col('$') - 1
 
-	if last_line ~= current_line then
-		if target_col == nil then
-			target_col = current_col
-		end
+    if last_line ~= current_line then
+        if target_col == nil then
+            target_col = current_col
+        end
 
-		if line_length < target_col then
-			vim.api.nvim_win_set_cursor(0, { current_line, line_length })
-		elseif current_col ~= target_col then
-			vim.api.nvim_win_set_cursor(0, { current_line, target_col })
-		end
-	else
-		target_col = current_col
-	end
+        if line_length < target_col then
+            vim.api.nvim_win_set_cursor(0, { current_line, line_length })
+        elseif current_col ~= target_col then
+            vim.api.nvim_win_set_cursor(0, { current_line, target_col })
+        end
+    else
+        target_col = current_col
+    end
 
-	last_line = current_line
-	commands.center_cursor()
+    last_line = current_line
+    commands.center_cursor()
+    vim.api.nvim_command('redraw') -- Force screen refresh
 end
 
 -- Function to handle search activation
