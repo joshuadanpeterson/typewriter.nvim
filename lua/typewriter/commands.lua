@@ -40,12 +40,13 @@ end
 ---
 --- @usage require("typewriter.commands").center_cursor()
 function M.center_cursor()
-	if not utils.is_typewriter_active() then
-		return
-	end
-	local cursor = api.nvim_win_get_cursor(0)
-	api.nvim_command("normal! zz")
-	api.nvim_win_set_cursor(0, cursor)
+    if not utils.is_typewriter_active() then
+        return
+    end
+    local cursor = api.nvim_win_get_cursor(0)
+    api.nvim_command("normal! zz")
+    api.nvim_win_set_cursor(0, cursor)
+    vim.api.nvim_command('redraw') -- Force screen refresh
 end
 
 --- Enable typewriter mode
