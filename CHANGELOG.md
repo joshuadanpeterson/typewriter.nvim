@@ -1,11 +1,18 @@
 # Changelog
 
+## [v0.6.14](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.14) (2025-06-04)
+- Merge pull request #32 from joshuadanpeterson/codex/add-tests-for-typewriter-state-toggle
+- test(utils): add state toggle spec
+- docs: update CHANGELOG.md for v0.6.13 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.13...v0.6.14)
+
 ## [v0.6.13](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.13) (2025-06-03)
 - Merge pull request #31 from joshuadanpeterson/codex/find-and-fix-important-bug
 - fix: validate LSP position recursively
 - docs: update CHANGELOG.md for v0.6.12 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.12...v0.6.13)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.14...v0.6.13)
 
 ## [v0.6.12](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.12) (2024-12-28)
 - Merge pull request #26 from sabinmarcu/main
