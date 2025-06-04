@@ -153,38 +153,47 @@ end
 --- @param position table Initial position from Treesitter
 --- @param search_pattern string Search pattern
 --- @return table|nil Validated cursor position
+local function validate_lsp_symbols(position, search_pattern, symbols)
+        for _, symbol in ipairs(symbols) do
+                if symbol.name:find(search_pattern) then
+                        local range = symbol.location.range
+                        local lsp_position = { range.start.line + 1, range.start.character }
+
+                        if lsp_position[1] == position[1] and lsp_position[2] == position[2] then
+                                return lsp_position
+                        end
+                end
+
+                if symbol.children then
+                        local child_position = validate_lsp_symbols(position, search_pattern, symbol.children)
+                        if child_position then
+                                return child_position
+                        end
+                end
+        end
+
+        return nil
+end
+
 local function validate_position_with_lsp(position, search_pattern)
-	local bufnr = vim.api.nvim_get_current_buf()
-	local params = { textDocument = vim.lsp.util.make_text_document_params() }
+        local bufnr = vim.api.nvim_get_current_buf()
+        local params = { textDocument = vim.lsp.util.make_text_document_params() }
 
-	-- Use LSP to get document symbols
-	local result = vim.lsp.buf_request_sync(bufnr, 'textDocument/documentSymbol', params, 1000)
+        -- Use LSP to get document symbols
+        local result = vim.lsp.buf_request_sync(bufnr, 'textDocument/documentSymbol', params, 1000)
 
-	if not result or vim.tbl_isempty(result) then
-		return nil
-	end
+        if not result or vim.tbl_isempty(result) then
+                return nil
+        end
 
-	for _, res in pairs(result) do
-		for _, symbol in ipairs(res.result or {}) do
-			if symbol.name:find(search_pattern) then
-				local range = symbol.location.range
-				local lsp_position = { range.start.line + 1, range.start.character }
+        for _, res in pairs(result) do
+                local validated = validate_lsp_symbols(position, search_pattern, res.result or {})
+                if validated then
+                        return validated
+                end
+        end
 
-				if lsp_position[1] == position[1] and lsp_position[2] == position[2] then
-					return lsp_position
-				end
-			end
-
-			if symbol.children then
-				local child_position = validate_position_with_lsp(symbol.children, search_pattern)
-				if child_position then
-					return child_position
-				end
-			end
-		end
-	end
-
-	return nil
+        return nil
 end
 
 --- Fallback to regex match
