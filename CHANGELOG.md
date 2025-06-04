@@ -1,11 +1,18 @@
 # Changelog
 
+## [v0.6.13](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.13) (2025-06-03)
+- Merge pull request #31 from joshuadanpeterson/codex/find-and-fix-important-bug
+- fix: validate LSP position recursively
+- docs: update CHANGELOG.md for v0.6.12 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.12...v0.6.13)
+
 ## [v0.6.12](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.12) (2024-12-28)
 - Merge pull request #26 from sabinmarcu/main
 - fix(autocommands): Add missing utils import
 - docs: update CHANGELOG.md for v0.6.11 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.11...v0.6.12)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.13...v0.6.12)
 
 ## [v0.6.11](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.11) (2024-10-20)
 - Merge pull request #25 from joshuadanpeterson/fix/restore-column-retention-issue-16
