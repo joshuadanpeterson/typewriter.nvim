@@ -1,3 +1,4 @@
+require("spec.spec_helper")
 describe('Sample', function()
   it('should pass', function()
     assert.is_true(true)
