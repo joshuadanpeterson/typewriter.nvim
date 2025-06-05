@@ -74,11 +74,15 @@ end
 ---
 --- @usage require("typewriter.commands").disable_typewriter_mode()
 function M.disable_typewriter_mode()
-	if utils.is_typewriter_active() then
-		utils.set_typewriter_active(false)
-		api.nvim_clear_autocmds({ group = "TypewriterMode" })
-		utils.notify("Typewriter mode disabled")
-	end
+        if utils.is_typewriter_active() then
+                utils.set_typewriter_active(false)
+                api.nvim_clear_autocmds({ group = "TypewriterMode" })
+                api.nvim_win_set_option(0, "wrap", true)
+		--- Restore the original horizontal position
+                vim.fn.winrestview({ leftcol = 0 })
+		--- Notify the user that typewriter mode is disabled
+                utils.notify("Typewriter mode disabled")
+        end
 end
 
 --- Toggle typewriter mode
