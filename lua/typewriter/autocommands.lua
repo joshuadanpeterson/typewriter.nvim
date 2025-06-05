@@ -49,8 +49,15 @@ local function handle_column_preservation()
 		target_col = current_col
 	end
 
-	last_line = current_line
-	commands.center_cursor()
+        last_line = current_line
+
+        -- Avoid duplicate centering when typewriter mode itself is handling
+        -- cursor centering. Only center the view here if typewriter mode is not
+        -- active. This prevents screen ghosting on rapid cursor movements
+        -- (Issue #27).
+        if not utils.is_typewriter_active() then
+                commands.center_cursor()
+        end
 end
 
 -- Function to handle search activation
