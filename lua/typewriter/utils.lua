@@ -26,9 +26,9 @@ local M = {}
 --- local utils = require("typewriter.utils")
 --- utils.notify("Typewriter mode enabled")
 function M.notify(message)
-	if config.config.enable_notifications then
-		vim.notify(message, vim.log.levels.INFO, { title = "Typewriter.nvim" })
-	end
+        if config.config.enable_notifications then
+        	vim.notify(message, vim.log.levels.INFO, { title = "Typewriter.nvim" })
+        end
 end
 
 --- Center the cursor horizontally if horizontal scrolling is enabled
@@ -51,6 +51,7 @@ function M.center_cursor_horizontally()
         vim.api.nvim_win_set_option(0, "wrap", false)
         vim.fn.winrestview({ leftcol = left_col })
         vim.cmd("redraw")
+        --- Force redraw to prevent ghost text
 end
 
 --- Check if Typewriter mode is currently active
@@ -62,7 +63,7 @@ end
 ---     print("Typewriter mode is active")
 --- end
 function M.is_typewriter_active()
-	return typewriter_active
+        return typewriter_active
 end
 
 --- Set the active state of Typewriter mode
@@ -72,8 +73,8 @@ end
 --- local utils = require("typewriter.utils")
 --- utils.set_typewriter_active(true)
 function M.set_typewriter_active(active)
-	typewriter_active = active
-	vim.api.nvim_exec_autocmds("User", { pattern = "TypewriterStateChanged" })
+        typewriter_active = active
+        vim.api.nvim_exec_autocmds("User", { pattern = "TypewriterStateChanged" })
 end
 
 --- Toggle the active state of Typewriter mode
@@ -84,9 +85,9 @@ end
 --- local new_state = utils.toggle_typewriter_active()
 --- print("Typewriter mode is now: " .. (new_state and "active" or "inactive"))
 function M.toggle_typewriter_active()
-	typewriter_active = not typewriter_active
-	M.set_typewriter_active(typewriter_active)
-	return typewriter_active
+        typewriter_active = not typewriter_active
+        M.set_typewriter_active(typewriter_active)
+        return typewriter_active
 end
 
 return M

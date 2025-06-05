@@ -78,7 +78,9 @@ function M.disable_typewriter_mode()
                 utils.set_typewriter_active(false)
                 api.nvim_clear_autocmds({ group = "TypewriterMode" })
                 api.nvim_win_set_option(0, "wrap", true)
+		--- Restore the original horizontal position
                 vim.fn.winrestview({ leftcol = 0 })
+		--- Notify the user that typewriter mode is disabled
                 utils.notify("Typewriter mode disabled")
         end
 end
