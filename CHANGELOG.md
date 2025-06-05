@@ -1,12 +1,18 @@
 # Changelog
 
+## [v0.6.18](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.18) (2025-06-05)
+- Update README.md
+- docs: update CHANGELOG.md for v0.6.17 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.17...v0.6.18)
+
 ## [v0.6.17](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.17) (2025-06-05)
 - Merge pull request #35 from joshuadanpeterson/codex/update-agents.md-with-new-sections-and-conventions
 - Merge branch 'main' into codex/update-agents.md-with-new-sections-and-conventions
 - ✨ docs: add AGENTS usage guide
 - docs: update CHANGELOG.md for v0.6.16 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.16...v0.6.17)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.18...v0.6.17)
 
 ## [v0.6.16](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.16) (2025-06-04)
 - Merge pull request #34 from joshuadanpeterson/codex/create-agents.md-file
