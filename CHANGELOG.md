@@ -1,10 +1,18 @@
 # Changelog
 
+## [v0.6.19](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.19) (2025-06-05)
+- Merge pull request #37 from joshuadanpeterson/codex/fix-issue-#27
+- fix: 🐛 resolve ghosting issue and improve docs
+- fix: 🐛 resolve ghosting issue
+- docs: update CHANGELOG.md for v0.6.18 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.18...v0.6.19)
+
 ## [v0.6.18](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.18) (2025-06-05)
 - Update README.md
 - docs: update CHANGELOG.md for v0.6.17 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.17...v0.6.18)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.19...v0.6.18)
 
 ## [v0.6.17](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.17) (2025-06-05)
 - Merge pull request #35 from joshuadanpeterson/codex/update-agents.md-with-new-sections-and-conventions
