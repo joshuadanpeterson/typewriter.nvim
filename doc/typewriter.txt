@@ -109,6 +109,7 @@ Disable typewriter mode
 
 Deactivates the typewriter mode, returning to normal scrolling behavior.
 
+It also restores line wrapping and resets horizontal scrolling.
 @usage require("typewriter.commands").disable_typewriter_mode()
 
 ------------------------------------------------------------------------------
@@ -330,6 +331,7 @@ the view. It only takes effect if the `enable_horizontal_scroll` option
 is set to true in the plugin's configuration. The function also disables
 line wrapping to allow for horizontal scrolling.
 
+The screen is redrawn after adjusting the view to avoid ghost text.
 @usage
 local utils = require("typewriter.utils")
 utils.center_cursor_horizontally()

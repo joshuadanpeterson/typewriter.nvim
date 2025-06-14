@@ -1,18 +1,45 @@
 # Changelog
 
-## [v0.6.16](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.16) (2025-06-14)
+## [v0.6.20](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.20) (2025-06-14)
 - fix: restore cursor correctly when using TWTop or TWBottom
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.15...v0.6.16)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.19...v0.6.20)
 
+## [v0.6.19](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.19) (2025-06-05)
+- Merge pull request #37 from joshuadanpeterson/codex/fix-issue-#27
+- fix: 🐛 resolve ghosting issue and improve docs
+- fix: 🐛 resolve ghosting issue
+- docs: update CHANGELOG.md for v0.6.18 and remove duplicate entries
 
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.18...v0.6.19)
+
+## [v0.6.18](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.18) (2025-06-05)
+- Update README.md
+- docs: update CHANGELOG.md for v0.6.17 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.19...v0.6.18)
+
+## [v0.6.17](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.17) (2025-06-05)
+- Merge pull request #35 from joshuadanpeterson/codex/update-agents.md-with-new-sections-and-conventions
+- Merge branch 'main' into codex/update-agents.md-with-new-sections-and-conventions
+- ✨ docs: add AGENTS usage guide
+- docs: update CHANGELOG.md for v0.6.16 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.18...v0.6.17)
+
+## [v0.6.16](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.16) (2025-06-04)
+- Merge pull request #34 from joshuadanpeterson/codex/create-agents.md-file
+- docs: ✏️ clarify commit guidelines
+- docs: update CHANGELOG.md for v0.6.15 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.17...v0.6.16)
 
 ## [v0.6.15](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.15) (2025-06-04)
 - Merge pull request #33 from joshuadanpeterson/codex/update-doc/typewriter.txt-with-twpreservecolumn-command
 - docs(help): add TWPreserveColumn command
 - docs: update CHANGELOG.md for v0.6.14 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.14...v0.6.15)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.16...v0.6.15)
 
 ## [v0.6.14](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.14) (2025-06-04)
 - Merge pull request #32 from joshuadanpeterson/codex/add-tests-for-typewriter-state-toggle

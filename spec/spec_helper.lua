@@ -10,5 +10,4 @@ vim.cmd = vim.cmd or function() end
 vim.schedule = vim.schedule or function(fn) fn() end
 vim.log = vim.log or { levels = { INFO = 1 } }
 vim.notify = vim.notify or function() end
-
 return {}

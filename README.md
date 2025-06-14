@@ -42,6 +42,9 @@
     <a href="https://github.com/joshuadanpeterson/typewriter.nvim/commits">
       <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge&color=orange">
     </a>
+    <a href="https://deepwiki.com/joshuadanpeterson/typewriter.nvim">
+      <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">
+    </a>
 </div>
 </br>
 
