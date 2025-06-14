@@ -174,9 +174,9 @@ function M.move_to_top_of_block()
 	vim.cmd("normal! zt")
 
 	if config.config.keep_cursor_position then
-		vim.schedule(function()
-			vim.api.nvim_win_set_cursor(0, { start_row + 1 + cursor_row, cursor_col })
-		end)
+                vim.schedule(function()
+                        vim.api.nvim_win_set_cursor(0, { start_row + cursor_row, cursor_col })
+                end)
 	end
 
 	utils.notify("Code block aligned with the top")
@@ -212,9 +212,9 @@ function M.move_to_bottom_of_block()
 	vim.cmd("normal! zb")
 
 	if config.config.keep_cursor_position then
-		vim.schedule(function()
-			vim.api.nvim_win_set_cursor(0, { start_row + 1 + cursor_row, cursor_col })
-		end)
+                vim.schedule(function()
+                        vim.api.nvim_win_set_cursor(0, { start_row + cursor_row, cursor_col })
+                end)
 	end
 
 	utils.notify("Code block aligned with the bottom")
