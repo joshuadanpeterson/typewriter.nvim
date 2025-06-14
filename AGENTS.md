@@ -1,37 +1,40 @@
 # Project Agents.md Guide for OpenAI Codex
 
-This Agents.md file provides comprehensive guidance for OpenAI Codex and other AI agents working with this codebase.
+This Agents.md file provides guidance for OpenAI Codex and other AI agents working with this codebase.
 
 ## Project Structure for OpenAI Codex Navigation
 
-- `lua/`: Lua source files for the plugin
-- `doc/`: help documentation
-- `spec/`: Busted unit tests
-- `demos/`: demonstration scripts
+- `/lua`: Source code for the Typewriter.nvim plugin
+- `/doc`: Vim help documentation
+- `/spec`: Busted unit tests
+- `/demos`: Demo GIFs and images (do not modify)
 
 ## Coding Conventions for OpenAI Codex
 
-- Use **tab-based indentation**.
-- Write comments in **LuaDoc** style with triple dashes (`---`).
-- Prefer **snake_case** for function and variable names.
-- Ensure a newline at the end of every file.
+- Use Lua for all plugin code
+- Follow the existing code style in each file
+- Provide meaningful variable and function names
+- Add comments for complex logic
 
 ## Testing Requirements for OpenAI Codex
 
-Run the following commands for Lua changes (skip when only docs or comments are modified):
+Run tests using the following command:
 
 ```bash
-luacheck .
-busted
+busted -v spec
 ```
+
+Ensure tests pass before committing code changes. Documentation-only changes do not require running tests.
 
 ## Pull Request Guidelines for OpenAI Codex
 
-- Use multi-line Conventional Commits with emoji prefixes for all commits.
+1. Include a clear description of the changes
+2. Reference related issues if applicable
+3. Ensure tests pass
+4. Keep PRs focused on a single concern
 
-## Programmatic Checks for OpenAI Codex
+---
 
-Before opening a Pull Request, make sure all required tests and linters pass.
 =======
 # Contributor Guidelines
 

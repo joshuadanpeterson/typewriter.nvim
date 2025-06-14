@@ -16,6 +16,16 @@ local center_block_config = require("typewriter.utils.center_block_config")
 local M = {}
 local typewriter_active = false
 
+--- Restore the cursor to its original position
+---
+--- `start_row` is zero-based, matching Neovim's API. We therefore add no
+--- extra offset when calculating the final cursor row.
+local function restore_cursor(start_row, cursor_row, cursor_col)
+        vim.schedule(function()
+                vim.api.nvim_win_set_cursor(0, { start_row + cursor_row, cursor_col })
+        end)
+end
+
 --- Helper function to determine if a node is a significant block
 local function is_significant_block(node)
 	local node_type = node:type()
@@ -116,7 +126,8 @@ function M.center_block_and_cursor()
 		return
 	end
 
-	local start_row, _, end_row, _ = node:range()
+       -- start_row is zero-based as returned by Treesitter's range()
+       local start_row, _, end_row, _ = node:range()
 	local middle_line = math.floor((start_row + end_row) / 2)
 
 	-- Check for edge cases
@@ -165,7 +176,8 @@ function M.move_to_top_of_block()
 		return
 	end
 
-	local start_row, _, _, _ = node:range()
+       -- start_row is zero-based as returned by Treesitter's range()
+       local start_row, _, _, _ = node:range()
 
 	local cursor_row, cursor_col
 	if config.config.keep_cursor_position then
@@ -177,11 +189,9 @@ function M.move_to_top_of_block()
 	vim.api.nvim_win_set_cursor(0, { start_row + 1, 0 })
 	vim.cmd("normal! zt")
 
-	if config.config.keep_cursor_position then
-		vim.schedule(function()
-			vim.api.nvim_win_set_cursor(0, { start_row + 1 + cursor_row, cursor_col })
-		end)
-	end
+       if config.config.keep_cursor_position then
+               restore_cursor(start_row, cursor_row, cursor_col)
+       end
 
 	utils.notify("Code block aligned with the top")
 end
@@ -215,11 +225,9 @@ function M.move_to_bottom_of_block()
 	vim.api.nvim_win_set_cursor(0, { end_row + 1, 0 })
 	vim.cmd("normal! zb")
 
-	if config.config.keep_cursor_position then
-		vim.schedule(function()
-			vim.api.nvim_win_set_cursor(0, { start_row + 1 + cursor_row, cursor_col })
-		end)
-	end
+       if config.config.keep_cursor_position then
+               restore_cursor(start_row, cursor_row, cursor_col)
+       end
 
 	utils.notify("Code block aligned with the bottom")
 end

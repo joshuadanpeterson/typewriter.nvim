@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.6.20](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.20) (2025-06-14)
+- fix: restore cursor correctly when using TWTop or TWBottom
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.19...v0.6.20)
+
 ## [v0.6.19](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.19) (2025-06-05)
 - Merge pull request #37 from joshuadanpeterson/codex/fix-issue-#27
 - fix: 🐛 resolve ghosting issue and improve docs
