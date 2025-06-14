@@ -17,6 +17,10 @@ FEATURES                                                  *typewriter-features*
 CHANGELOG                                                 *typewriter-changelog*
     - Summary of recent changes:
 
+    v0.6.16 (2025-06-14)
+    - fix: restore cursor correctly when using TWTop or TWBottom
+
+
     v0.4.20 (2024-07-18)
     - feat(docs): Update CHANGELOG and TODO in help docs
     - docs: update CHANGELOG.md for v0.4.19 and remove duplicate entries

@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.6.16](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.16) (2025-06-14)
+- fix: restore cursor correctly when using TWTop or TWBottom
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.15...v0.6.16)
+
+
+
 ## [v0.6.15](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.15) (2025-06-04)
 - Merge pull request #33 from joshuadanpeterson/codex/update-doc/typewriter.txt-with-twpreservecolumn-command
 - docs(help): add TWPreserveColumn command

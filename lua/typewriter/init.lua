@@ -33,12 +33,13 @@ local M = {}
 --- })
 
 M.setup = function(user_config)
-	config = require("typewriter.config")
+        config = require("typewriter.config")
 
-	autocommands = require("typewriter.autocommands")
+        autocommands = require("typewriter.autocommands")
 
-	config.config_setup(user_config or {})
-	autocommands.autocmd_setup()
+        config.config_setup(user_config or {})
+        autocommands.autocmd_setup()
+        require("typewriter.utils").notify("Typewriter.nvim started")
 end
 
 return M

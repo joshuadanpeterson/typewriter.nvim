@@ -1,0 +1,34 @@
+name: Update Changelog
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install conventional-changelog
+        run: npm install -g conventional-changelog-cli
+      - name: Generate changelog
+        run: conventional-changelog -p angular -i CHANGELOG.md -s
+      - name: Commit changelog
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add CHANGELOG.md
+          if git diff --cached --quiet; then
+            echo "No changelog updates"
+          else
+            git commit -m "docs: update CHANGELOG.md" && git push
+          fi
