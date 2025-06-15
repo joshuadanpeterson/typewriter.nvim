@@ -332,22 +332,29 @@ function M.autocmd_setup()
 	end
 
 	-- Autocommands for True Zen integration
-	if config.config.enable_with_true_zen then
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "TZWoon",
-			callback = function()
-				commands.enable_typewriter_mode()
-			end,
-			desc = "Enable Typewriter mode when entering True Zen",
-		})
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "TZOff",
-			callback = function()
-				commands.disable_typewriter_mode()
-			end,
-			desc = "Disable Typewriter mode when leaving True Zen",
-		})
-	end
+        if config.config.enable_with_true_zen then
+                vim.api.nvim_create_autocmd("User", {
+                        pattern = "TZWoon",
+                        callback = function()
+                                commands.enable_typewriter_mode()
+                        end,
+                        desc = "Enable Typewriter mode when entering True Zen",
+                })
+                vim.api.nvim_create_autocmd("User", {
+                        pattern = "TZOff",
+                        callback = function()
+                                commands.disable_typewriter_mode()
+                        end,
+                        desc = "Disable Typewriter mode when leaving True Zen",
+                })
+        end
+
+        -- Log plugin shutdown
+        vim.api.nvim_create_autocmd("VimLeavePre", {
+                callback = function()
+                        logger.info("Typewriter.nvim shutdown")
+                end,
+        })
 end
 
 return M

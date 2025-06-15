@@ -377,6 +377,9 @@ Typewriter.nvim writes log messages to a file located at
 `stdpath('data')/typewriter.log`. The logger provides simple `info` and `error`
 functions for debugging.
 
+Startup and shutdown events are logged when the plugin is loaded and when Vim
+exits, allowing you to trace the plugin lifecycle.
+
 @module typewriter.logger
 @file lua/typewriter/logger.lua
 @tag typewriter-logger
