@@ -374,12 +374,14 @@ print("Typewriter mode is now: " .. (new_state and "active" or "inactive"))
 Logging utilities
 
 Typewriter.nvim writes log messages to a file located at
-`stdpath('data')/typewriter.log`. The logger provides simple `info` and `error`
+`stdpath('data')/typewriter.log`. The logger provides `info`, `warning`, and `error`
 functions for debugging. The log directory is created automatically if needed,
 so messages are recorded even on first use.
 
 Startup and shutdown events are logged when the plugin is loaded and when Vim
 exits, allowing you to trace the plugin lifecycle.
+Fallbacks from Treesitter or LSP to regex search are logged as warnings to
+highlight non-critical downgrades in functionality.
 
 @module typewriter.logger
 @file lua/typewriter/logger.lua

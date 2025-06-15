@@ -1,6 +1,6 @@
 --- Simple file-based logger for Typewriter.nvim
 ---
---- Provides basic functions to log info and error messages
+--- Provides basic functions to log info, warning, and error messages
 --- to a file located in Neovim's stdpath('data') directory.
 
 local log_file = vim.fn.stdpath('data') .. '/typewriter.log'
@@ -25,6 +25,10 @@ local M = {}
 
 function M.info(msg)
   write('INFO', msg)
+end
+
+function M.warning(msg)
+  write('WARNING', msg)
 end
 
 function M.error(msg)

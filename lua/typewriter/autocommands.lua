@@ -90,8 +90,9 @@ local function move_cursor_to_combined_match(search_pattern)
 		end
 	end
 
-        -- Fallback to regex if both Treesitter and LSP fail
-        logger.error("Falling back to regex search for pattern: " .. search_pattern)
+        -- Fallback to regex if both Treesitter and LSP fail. This is not a
+        -- critical error, just an alternative search path.
+        logger.warning("Falling back to regex search for pattern: " .. search_pattern)
         move_cursor_to_regex_match(bufnr, search_pattern)
 end
 

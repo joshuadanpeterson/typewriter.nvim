@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.24](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.24) (2025-06-15)
+- feat: add warning log level and use it for regex fallback
+- test: ensure warning messages are written
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.23...v0.6.24)
+
 ## [v0.6.23](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.23) (2025-06-15)
 - fix: ensure log directory exists and timestamp entries
 - test: cover vim.tbl_extend behaviour
