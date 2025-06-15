@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.21](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.21) (2025-06-15)
+- feat: add logging utilities and tests
+- docs: document logging feature
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.20...v0.6.21)
+
 ## [v0.6.20](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.20) (2025-06-14)
 - fix: restore cursor correctly when using TWTop or TWBottom
 

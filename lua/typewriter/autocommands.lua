@@ -9,6 +9,7 @@ local commands = require("typewriter.commands")
 local ts_utils = require('nvim-treesitter.ts_utils')
 local ts_parsers = require('nvim-treesitter.parsers')
 local utils = require('typewriter.utils')
+local logger = require('typewriter.logger')
 
 local M = {}
 
@@ -89,8 +90,9 @@ local function move_cursor_to_combined_match(search_pattern)
 		end
 	end
 
-	-- Fallback to regex if both Treesitter and LSP fail
-	move_cursor_to_regex_match(bufnr, search_pattern)
+        -- Fallback to regex if both Treesitter and LSP fail
+        logger.error("Falling back to regex search for pattern: " .. search_pattern)
+        move_cursor_to_regex_match(bufnr, search_pattern)
 end
 
 --- Get match position using Treesitter
