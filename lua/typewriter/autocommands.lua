@@ -23,7 +23,8 @@ local State = {
 local current_state = State.NORMAL
 local target_col = nil
 local last_line = nil
-local move_cursor_to_combined_match -- forward declaration for search fallback
+-- Forward declare local helpers to avoid polluting the global namespace
+local move_cursor_to_combined_match
 local get_treesitter_match
 local validate_position_with_lsp
 local move_cursor_to_regex_match

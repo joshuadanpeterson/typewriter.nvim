@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.6.26](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.26) (2025-06-15)
+- refactor: limit helper function scope to avoid global pollution
+
+
 ## [v0.6.25](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.25) (2025-06-15)
 - feat: allow custom log file path and document usage
 - test: cover startup, fallback, and shutdown logging

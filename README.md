@@ -68,6 +68,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - Robust state tracking with `is_typewriter_active()`, `set_typewriter_active()`, and `toggle_typewriter_active()` functions for programmatic control. 🎛️
 - `TypewriterStateChanged` event for reacting to Typewriter mode state changes in your own scripts or plugins. 🔄
 - Basic logging to `stdpath('data')/typewriter.log` for startup, shutdown, and info, warning, and error events. The log directory is created automatically, and the log path can be overridden for testing. 📝
+- Search helper functions are scoped locally to keep the global namespace clean. 🔒
 - Comprehensive in-editor help documentation accessible via `:help typewriter`. 📚
 
 <div align=center>
