@@ -78,7 +78,7 @@ end
 --- Move cursor to the best match found using Treesitter and LSP
 ---
 --- @param search_pattern string The search pattern to match against symbols and nodes
-function move_cursor_to_combined_match(search_pattern)
+move_cursor_to_combined_match = function(search_pattern)
 	local bufnr = vim.api.nvim_get_current_buf()
 
 	-- Treesitter Phase
@@ -106,7 +106,7 @@ end
 --- @param bufnr number Buffer number
 --- @param search_pattern string Search pattern
 --- @return table|nil Cursor position
-function get_treesitter_match(bufnr, search_pattern)
+get_treesitter_match = function(bufnr, search_pattern)
 	local lang = ts_parsers.get_buf_lang(bufnr)
 	if not lang then
 		return nil
@@ -183,7 +183,7 @@ local function validate_lsp_symbols(position, search_pattern, symbols)
         return nil
 end
 
-function validate_position_with_lsp(position, search_pattern)
+validate_position_with_lsp = function(position, search_pattern)
         local bufnr = vim.api.nvim_get_current_buf()
         local params = { textDocument = vim.lsp.util.make_text_document_params() }
 
@@ -208,7 +208,7 @@ end
 ---
 --- @param bufnr number Buffer number
 --- @param search_pattern string Search pattern
-function move_cursor_to_regex_match(bufnr, search_pattern)
+move_cursor_to_regex_match = function(bufnr, search_pattern)
 	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 	local regex_pattern = string.format("\\b%s\\b", search_pattern:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"))
 

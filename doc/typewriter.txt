@@ -383,7 +383,7 @@ Startup and shutdown events are logged when the plugin is loaded and when Vim
 exits, allowing you to trace the plugin lifecycle.
 Fallbacks from Treesitter or LSP to regex search are logged as warnings to
 highlight non-critical downgrades in functionality.
-Internal search helper functions are local to avoid global namespace pollution.
+Internal search helper functions are local to avoid global namespace pollution (v0.6.27).
 
 @module typewriter.logger
 @file lua/typewriter/logger.lua
