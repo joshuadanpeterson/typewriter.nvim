@@ -376,7 +376,8 @@ Logging utilities
 Typewriter.nvim writes log messages to a file located at
 `stdpath('data')/typewriter.log`. The logger provides `info`, `warning`, and `error`
 functions for debugging. The log directory is created automatically if needed,
-so messages are recorded even on first use.
+so messages are recorded even on first use. The log file path can be overridden
+via `require('typewriter.logger').set_log_file()` for tests or custom setups.
 
 Startup and shutdown events are logged when the plugin is loaded and when Vim
 exits, allowing you to trace the plugin lifecycle.
