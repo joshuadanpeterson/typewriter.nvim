@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.23](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.23) (2025-06-15)
+- fix: ensure log directory exists and timestamp entries
+- test: cover vim.tbl_extend behaviour
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.22...v0.6.23)
+
 ## [v0.6.22](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.22) (2025-06-15)
 - feat: log plugin shutdown on VimLeavePre
 - test: add logger specs

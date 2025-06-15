@@ -12,11 +12,22 @@ vim.schedule = vim.schedule or function(fn) fn() end
 vim.log = vim.log or { levels = { INFO = 1 } }
 vim.notify = vim.notify or function() end
 vim.fn.stdpath = vim.fn.stdpath or function() return '/tmp' end
+vim.fn.fnamemodify = vim.fn.fnamemodify or function(path, mod)
+  if mod == ':h' then
+    return path:match('(.+)/[^/]*$') or '.'
+  end
+  return path
+end
+vim.fn.mkdir = vim.fn.mkdir or function() end
 vim.tbl_extend = vim.tbl_extend or function(_, ...)
   local result = {}
-  for _, t in ipairs({...}) do
-    for k, v in pairs(t) do
-      result[k] = v
+  -- Use pairs to iterate over the provided tables so keys of any type
+  -- are copied, matching the behaviour of real vim.tbl_extend.
+  for _, t in pairs{...} do
+    if type(t) == "table" then
+      for k, v in pairs(t) do
+        result[k] = v
+      end
     end
   end
   return result
