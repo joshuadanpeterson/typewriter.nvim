@@ -133,8 +133,8 @@ get_treesitter_match = function(bufnr, search_pattern)
 		return nil
 	end
 
-	-- Preprocess the search pattern to handle special characters and word boundaries
-	local regex_pattern = string.format("\\b%s\\b", search_pattern:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"))
+        -- Preprocess the search pattern to handle special characters and word boundaries
+        local regex_pattern = utils.create_escaped_regex_pattern(search_pattern)
 
 	-- Iterate over captures and match against the search pattern
 	local cursor_position
@@ -209,8 +209,8 @@ end
 --- @param bufnr number Buffer number
 --- @param search_pattern string Search pattern
 move_cursor_to_regex_match = function(bufnr, search_pattern)
-	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-	local regex_pattern = string.format("\\b%s\\b", search_pattern:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"))
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        local regex_pattern = utils.create_escaped_regex_pattern(search_pattern)
 
 	for line_num, line in ipairs(lines) do
 		local start_pos = line:find(regex_pattern)

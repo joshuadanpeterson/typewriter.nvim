@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.6.28](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.28) (2025-06-16)
+- feat: extract regex escaping to shared helper
+- test: add utils and command specs for broader coverage
+
 ## [v0.6.26](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.26) (2025-06-15)
 - refactor: limit helper function scope to avoid global pollution
 
