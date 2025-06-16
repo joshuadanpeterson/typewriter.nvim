@@ -51,12 +51,24 @@ end
 ---
 --- @usage require("typewriter.commands").center_cursor()
 function M.center_cursor()
-	if not utils.is_typewriter_active() then
-		return
-	end
-	local cursor = api.nvim_win_get_cursor(0)
-	api.nvim_command("normal! zz")
-	api.nvim_win_set_cursor(0, cursor)
+        if not utils.is_typewriter_active() then
+                return
+        end
+        local cursor = api.nvim_win_get_cursor(0)
+        -- Determine if the cursor is at the edge of the file so gg and G work
+        -- without forcing the view to center.
+        local line = cursor[1]
+        local last_line = api.nvim_buf_line_count(0)
+
+        if line == 1 then
+                api.nvim_command("normal! zt")
+        elseif line == last_line then
+                api.nvim_command("normal! zb")
+        else
+                api.nvim_command("normal! zz")
+        end
+
+        api.nvim_win_set_cursor(0, cursor)
 end
 
 --- Enable typewriter mode

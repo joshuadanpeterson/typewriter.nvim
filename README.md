@@ -62,6 +62,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - `:TWCenter` command to center the view around the current code block or function using [Tree-sitter](https://tree-sitter.github.io/tree-sitter/). 🌳
 - `:TWTop` command to move the top of the current code block to the top of the screen. ⬆️
 - `:TWBottom` command to move the bottom of the current code block to the bottom of the screen. ⬇️
+- Built-in handling so `gg` and `G` jump to the file edges without recentering. ⌨️
 - Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view or using TWTop/TWBottom. 📌
 - Set `enable_notifications` to `true` in plugin config to enable or disable notifications for actions like enabling/disabling typewriter mode, and aligning code blocks. 🔔
 - Enable horizontal scrolling in Typewriter mode and center the cursor by setting `enable_horizontal_scroll` to `true` in the plugin configuration. ↔️
