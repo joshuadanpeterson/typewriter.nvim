@@ -59,6 +59,13 @@ describe('typewriter.logger', function()
     assert.is_not_nil(content:find('Typewriter.nvim started'))
   end)
 
+  it('enables typewriter mode when start_enabled is true', function()
+    local typewriter = require('typewriter')
+    typewriter.setup({ start_enabled = true })
+    local utils = require('typewriter.utils')
+    assert.is_true(utils.is_typewriter_active())
+  end)
+
   it('logs fallback warning when regex search is used', function()
     local autocmd = nil
     require('typewriter.autocommands').autocmd_setup()

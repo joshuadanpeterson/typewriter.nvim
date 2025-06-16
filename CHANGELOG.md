@@ -1,4 +1,7 @@
 # Changelog
+## [v0.7.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.1) (2025-06-16)
+- feat(config): add `start_enabled` option to enable plugin on startup (#29)
+
 
 ## [v0.7.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.0) (2025-06-16)
 - Merge pull request #39 from joshuadanpeterson/codex/create-tests-folder-and-add-tests

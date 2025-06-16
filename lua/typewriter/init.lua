@@ -37,9 +37,13 @@ M.setup = function(user_config)
         config = require("typewriter.config")
 
         autocommands = require("typewriter.autocommands")
+        local commands = require("typewriter.commands")
 
         config.config_setup(user_config or {})
         autocommands.autocmd_setup()
+        if config.config.start_enabled then
+                commands.enable_typewriter_mode()
+        end
         require("typewriter.utils").notify("Typewriter.nvim started")
         logger.info("Typewriter.nvim started")
 end

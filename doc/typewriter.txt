@@ -246,6 +246,7 @@ and sets up the necessary autocommands.
 require('typewriter').setup({
     enable_with_zen_mode = false,
     keep_cursor_position = true
+    start_enabled = false
 })
 
 
@@ -335,6 +336,10 @@ The screen is redrawn after adjusting the view to avoid ghost text.
 @usage
 local utils = require("typewriter.utils")
 utils.center_cursor_horizontally()
+
+Starting Typewriter mode automatically
+  Set `start_enabled` to `true` in `require('typewriter').setup()` to have the plugin
+  enable typewriter mode on startup.
 
 ------------------------------------------------------------------------------
                                                       *M.is_typewriter_active()*
