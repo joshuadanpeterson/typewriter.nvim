@@ -12,6 +12,7 @@ local ts_utils = require("nvim-treesitter.ts_utils")
 local utils = require("typewriter.utils")
 local config = require("typewriter.config")
 local center_block_config = require("typewriter.utils.center_block_config")
+local logger = require("typewriter.logger")
 
 local M = {}
 local typewriter_active = false
@@ -74,7 +75,8 @@ function M.enable_typewriter_mode()
 				utils.center_cursor_horizontally()
 			end,
 		})
-		utils.notify("Typewriter mode enabled")
+                utils.notify("Typewriter mode enabled")
+                logger.info("Typewriter mode enabled")
 	end
 end
 
@@ -92,6 +94,7 @@ function M.disable_typewriter_mode()
                 vim.fn.winrestview({ leftcol = 0 })
 		--- Notify the user that typewriter mode is disabled
                 utils.notify("Typewriter mode disabled")
+                logger.info("Typewriter mode disabled")
         end
 end
 

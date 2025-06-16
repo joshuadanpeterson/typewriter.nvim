@@ -9,6 +9,7 @@ local commands = require("typewriter.commands")
 local ts_utils = require('nvim-treesitter.ts_utils')
 local ts_parsers = require('nvim-treesitter.parsers')
 local utils = require('typewriter.utils')
+local logger = require('typewriter.logger')
 
 local M = {}
 
@@ -22,6 +23,11 @@ local State = {
 local current_state = State.NORMAL
 local target_col = nil
 local last_line = nil
+-- Forward declare local helpers to avoid polluting the global namespace
+local move_cursor_to_combined_match
+local get_treesitter_match
+local validate_position_with_lsp
+local move_cursor_to_regex_match
 
 -- Helper function to set state
 local function set_state(new_state)
@@ -72,7 +78,7 @@ end
 --- Move cursor to the best match found using Treesitter and LSP
 ---
 --- @param search_pattern string The search pattern to match against symbols and nodes
-local function move_cursor_to_combined_match(search_pattern)
+move_cursor_to_combined_match = function(search_pattern)
 	local bufnr = vim.api.nvim_get_current_buf()
 
 	-- Treesitter Phase
@@ -89,8 +95,10 @@ local function move_cursor_to_combined_match(search_pattern)
 		end
 	end
 
-	-- Fallback to regex if both Treesitter and LSP fail
-	move_cursor_to_regex_match(bufnr, search_pattern)
+        -- Fallback to regex if both Treesitter and LSP fail. This is not a
+        -- critical error, just an alternative search path.
+        logger.warning("Falling back to regex search for pattern: " .. search_pattern)
+        move_cursor_to_regex_match(bufnr, search_pattern)
 end
 
 --- Get match position using Treesitter
@@ -98,7 +106,7 @@ end
 --- @param bufnr number Buffer number
 --- @param search_pattern string Search pattern
 --- @return table|nil Cursor position
-local function get_treesitter_match(bufnr, search_pattern)
+get_treesitter_match = function(bufnr, search_pattern)
 	local lang = ts_parsers.get_buf_lang(bufnr)
 	if not lang then
 		return nil
@@ -125,8 +133,8 @@ local function get_treesitter_match(bufnr, search_pattern)
 		return nil
 	end
 
-	-- Preprocess the search pattern to handle special characters and word boundaries
-	local regex_pattern = string.format("\\b%s\\b", search_pattern:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"))
+        -- Preprocess the search pattern to handle special characters and word boundaries
+        local regex_pattern = utils.create_escaped_regex_pattern(search_pattern)
 
 	-- Iterate over captures and match against the search pattern
 	local cursor_position
@@ -175,7 +183,7 @@ local function validate_lsp_symbols(position, search_pattern, symbols)
         return nil
 end
 
-local function validate_position_with_lsp(position, search_pattern)
+validate_position_with_lsp = function(position, search_pattern)
         local bufnr = vim.api.nvim_get_current_buf()
         local params = { textDocument = vim.lsp.util.make_text_document_params() }
 
@@ -200,9 +208,9 @@ end
 ---
 --- @param bufnr number Buffer number
 --- @param search_pattern string Search pattern
-local function move_cursor_to_regex_match(bufnr, search_pattern)
-	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-	local regex_pattern = string.format("\\b%s\\b", search_pattern:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"))
+move_cursor_to_regex_match = function(bufnr, search_pattern)
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        local regex_pattern = utils.create_escaped_regex_pattern(search_pattern)
 
 	for line_num, line in ipairs(lines) do
 		local start_pos = line:find(regex_pattern)
@@ -330,22 +338,29 @@ function M.autocmd_setup()
 	end
 
 	-- Autocommands for True Zen integration
-	if config.config.enable_with_true_zen then
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "TZWoon",
-			callback = function()
-				commands.enable_typewriter_mode()
-			end,
-			desc = "Enable Typewriter mode when entering True Zen",
-		})
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "TZOff",
-			callback = function()
-				commands.disable_typewriter_mode()
-			end,
-			desc = "Disable Typewriter mode when leaving True Zen",
-		})
-	end
+        if config.config.enable_with_true_zen then
+                vim.api.nvim_create_autocmd("User", {
+                        pattern = "TZWoon",
+                        callback = function()
+                                commands.enable_typewriter_mode()
+                        end,
+                        desc = "Enable Typewriter mode when entering True Zen",
+                })
+                vim.api.nvim_create_autocmd("User", {
+                        pattern = "TZOff",
+                        callback = function()
+                                commands.disable_typewriter_mode()
+                        end,
+                        desc = "Disable Typewriter mode when leaving True Zen",
+                })
+        end
+
+        -- Log plugin shutdown
+        vim.api.nvim_create_autocmd("VimLeavePre", {
+                callback = function()
+                        logger.info("Typewriter.nvim shutdown")
+                end,
+        })
 end
 
 return M

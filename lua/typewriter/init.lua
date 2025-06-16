@@ -18,6 +18,7 @@
 --- Import required modules
 --- local config = require("typewriter.config")
 --- local autocommands = require("typewriter.autocommands")
+local logger = require("typewriter.logger")
 local M = {}
 
 --- Setup the Typewriter.nvim plugin
@@ -40,6 +41,7 @@ M.setup = function(user_config)
         config.config_setup(user_config or {})
         autocommands.autocmd_setup()
         require("typewriter.utils").notify("Typewriter.nvim started")
+        logger.info("Typewriter.nvim started")
 end
 
 return M
