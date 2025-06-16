@@ -1,7 +1,11 @@
 # Changelog
-## [v0.7.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.1) (2025-06-16)
-- feat(config): add `start_enabled` option to enable plugin on startup (#29)
 
+## [v0.7.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.1) (2025-06-16)
+- Merge pull request #40 from joshuadanpeterson/codex/fix-issue-#29
+- feat(config): ✨ add start_enabled option
+- docs: update CHANGELOG.md for v0.7.0 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.0...v0.7.1)
 
 ## [v0.7.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.0) (2025-06-16)
 - Merge pull request #39 from joshuadanpeterson/codex/create-tests-folder-and-add-tests
@@ -19,7 +23,7 @@
 - fix(commands): correct cursor restoration
 - docs: update CHANGELOG.md for v0.6.19 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.19...v0.7.0)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.1...v0.7.0)
 
 ## [v0.6.28](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.28) (2025-06-16)
 - feat: extract regex escaping to shared helper
