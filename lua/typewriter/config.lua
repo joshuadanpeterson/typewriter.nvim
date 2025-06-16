@@ -35,10 +35,15 @@ M.default_config = {
 	--- @type boolean
 	enable_notifications = true,
 
-	--- Enable horizontal scrolling
-	--- When true, the plugin will center text horizontally as well as vertically.
-	--- @type boolean
-	enable_horizontal_scroll = true,
+        --- Enable horizontal scrolling
+        --- When true, the plugin will center text horizontally as well as vertically.
+        --- @type boolean
+        enable_horizontal_scroll = true,
+
+        --- Start Typewriter mode on startup
+        --- When true, the plugin enables typewriter mode immediately when setup() is called.
+        --- @type boolean
+        start_enabled = false,
 
 }
 

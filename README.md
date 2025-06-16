@@ -212,6 +212,7 @@ require('packer').startup(function()
                 keep_cursor_position = true,
                 enable_notifications = true,
                 enable_horizontal_scroll = true,
+                start_enabled = false,
             })
         end
     }
@@ -269,6 +270,7 @@ lazy.setup({
                 keep_cursor_position = true,
                 enable_notifications = true,
                 enable_horizontal_scroll = true,
+                start_enabled = false,
             })
         end,
         opts = {}
