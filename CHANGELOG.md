@@ -2,7 +2,8 @@
 
 ## [v0.7.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.2) (2025-06-16)
 - Merge pull request #41 from joshuadanpeterson/codex/fix-issue-#30
-- fix(commands): 🐛 respect gg and G motions at file edges
+- test: ✅ verify center_cursor uses zz in middle\n\n- add test for non-edge cursor\n- ensures fix for issue #30
+- docs: update CHANGELOG.md for v0.7.1 and remove duplicate entries
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.1...v0.7.2)
 
@@ -11,7 +12,7 @@
 - feat(config): ✨ add start_enabled option
 - docs: update CHANGELOG.md for v0.7.0 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.0...v0.7.1)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.2...v0.7.1)
 
 ## [v0.7.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.0) (2025-06-16)
 - Merge pull request #39 from joshuadanpeterson/codex/create-tests-folder-and-add-tests
