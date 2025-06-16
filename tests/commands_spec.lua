@@ -35,4 +35,34 @@ describe('typewriter.commands', function()
     assert.is_not_nil(content:find('Typewriter mode enabled'))
     assert.is_not_nil(content:find('Typewriter mode disabled'))
   end)
+
+  it('centers with zt when at top of file', function()
+    utils.set_typewriter_active(true)
+    vim.api.nvim_win_get_cursor = function() return {1, 0} end
+    vim.api.nvim_buf_line_count = function() return 50 end
+    local cmd
+    vim.api.nvim_command = function(c) cmd = c end
+    commands.center_cursor()
+    assert.are.equal('normal! zt', cmd)
+  end)
+
+  it('centers with zb when at bottom of file', function()
+    utils.set_typewriter_active(true)
+    vim.api.nvim_win_get_cursor = function() return {50, 0} end
+    vim.api.nvim_buf_line_count = function() return 50 end
+    local cmd
+    vim.api.nvim_command = function(c) cmd = c end
+    commands.center_cursor()
+    assert.are.equal('normal! zb', cmd)
+  end)
+
+  it('centers with zz when in middle of file', function()
+    utils.set_typewriter_active(true)
+    vim.api.nvim_win_get_cursor = function() return {25, 0} end
+    vim.api.nvim_buf_line_count = function() return 50 end
+    local cmd
+    vim.api.nvim_command = function(c) cmd = c end
+    commands.center_cursor()
+    assert.are.equal('normal! zz', cmd)
+  end)
 end)

@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.2) (2025-06-16)
+- Merge pull request #41 from joshuadanpeterson/codex/fix-issue-#30
+- fix(commands): 🐛 respect gg and G motions at file edges
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.1...v0.7.2)
+
 ## [v0.7.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.1) (2025-06-16)
 - Merge pull request #40 from joshuadanpeterson/codex/fix-issue-#29
 - feat(config): ✨ add start_enabled option
