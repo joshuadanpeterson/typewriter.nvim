@@ -15,6 +15,19 @@ local typewriter_active = false
 
 local M = {}
 
+--- Create a Lua pattern escaped for regex search
+--
+-- This helper escapes special characters in a search pattern and wraps
+-- it with word boundaries so it can be used safely in Lua pattern
+-- matching.
+--
+-- @param pattern string search text provided by the user
+-- @return string escaped Lua pattern wrapped with %b
+function M.create_escaped_regex_pattern(pattern)
+        local escaped = pattern:gsub('[%^%$%(%)%%%.%[%]%*%+%-%?]', '%%%0')
+        return string.format('\\b%s\\b', escaped)
+end
+
 --- Notify the user with a message if notifications are enabled
 ---
 --- This function displays a notification to the user using Neovim's built-in

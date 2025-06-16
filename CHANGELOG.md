@@ -1,5 +1,48 @@
 # Changelog
 
+## [v0.6.28](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.28) (2025-06-16)
+- feat: extract regex escaping to shared helper
+- test: add utils and command specs for broader coverage
+
+## [v0.6.26](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.26) (2025-06-15)
+- refactor: limit helper function scope to avoid global pollution
+
+## [v0.6.27](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.27) (2025-06-15)
+- fix: ensure search helpers remain local
+- test: verify no global leakage
+
+
+## [v0.6.25](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.25) (2025-06-15)
+- feat: allow custom log file path and document usage
+- test: cover startup, fallback, and shutdown logging
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.24...v0.6.25)
+
+
+## [v0.6.24](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.24) (2025-06-15)
+- feat: add warning log level and use it for regex fallback
+- test: ensure warning messages are written
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.23...v0.6.24)
+
+## [v0.6.23](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.23) (2025-06-15)
+- fix: ensure log directory exists and timestamp entries
+- test: cover vim.tbl_extend behaviour
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.22...v0.6.23)
+
+## [v0.6.22](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.22) (2025-06-15)
+- feat: log plugin shutdown on VimLeavePre
+- test: add logger specs
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.21...v0.6.22)
+
+## [v0.6.21](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.21) (2025-06-15)
+- feat: add logging utilities and tests
+- docs: document logging feature
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.20...v0.6.21)
+
 ## [v0.6.20](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.20) (2025-06-14)
 - fix: restore cursor correctly when using TWTop or TWBottom
 

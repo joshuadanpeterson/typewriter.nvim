@@ -67,6 +67,9 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - Enable horizontal scrolling in Typewriter mode and center the cursor by setting `enable_horizontal_scroll` to `true` in the plugin configuration. ↔️
 - Robust state tracking with `is_typewriter_active()`, `set_typewriter_active()`, and `toggle_typewriter_active()` functions for programmatic control. 🎛️
 - `TypewriterStateChanged` event for reacting to Typewriter mode state changes in your own scripts or plugins. 🔄
+- Basic logging to `stdpath('data')/typewriter.log` for startup, shutdown, and info, warning, and error events. The log directory is created automatically, and the log path can be overridden for testing. 📝
+- Shared helper to escape regex search patterns used by Treesitter and fallback logic, avoiding duplication. 🔍
+- Search helper functions are scoped locally to keep the global namespace clean (v0.6.27). 🔒
 - Comprehensive in-editor help documentation accessible via `:help typewriter`. 📚
 
 <div align=center>
