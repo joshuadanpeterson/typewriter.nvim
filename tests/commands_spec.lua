@@ -65,4 +65,31 @@ describe('typewriter.commands', function()
     commands.center_cursor()
     assert.are.equal('normal! zz', cmd)
   end)
+
+  it('uses zz at EOF when always_center is true', function()
+    utils.set_typewriter_active(true)
+    vim.api.nvim_win_get_cursor = function() return {50, 0} end
+    vim.api.nvim_buf_line_count = function() return 50 end
+    local cmd
+    vim.api.nvim_command = function(c) cmd = c end
+    local cfg = require('typewriter.config')
+    cfg.config.always_center = true
+    commands.center_cursor()
+    assert.are.equal('normal! zz', cmd)
+    cfg.config.always_center = false
+  end)
+
+  it('uses zz at EOF when filetype is in always_center_filetypes', function()
+    utils.set_typewriter_active(true)
+    vim.api.nvim_win_get_cursor = function() return {50, 0} end
+    vim.api.nvim_buf_line_count = function() return 50 end
+    local cmd
+    vim.api.nvim_command = function(c) cmd = c end
+    local cfg = require('typewriter.config')
+    cfg.config.always_center_filetypes = { markdown = true }
+    vim.bo.filetype = 'markdown'
+    commands.center_cursor()
+    assert.are.equal('normal! zz', cmd)
+    cfg.config.always_center_filetypes = {}
+  end)
 end)

@@ -201,6 +201,8 @@ It allows users to override only the options they want to change.
 require('typewriter.config').config_setup({
     enable_with_zen_mode = false,
     enable_notifications = false
+    always_center = false
+    always_center_filetypes = {}
 })
 
 ------------------------------------------------------------------------------
@@ -253,6 +255,8 @@ require('typewriter').setup({
     enable_with_zen_mode = false,
     keep_cursor_position = true
     start_enabled = false
+    always_center = false
+    always_center_filetypes = {}
 })
 
 
@@ -346,6 +350,7 @@ utils.center_cursor_horizontally()
 Starting Typewriter mode automatically
   Set `start_enabled` to `true` in `require('typewriter').setup()` to have the plugin
   enable typewriter mode on startup.
+  Set `always_center` to `true` or populate `always_center_filetypes` to always center on the last line.
 
 ------------------------------------------------------------------------------
                                                       *M.is_typewriter_active()*
