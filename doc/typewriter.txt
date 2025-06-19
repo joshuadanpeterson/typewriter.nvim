@@ -204,6 +204,7 @@ require('typewriter.config').config_setup({
     always_center = false,
     always_center_filetypes = {},
 })
+Note: trailing commas after each option ensure valid Lua syntax when copying these examples.
 
 ------------------------------------------------------------------------------
                                                                 *M.get_config()*
@@ -258,6 +259,7 @@ require('typewriter').setup({
     always_center = false,
     always_center_filetypes = {},
 })
+Note: trailing commas in this example ensure valid Lua syntax for easy copying.
 
 
 ==============================================================================
