@@ -201,7 +201,7 @@ It allows users to override only the options they want to change.
 require('typewriter.config').config_setup({
     enable_with_zen_mode = false,
     enable_notifications = false
-    always_center = false
+    always_center = false,
     always_center_filetypes = {}
 })
 
@@ -255,7 +255,7 @@ require('typewriter').setup({
     enable_with_zen_mode = false,
     keep_cursor_position = true
     start_enabled = false
-    always_center = false
+    always_center = false,
     always_center_filetypes = {}
 })
 
