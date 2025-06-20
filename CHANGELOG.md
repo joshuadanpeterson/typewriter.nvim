@@ -1,7 +1,13 @@
+# Changelog
 
-## [v0.7.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.3) (2025-06-18)
+## [v0.7.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.3) (2025-06-19)
+- Merge pull request #43 from joshuadanpeterson/codex/fix-issue-#42-based-on-suggestion
+- test: 🧪 restore filetype in commands test
+- docs: 📝 clarify trailing comma usage
+- docs: 📝 fix setup examples in help
+- docs: \xF0\x9F\x93\x9D fix missing trailing comma in config examples
 - feat(config): ✨ add always_center option
-- fix: 🐛 ensure cursor centers on last line when enabled
+- docs: update CHANGELOG.md for v0.7.2 and remove duplicate entries
 
 [Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.2...v0.7.3)
 
@@ -10,7 +16,7 @@
 - test: ✅ verify center_cursor uses zz in middle\n\n- add test for non-edge cursor\n- ensures fix for issue #30
 - docs: update CHANGELOG.md for v0.7.1 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.1...v0.7.2)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.3...v0.7.2)
 
 ## [v0.7.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.1) (2025-06-16)
 - Merge pull request #40 from joshuadanpeterson/codex/fix-issue-#29
