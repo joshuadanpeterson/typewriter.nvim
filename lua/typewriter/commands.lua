@@ -60,9 +60,14 @@ function M.center_cursor()
         local line = cursor[1]
         local last_line = api.nvim_buf_line_count(0)
 
+        -- Determine if always_center is active globally or for this filetype
+        local cfg = config.get_config()
+        local ft = vim.bo.filetype
+        local force_center = cfg.always_center or cfg.always_center_filetypes[ft]
+
         if line == 1 then
                 api.nvim_command("normal! zt")
-        elseif line == last_line then
+        elseif line == last_line and not force_center then
                 api.nvim_command("normal! zb")
         else
                 api.nvim_command("normal! zz")

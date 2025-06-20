@@ -44,6 +44,15 @@ M.default_config = {
         --- When true, the plugin enables typewriter mode immediately when setup() is called.
         --- @type boolean
         start_enabled = false,
+        --- Always center the cursor, even on the last line
+        --- When true, `center_cursor` will always use `zz` rather than `zb`
+        --- @type boolean
+        always_center = false,
+
+        --- Filetypes that should always center the cursor
+        --- When a filetype is listed here, `center_cursor` will use `zz` for it
+        --- @type table<string, boolean>
+        always_center_filetypes = {},
 
 }
 

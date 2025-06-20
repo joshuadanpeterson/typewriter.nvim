@@ -1,4 +1,9 @@
-# Changelog
+
+## [v0.7.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.3) (2025-06-18)
+- feat(config): ✨ add always_center option
+- fix: 🐛 ensure cursor centers on last line when enabled
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.2...v0.7.3)
 
 ## [v0.7.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.2) (2025-06-16)
 - Merge pull request #41 from joshuadanpeterson/codex/fix-issue-#30

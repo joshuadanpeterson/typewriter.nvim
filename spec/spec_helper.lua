@@ -19,6 +19,7 @@ vim.schedule = vim.schedule or function(fn) fn() end
 vim.log = vim.log or { levels = { INFO = 1 } }
 vim.notify = vim.notify or function() end
 vim.v = vim.v or {}
+vim.bo = vim.bo or {}
 vim.fn.stdpath = vim.fn.stdpath or function() return '/tmp' end
 vim.fn.fnamemodify = vim.fn.fnamemodify or function(path, mod)
   if mod == ':h' then
