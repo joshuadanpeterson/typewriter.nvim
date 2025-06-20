@@ -87,9 +87,11 @@ describe('typewriter.commands', function()
     vim.api.nvim_command = function(c) cmd = c end
     local cfg = require('typewriter.config')
     cfg.config.always_center_filetypes = { markdown = true }
+    local original_ft = vim.bo.filetype
     vim.bo.filetype = 'markdown'
     commands.center_cursor()
     assert.are.equal('normal! zz', cmd)
+    vim.bo.filetype = original_ft
     cfg.config.always_center_filetypes = {}
   end)
 end)
