@@ -1,10 +1,11 @@
 # Changelog
 
 ## [v0.7.4](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.4) (2025-07-05)
-- fix(autocommands): restore column preservation after search (issue #44)
-- feat(autocommands): enable preservation for Zen Mode and True Zen events
-- docs: clarify column preservation behavior
-- test: add coverage for search state handling
+- Merge pull request #45 from joshuadanpeterson/codex/fix-issue-#44
+- fix(autocommands): 🛠️ restore column preservation
+- docs: update CHANGELOG.md for v0.7.3 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.3...v0.7.4)
 
 ## [v0.7.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.3) (2025-06-19)
 - Merge pull request #43 from joshuadanpeterson/codex/fix-issue-#42-based-on-suggestion
@@ -15,7 +16,7 @@
 - feat(config): ✨ add always_center option
 - docs: update CHANGELOG.md for v0.7.2 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.2...v0.7.3)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.4...v0.7.3)
 
 ## [v0.7.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.2) (2025-06-16)
 - Merge pull request #41 from joshuadanpeterson/codex/fix-issue-#30
