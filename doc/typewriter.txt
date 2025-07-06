@@ -70,6 +70,7 @@ User commands created:
 - TWTop: Move the top of the current code block to the top of the screen
 - TWBottom: Move the bottom of the current code block to the bottom of the screen
 - TWPreserveColumn: Toggle column preservation mode
+  Column preservation automatically resumes after search when Typewriter mode remains active.
 
 @usage require("typewriter.autocommands").autocmd_setup()
 

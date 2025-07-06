@@ -43,6 +43,7 @@ M.setup = function(user_config)
         autocommands.autocmd_setup()
         if config.config.start_enabled then
                 commands.enable_typewriter_mode()
+                autocommands.enable_column_preservation()
         end
         require("typewriter.utils").notify("Typewriter.nvim started")
         logger.info("Typewriter.nvim started")

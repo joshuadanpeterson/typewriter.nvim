@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.4](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.4) (2025-07-05)
+- fix(autocommands): restore column preservation after search (issue #44)
+- feat(autocommands): enable preservation for Zen Mode and True Zen events
+- docs: clarify column preservation behavior
+- test: add coverage for search state handling
+
 ## [v0.7.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.3) (2025-06-19)
 - Merge pull request #43 from joshuadanpeterson/codex/fix-issue-#42-based-on-suggestion
 - test: 🧪 restore filetype in commands test
