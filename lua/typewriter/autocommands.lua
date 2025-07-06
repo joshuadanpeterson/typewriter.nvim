@@ -66,13 +66,17 @@ end
 
 -- Function to handle search completion
 local function handle_search_completion()
-	if vim.fn.mode() == "n" then
-		set_state(State.NORMAL)
-		if vim.v.hlsearch == 1 then
-			local search_pattern = vim.fn.getreg("/")
-			move_cursor_to_combined_match(search_pattern)
-		end
-	end
+        if vim.fn.mode() == "n" then
+                if utils.is_typewriter_active() then
+                        set_state(State.PRESERVE_COLUMN)
+                else
+                        set_state(State.NORMAL)
+                end
+                if vim.v.hlsearch == 1 then
+                        local search_pattern = vim.fn.getreg("/")
+                        move_cursor_to_combined_match(search_pattern)
+                end
+        end
 end
 
 --- Move cursor to the best match found using Treesitter and LSP
@@ -321,13 +325,14 @@ function M.autocmd_setup()
 	-- ZenMode and True Zen integration (same as before)
 	-- Autocommands for ZenMode integration
 	if config.config.enable_with_zen_mode then
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "ZenModePre",
-			callback = function()
-				commands.enable_typewriter_mode()
-			end,
-			desc = "Enable Typewriter mode when entering Zen Mode",
-		})
+                vim.api.nvim_create_autocmd("User", {
+                        pattern = "ZenModePre",
+                        callback = function()
+                                commands.enable_typewriter_mode()
+                                set_state(State.PRESERVE_COLUMN)
+                        end,
+                        desc = "Enable Typewriter mode when entering Zen Mode",
+                })
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "ZenModeLeave",
 			callback = function()
@@ -343,6 +348,7 @@ function M.autocmd_setup()
                         pattern = "TZWoon",
                         callback = function()
                                 commands.enable_typewriter_mode()
+                                set_state(State.PRESERVE_COLUMN)
                         end,
                         desc = "Enable Typewriter mode when entering True Zen",
                 })
@@ -361,6 +367,22 @@ function M.autocmd_setup()
                         logger.info("Typewriter.nvim shutdown")
                 end,
         })
+end
+
+--- Enable column preservation state
+function M.enable_column_preservation()
+        set_state(State.PRESERVE_COLUMN)
+end
+
+--- Disable column preservation state
+function M.disable_column_preservation()
+        set_state(State.NORMAL)
+end
+
+--- Get the current internal state (for testing)
+-- @return number current state
+function M.get_state()
+        return current_state
 end
 
 return M
