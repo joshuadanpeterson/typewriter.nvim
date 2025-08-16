@@ -2,14 +2,26 @@
 
 This file provides guidance to WARP (warp.dev) when working with code in this repository.
 
+## Project Structure
+
+- `/lua`: Source code for the Typewriter.nvim plugin
+- `/doc`: Vim help documentation
+- `/spec`: Busted unit tests
+- `/tests`: Additional test suites
+- `/demos`: Demo GIFs and images (do not modify)
+- `/.github/workflows`: CI/CD automation
+
 ## Common Development Commands
 
 ### Testing
 ```bash
-# Run Busted tests (if spec/ or tests/ directory exists)
-busted
-# Or specifically for tests directory
+# Run Busted tests with verbose output
+busted -v spec/
+# Or for tests directory
 busted tests/
+
+# Run luacheck for linting (install via LuaRocks if needed)
+luacheck lua/
 
 # Test the plugin locally in Neovim
 nvim --headless +'lua require("typewriter").setup({ enable_horizontal_scroll = true })' +'autocmd BufEnter * normal! zt' +'qall'
@@ -17,6 +29,8 @@ nvim --headless +'lua require("typewriter").setup({ enable_horizontal_scroll = t
 # Quick local testing with your config
 nvim -c "lua require('typewriter').setup()" test_file.lua
 ```
+
+**Note**: Documentation-only changes do not require running tests.
 
 ### Dependency Management
 ```bash
@@ -110,12 +124,26 @@ nvim -u NONE -c "lua require('typewriter').setup()" test.lua
 - Feature branches merge into `dev`, then `dev` merges to `main` for releases
 
 ### Commit Convention
-Uses conventional commits with emojis:
+Uses multi-line conventional commits with emojis:
 ```bash
 # Format: type(scope): emoji description
-git commit -m "feat(commands): ✨ Add support for TypeScript blocks"
-git commit -m "fix(autocommands): 🐛 Resolve cursor position issue"
-git commit -m "docs(README): 📚 Update installation instructions"
+# Followed by bullet points for details
+
+git commit -m "feat(commands): ✨ Add support for TypeScript blocks
+
+- Implemented core logic for TypeScript nodes
+- Updated center_block_config.lua
+- Added test coverage"
+
+git commit -m "fix(autocommands): 🐛 Resolve cursor position issue
+
+- Fixed column preservation logic
+- Updated autocommand handlers"
+
+git commit -m "docs(README): 📚 Update installation instructions
+
+- Added Lazy.nvim setup example
+- Clarified dependencies"
 ```
 
 ### Adding Language Support
@@ -124,6 +152,23 @@ To add support for a new language:
 2. Add them to `lua/typewriter/utils/center_block_config.lua`
 3. Test with sample code files
 4. Update README.md supported languages section
+5. Run tests to ensure no regressions
+
+### Pull Request Guidelines
+1. Include a clear description of the changes
+2. Reference related issues if applicable (e.g., "Fixes #123")
+3. Ensure all tests pass (`busted -v spec/`)
+4. Keep PRs focused on a single concern
+5. Follow the existing code style in each file
+
+## Coding Conventions
+
+- Use Lua for all plugin code
+- Follow the existing code style in each file
+- Provide meaningful variable and function names
+- Add comments for complex logic
+- Run `luacheck` for linting before committing
+- Ensure tests pass before committing code changes
 
 ## Technical Details
 
