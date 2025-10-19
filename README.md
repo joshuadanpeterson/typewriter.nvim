@@ -61,7 +61,7 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - `:TWBottom` command to move the bottom of the current code block to the bottom of the screen. ⬇️
 - Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view or using TWTop/TWBottom. 📌
 - Set `enable_notifications` to `true` in plugin config to enable or disable notifications for actions like enabling/disabling typewriter mode, and aligning code blocks. 🔔
-- Enable horizontal scrolling in Typewriter mode and center the cursor by setting `enable_horizontal_scroll` to `true` in the plugin configuration. ↔️
+- Enable horizontal scrolling in Typewriter mode and center the cursor by setting `enable_horizontal_scroll` to `true`; adjust `horizontal_left_offset` (default 0) to retain left-context when centering. ↔️
 - Robust state tracking with `is_typewriter_active()`, `set_typewriter_active()`, and `toggle_typewriter_active()` functions for programmatic control. 🎛️
 - `TypewriterStateChanged` event for reacting to Typewriter mode state changes in your own scripts or plugins. 🔄
 - Comprehensive in-editor help documentation accessible via `:help typewriter`. 📚
@@ -206,6 +206,7 @@ require('packer').startup(function()
                 keep_cursor_position = true,
                 enable_notifications = true,
                 enable_horizontal_scroll = true,
+                horizontal_left_offset = 0,
             })
         end
     }
@@ -263,6 +264,7 @@ lazy.setup({
                 keep_cursor_position = true,
                 enable_notifications = true,
                 enable_horizontal_scroll = true,
+                horizontal_left_offset = 0,
             })
         end,
         opts = {}

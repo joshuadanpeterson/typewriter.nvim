@@ -39,6 +39,12 @@ M.default_config = {
 	--- When true, the plugin will center text horizontally as well as vertically.
 	--- @type boolean
 	enable_horizontal_scroll = true,
+
+	--- Horizontal scroll left offset
+	--- When centering horizontally, shift the left column by this amount to retain context.
+	--- Set to 0 to disable additional offset. Can be negative to pull more content into view.
+	--- @type integer
+	horizontal_left_offset = 0,
 }
 
 --- Current configuration

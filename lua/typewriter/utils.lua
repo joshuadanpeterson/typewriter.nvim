@@ -47,7 +47,9 @@ function M.center_cursor_horizontally()
 	end
 	local win_width = vim.api.nvim_win_get_width(0)
 	local cursor_col = vim.fn.virtcol(".")
-	local left_col = math.max(cursor_col - math.floor(win_width / 2), 0) + 10
+	local base_left = math.max(cursor_col - math.floor(win_width / 2), 0)
+	local offset = tonumber(config.config.horizontal_left_offset) or 0
+	local left_col = math.max(base_left + offset, 0)
 	vim.api.nvim_win_set_option(0, "wrap", false)
 	vim.fn.winrestview({ leftcol = left_col })
 end
