@@ -1,10 +1,196 @@
 # Changelog
 
+## [v0.7.5](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.5) (2025-08-16)
+- feat(latex): 📝 Add comprehensive LaTeX Tree-sitter support
+- docs(warp): 🔄 Incorporate AGENTS.md content into WARP.md
+- docs(warp): 📚 Add WARP.md for development guidance
+- docs: update CHANGELOG.md for v0.7.4 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.4...v0.7.5)
+
+## [v0.7.4](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.4) (2025-07-05)
+- Merge pull request #45 from joshuadanpeterson/codex/fix-issue-#44
+- fix(autocommands): 🛠️ restore column preservation
+- docs: update CHANGELOG.md for v0.7.3 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.5...v0.7.4)
+
+## [v0.7.3](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.3) (2025-06-19)
+- Merge pull request #43 from joshuadanpeterson/codex/fix-issue-#42-based-on-suggestion
+- test: 🧪 restore filetype in commands test
+- docs: 📝 clarify trailing comma usage
+- docs: 📝 fix setup examples in help
+- docs: \xF0\x9F\x93\x9D fix missing trailing comma in config examples
+- feat(config): ✨ add always_center option
+- docs: update CHANGELOG.md for v0.7.2 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.4...v0.7.3)
+
+## [v0.7.2](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.2) (2025-06-16)
+- Merge pull request #41 from joshuadanpeterson/codex/fix-issue-#30
+- test: ✅ verify center_cursor uses zz in middle\n\n- add test for non-edge cursor\n- ensures fix for issue #30
+- docs: update CHANGELOG.md for v0.7.1 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.3...v0.7.2)
+
+## [v0.7.1](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.1) (2025-06-16)
+- Merge pull request #40 from joshuadanpeterson/codex/fix-issue-#29
+- feat(config): ✨ add start_enabled option
+- docs: update CHANGELOG.md for v0.7.0 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.2...v0.7.1)
+
+## [v0.7.0](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.7.0) (2025-06-16)
+- Merge pull request #39 from joshuadanpeterson/codex/create-tests-folder-and-add-tests
+- feat: 🔍 add regex helper and tests
+- fix: 🔒 enforce local helper scope
+- refactor: ♻️ scope search helpers locally
+- feat: 🧪 extend logger API and tests
+- feat: ⚠️ add warning log level
+- fix(logger): 🪵 improve reliability
+- feat: 📝 add shutdown logging and logger tests
+- feat: 🧪 add logging and tests
+- Merge pull request #38 from joshuadanpeterson/codex/fix-issue-#28
+- Merge branch 'main' into codex/fix-issue-#28
+- fix(commands): 🎯 correct cursor restoration
+- fix(commands): correct cursor restoration
+- docs: update CHANGELOG.md for v0.6.19 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.1...v0.7.0)
+
+## [v0.6.28](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.28) (2025-06-16)
+- feat: extract regex escaping to shared helper
+- test: add utils and command specs for broader coverage
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.7.0...v0.6.28)
+
+## [v0.6.26](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.26) (2025-06-15)
+- refactor: limit helper function scope to avoid global pollution
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.28...v0.6.26)
+
+## [v0.6.27](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.27) (2025-06-15)
+- fix: ensure search helpers remain local
+- test: verify no global leakage
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.26...v0.6.27)
+
+## [v0.6.25](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.25) (2025-06-15)
+- feat: allow custom log file path and document usage
+- test: cover startup, fallback, and shutdown logging
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.27...v0.6.25)
+
+## [v0.6.24](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.24) (2025-06-15)
+- feat: add warning log level and use it for regex fallback
+- test: ensure warning messages are written
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.25...v0.6.24)
+
+## [v0.6.23](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.23) (2025-06-15)
+- fix: ensure log directory exists and timestamp entries
+- test: cover vim.tbl_extend behaviour
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.24...v0.6.23)
+
+## [v0.6.22](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.22) (2025-06-15)
+- feat: log plugin shutdown on VimLeavePre
+- test: add logger specs
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.23...v0.6.22)
+
+## [v0.6.21](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.21) (2025-06-15)
+- feat: add logging utilities and tests
+- docs: document logging feature
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.22...v0.6.21)
+
+## [v0.6.20](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.20) (2025-06-14)
+- fix: restore cursor correctly when using TWTop or TWBottom
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.21...v0.6.20)
+
+## [v0.6.19](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.19) (2025-06-05)
+- Merge pull request #37 from joshuadanpeterson/codex/fix-issue-#27
+- fix: 🐛 resolve ghosting issue and improve docs
+- fix: 🐛 resolve ghosting issue
+- docs: update CHANGELOG.md for v0.6.18 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.20...v0.6.19)
+
+## [v0.6.18](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.18) (2025-06-05)
+- Update README.md
+- docs: update CHANGELOG.md for v0.6.17 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.19...v0.6.18)
+
+## [v0.6.17](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.17) (2025-06-05)
+- Merge pull request #35 from joshuadanpeterson/codex/update-agents.md-with-new-sections-and-conventions
+- Merge branch 'main' into codex/update-agents.md-with-new-sections-and-conventions
+- ✨ docs: add AGENTS usage guide
+- docs: update CHANGELOG.md for v0.6.16 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.18...v0.6.17)
+
+## [v0.6.16](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.16) (2025-06-04)
+- Merge pull request #34 from joshuadanpeterson/codex/create-agents.md-file
+- docs: ✏️ clarify commit guidelines
+- docs: update CHANGELOG.md for v0.6.15 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.17...v0.6.16)
+
+## [v0.6.15](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.15) (2025-06-04)
+- Merge pull request #33 from joshuadanpeterson/codex/update-doc/typewriter.txt-with-twpreservecolumn-command
+- docs(help): add TWPreserveColumn command
+- docs: update CHANGELOG.md for v0.6.14 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.16...v0.6.15)
+
+## [v0.6.14](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.14) (2025-06-04)
+- Merge pull request #32 from joshuadanpeterson/codex/add-tests-for-typewriter-state-toggle
+- test(utils): add state toggle spec
+- docs: update CHANGELOG.md for v0.6.13 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.15...v0.6.14)
+
+## [v0.6.13](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.13) (2025-06-03)
+- Merge pull request #31 from joshuadanpeterson/codex/find-and-fix-important-bug
+- fix: validate LSP position recursively
+- docs: update CHANGELOG.md for v0.6.12 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.14...v0.6.13)
+
+## [v0.6.12](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.12) (2024-12-28)
+- Merge pull request #26 from sabinmarcu/main
+- fix(autocommands): Add missing utils import
+- docs: update CHANGELOG.md for v0.6.11 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.13...v0.6.12)
+
+## [v0.6.11](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.11) (2024-10-20)
+- Merge pull request #25 from joshuadanpeterson/fix/restore-column-retention-issue-16
+- fix(autocommands): Restore default column retention behavior (Issue #16)
+- docs: update CHANGELOG.md for v0.6.10 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.12...v0.6.11)
+
+## [v0.6.10](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.10) (2024-10-19)
+- Merge pull request #24 from joshuadanpeterson/twdisable-autocmd-column-preservation
+- fix(autocommands): Fix issue with column preservation in TWDisable command
+- docs: update CHANGELOG.md for v0.6.9 and remove duplicate entries
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.11...v0.6.10)
+
+## [v0.6.9](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.9) (2024-10-19)
+- Merge pull request #23 from joshuadanpeterson/21-searching-doesnt-move-cursor-to-the-correct-place
+
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.10...v0.6.9)
+
 ## [v0.6.6](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.6) (2024-07-29)
 - Merge pull request #17 from joshuadanpeterson/dev
 - docs: update CHANGELOG.md for v0.6.5 and remove duplicate entries
 
-[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.5...v0.6.6)
+[Full Changelog](https://github.com/joshuadanpeterson/typewriter.nvim/compare/v0.6.9...v0.6.6)
 
 ## [v0.6.5](https://github.com/joshuadanpeterson/typewriter.nvim/tree/v0.6.5) (2024-07-29)
 - feat(autocommands): Preserve column position when moving between lines of different lengths

@@ -15,6 +15,19 @@ local typewriter_active = false
 
 local M = {}
 
+--- Create a Lua pattern escaped for regex search
+--
+-- This helper escapes special characters in a search pattern and wraps
+-- it with word boundaries so it can be used safely in Lua pattern
+-- matching.
+--
+-- @param pattern string search text provided by the user
+-- @return string escaped Lua pattern wrapped with %b
+function M.create_escaped_regex_pattern(pattern)
+        local escaped = pattern:gsub('[%^%$%(%)%%%.%[%]%*%+%-%?]', '%%%0')
+        return string.format('\\b%s\\b', escaped)
+end
+
 --- Notify the user with a message if notifications are enabled
 ---
 --- This function displays a notification to the user using Neovim's built-in
@@ -26,9 +39,9 @@ local M = {}
 --- local utils = require("typewriter.utils")
 --- utils.notify("Typewriter mode enabled")
 function M.notify(message)
-	if config.config.enable_notifications then
-		vim.notify(message, vim.log.levels.INFO, { title = "Typewriter.nvim" })
-	end
+        if config.config.enable_notifications then
+        vim.notify(message, vim.log.levels.INFO, { title = "Typewriter.nvim" })
+        end
 end
 
 --- Center the cursor horizontally if horizontal scrolling is enabled
@@ -52,6 +65,8 @@ function M.center_cursor_horizontally()
 	local left_col = math.max(base_left + offset, 0)
 	vim.api.nvim_win_set_option(0, "wrap", false)
 	vim.fn.winrestview({ leftcol = left_col })
+	vim.cmd("redraw")
+	--- Force redraw to prevent ghost text
 end
 
 --- Check if Typewriter mode is currently active
@@ -63,7 +78,7 @@ end
 ---     print("Typewriter mode is active")
 --- end
 function M.is_typewriter_active()
-	return typewriter_active
+        return typewriter_active
 end
 
 --- Set the active state of Typewriter mode
@@ -73,8 +88,8 @@ end
 --- local utils = require("typewriter.utils")
 --- utils.set_typewriter_active(true)
 function M.set_typewriter_active(active)
-	typewriter_active = active
-	vim.api.nvim_exec_autocmds("User", { pattern = "TypewriterStateChanged" })
+        typewriter_active = active
+        vim.api.nvim_exec_autocmds("User", { pattern = "TypewriterStateChanged" })
 end
 
 --- Toggle the active state of Typewriter mode
@@ -85,9 +100,9 @@ end
 --- local new_state = utils.toggle_typewriter_active()
 --- print("Typewriter mode is now: " .. (new_state and "active" or "inactive"))
 function M.toggle_typewriter_active()
-	typewriter_active = not typewriter_active
-	M.set_typewriter_active(typewriter_active)
-	return typewriter_active
+        typewriter_active = not typewriter_active
+        M.set_typewriter_active(typewriter_active)
+        return typewriter_active
 end
 
 return M

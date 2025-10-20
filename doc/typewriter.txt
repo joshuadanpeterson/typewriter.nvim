@@ -17,6 +17,13 @@ FEATURES                                                  *typewriter-features*
 CHANGELOG                                                 *typewriter-changelog*
     - Summary of recent changes:
 
+    v0.7.2 (2025-06-16)
+    - fix: allow gg and G to reach top or bottom without recentering
+
+    v0.6.16 (2025-06-14)
+    - fix: restore cursor correctly when using TWTop or TWBottom
+
+
     v0.4.20 (2024-07-18)
     - feat(docs): Update CHANGELOG and TODO in help docs
     - docs: update CHANGELOG.md for v0.4.19 and remove duplicate entries
@@ -62,6 +69,8 @@ User commands created:
 - TWCenter: Center the current code block and cursor
 - TWTop: Move the top of the current code block to the top of the screen
 - TWBottom: Move the bottom of the current code block to the bottom of the screen
+- TWPreserveColumn: Toggle column preservation mode
+  Column preservation automatically resumes after search when Typewriter mode remains active.
 
 @usage require("typewriter.autocommands").autocmd_setup()
 
@@ -83,7 +92,10 @@ including cursor centering, typewriter mode toggling, and block navigation.
 Center the cursor on the screen
 
 This function moves the view so that the cursor is centered vertically
-on the screen. It's the core of the typewriter-style scrolling.
+on the screen. It's the core of the typewriter-style scrolling. When the
+cursor is on the first or last line of the file, the view is aligned with
+the top or bottom respectively so that commands like `gg` and `G` work as
+expected.
 
 @usage require("typewriter.commands").center_cursor()
 
@@ -104,6 +116,7 @@ Disable typewriter mode
 
 Deactivates the typewriter mode, returning to normal scrolling behavior.
 
+It also restores line wrapping and resets horizontal scrolling.
 @usage require("typewriter.commands").disable_typewriter_mode()
 
 ------------------------------------------------------------------------------
@@ -188,8 +201,11 @@ It allows users to override only the options they want to change.
 @usage
 require('typewriter.config').config_setup({
     enable_with_zen_mode = false,
-    enable_notifications = false
+    enable_notifications = false,
+    always_center = false,
+    always_center_filetypes = {},
 })
+Note: trailing commas after each option ensure valid Lua syntax when copying these examples.
 
 ------------------------------------------------------------------------------
                                                                 *M.get_config()*
@@ -239,8 +255,12 @@ and sets up the necessary autocommands.
 @usage
 require('typewriter').setup({
     enable_with_zen_mode = false,
-    keep_cursor_position = true
+    keep_cursor_position = true,
+    start_enabled = false,
+    always_center = false,
+    always_center_filetypes = {},
 })
+Note: trailing commas in this example ensure valid Lua syntax for easy copying.
 
 
 ==============================================================================
@@ -325,9 +345,15 @@ the view. It only takes effect if the `enable_horizontal_scroll` option
 is set to true in the plugin's configuration. The function also disables
 line wrapping to allow for horizontal scrolling.
 
+The screen is redrawn after adjusting the view to avoid ghost text.
 @usage
 local utils = require("typewriter.utils")
 utils.center_cursor_horizontally()
+
+Starting Typewriter mode automatically
+  Set `start_enabled` to `true` in `require('typewriter').setup()` to have the plugin
+  enable typewriter mode on startup.
+  Set `always_center` to `true` or populate `always_center_filetypes` to always center on the last line.
 
 ------------------------------------------------------------------------------
                                                       *M.is_typewriter_active()*
@@ -362,6 +388,28 @@ local utils = require("typewriter.utils")
 local new_state = utils.toggle_typewriter_active()
 print("Typewriter mode is now: " .. (new_state and "active" or "inactive"))
 
+------------------------------------------------------------------------------
+                                                     *typewriter-logger*
+Logging utilities
+
+Typewriter.nvim writes log messages to a file located at
+`stdpath('data')/typewriter.log`. The logger provides `info`, `warning`, and `error`
+functions for debugging. The log directory is created automatically if needed,
+so messages are recorded even on first use. The log file path can be overridden
+via `require('typewriter.logger').set_log_file()` for tests or custom setups.
+
+Startup and shutdown events are logged when the plugin is loaded and when Vim
+exits, allowing you to trace the plugin lifecycle.
+Fallbacks from Treesitter or LSP to regex search are logged as warnings to
+highlight non-critical downgrades in functionality.
+Internal search helper functions are local to avoid global namespace pollution (v0.6.27).
+The regex search pattern is generated with a shared helper to ensure proper escaping.
+
+@module typewriter.logger
+@file lua/typewriter/logger.lua
+@tag typewriter-logger
+
+------------------------------------------------------------------------------
 
  vim:tw=78:ts=8:noet:ft=help:norl:
 

@@ -42,6 +42,9 @@
     <a href="https://github.com/joshuadanpeterson/typewriter.nvim/commits">
       <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/joshuadanpeterson/typewriter.nvim?logo=github&style=for-the-badge&color=orange">
     </a>
+    <a href="https://deepwiki.com/joshuadanpeterson/typewriter.nvim">
+      <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">
+    </a>
 </div>
 </br>
 
@@ -59,11 +62,16 @@ A Neovim plugin that emulates a typewriter, keeping the cursor centered on the s
 - `:TWCenter` command to center the view around the current code block or function using [Tree-sitter](https://tree-sitter.github.io/tree-sitter/). 🌳
 - `:TWTop` command to move the top of the current code block to the top of the screen. ⬆️
 - `:TWBottom` command to move the bottom of the current code block to the bottom of the screen. ⬇️
+- Built-in handling so `gg` and `G` jump to the file edges without recentering. ⌨️
 - Set `keep_cursor_position` to `true` in plugin config to keep cursor position relative to text when centering the view or using TWTop/TWBottom. 📌
 - Set `enable_notifications` to `true` in plugin config to enable or disable notifications for actions like enabling/disabling typewriter mode, and aligning code blocks. 🔔
 - Enable horizontal scrolling in Typewriter mode and center the cursor by setting `enable_horizontal_scroll` to `true`; adjust `horizontal_left_offset` (default 0) to retain left-context when centering. ↔️
+- Set `always_center` to `true` or list filetypes in `always_center_filetypes` to force `zz` even on the last line. 📖
 - Robust state tracking with `is_typewriter_active()`, `set_typewriter_active()`, and `toggle_typewriter_active()` functions for programmatic control. 🎛️
 - `TypewriterStateChanged` event for reacting to Typewriter mode state changes in your own scripts or plugins. 🔄
+- Basic logging to `stdpath('data')/typewriter.log` for startup, shutdown, and info, warning, and error events. The log directory is created automatically, and the log path can be overridden for testing. 📝
+- Shared helper to escape regex search patterns used by Treesitter and fallback logic, avoiding duplication. 🔍
+- Search helper functions are scoped locally to keep the global namespace clean (v0.6.27). 🔒
 - Comprehensive in-editor help documentation accessible via `:help typewriter`. 📚
 
 <div align=center>
@@ -207,6 +215,9 @@ require('packer').startup(function()
                 enable_notifications = true,
                 enable_horizontal_scroll = true,
                 horizontal_left_offset = 0,
+                start_enabled = false,
+                always_center = false,
+                always_center_filetypes = {},
             })
         end
     }
@@ -265,6 +276,9 @@ lazy.setup({
                 enable_notifications = true,
                 enable_horizontal_scroll = true,
                 horizontal_left_offset = 0,
+                start_enabled = false,
+                always_center = false,
+                always_center_filetypes = {},
             })
         end,
         opts = {}
