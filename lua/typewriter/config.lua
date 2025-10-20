@@ -35,25 +35,30 @@ M.default_config = {
 	--- @type boolean
 	enable_notifications = true,
 
-        --- Enable horizontal scrolling
-        --- When true, the plugin will center text horizontally as well as vertically.
-        --- @type boolean
-        enable_horizontal_scroll = true,
+	--- Enable horizontal scrolling
+	--- When true, the plugin will center text horizontally as well as vertically.
+	--- @type boolean
+	enable_horizontal_scroll = true,
 
-        --- Start Typewriter mode on startup
-        --- When true, the plugin enables typewriter mode immediately when setup() is called.
-        --- @type boolean
-        start_enabled = false,
-        --- Always center the cursor, even on the last line
-        --- When true, `center_cursor` will always use `zz` rather than `zb`
-        --- @type boolean
-        always_center = false,
+	--- Horizontal scroll left offset
+	--- When centering horizontally, shift the left column by this amount to retain context.
+	--- Set to 0 to disable additional offset. Can be negative to pull more content into view.
+	--- @type integer
+	horizontal_left_offset = 0,
 
-        --- Filetypes that should always center the cursor
-        --- When a filetype is listed here, `center_cursor` will use `zz` for it
-        --- @type table<string, boolean>
-        always_center_filetypes = {},
+	--- Start Typewriter mode on startup
+	--- When true, the plugin enables typewriter mode immediately when setup() is called.
+	--- @type boolean
+	start_enabled = false,
+	--- Always center the cursor, even on the last line
+	--- When true, `center_cursor` will always use `zz` rather than `zb`
+	--- @type boolean
+	always_center = false,
 
+	--- Filetypes that should always center the cursor
+	--- When a filetype is listed here, `center_cursor` will use `zz` for it
+	--- @type table<string, boolean>
+	always_center_filetypes = {},
 }
 
 --- Current configuration

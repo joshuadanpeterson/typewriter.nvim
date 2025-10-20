@@ -40,7 +40,7 @@ end
 --- utils.notify("Typewriter mode enabled")
 function M.notify(message)
         if config.config.enable_notifications then
-        	vim.notify(message, vim.log.levels.INFO, { title = "Typewriter.nvim" })
+        vim.notify(message, vim.log.levels.INFO, { title = "Typewriter.nvim" })
         end
 end
 
@@ -55,16 +55,18 @@ end
 --- local utils = require("typewriter.utils")
 --- utils.center_cursor_horizontally()
 function M.center_cursor_horizontally()
-        if not config.config.enable_horizontal_scroll then
-                return
-        end
-        local win_width = vim.api.nvim_win_get_width(0)
-        local cursor_col = vim.fn.virtcol(".")
-        local left_col = math.max(cursor_col - math.floor(win_width / 2), 0) + 10
-        vim.api.nvim_win_set_option(0, "wrap", false)
-        vim.fn.winrestview({ leftcol = left_col })
-        vim.cmd("redraw")
-        --- Force redraw to prevent ghost text
+	if not config.config.enable_horizontal_scroll then
+		return
+	end
+	local win_width = vim.api.nvim_win_get_width(0)
+	local cursor_col = vim.fn.virtcol(".")
+	local base_left = math.max(cursor_col - math.floor(win_width / 2), 0)
+	local offset = tonumber(config.config.horizontal_left_offset) or 0
+	local left_col = math.max(base_left + offset, 0)
+	vim.api.nvim_win_set_option(0, "wrap", false)
+	vim.fn.winrestview({ leftcol = left_col })
+	vim.cmd("redraw")
+	--- Force redraw to prevent ghost text
 end
 
 --- Check if Typewriter mode is currently active
