@@ -6,8 +6,7 @@
 
 local config = require("typewriter.config")
 local commands = require("typewriter.commands")
-local ts_utils = require('nvim-treesitter.ts_utils')
-local ts_parsers = require('nvim-treesitter.parsers')
+local treesitter = require('typewriter.treesitter')
 local utils = require('typewriter.utils')
 local logger = require('typewriter.logger')
 
@@ -111,12 +110,12 @@ end
 --- @param search_pattern string Search pattern
 --- @return table|nil Cursor position
 get_treesitter_match = function(bufnr, search_pattern)
-	local lang = ts_parsers.get_buf_lang(bufnr)
+	local lang = treesitter.get_buf_lang(bufnr)
 	if not lang then
 		return nil
 	end
 
-	local root = ts_utils.get_root_for_position(0, 0, bufnr)
+	local root = treesitter.get_root(bufnr)
 	if not root then
 		return nil
 	end
@@ -144,7 +143,7 @@ get_treesitter_match = function(bufnr, search_pattern)
 	local cursor_position
 	query:for_each_match(root, bufnr, 0, function(_, match, _)
 		for _, node in ipairs(match) do
-			local node_text = ts_utils.get_node_text(node, bufnr)[1]
+			local node_text = treesitter.get_node_text(node, bufnr)
 			if node_text then
 				-- Find the exact position of the match within the node
 				local start_pos = node_text:find(regex_pattern)

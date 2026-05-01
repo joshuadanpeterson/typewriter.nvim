@@ -8,11 +8,11 @@
 --- @tag typewriter-commands
 
 local api = vim.api
-local ts_utils = require("nvim-treesitter.ts_utils")
 local utils = require("typewriter.utils")
 local config = require("typewriter.config")
 local center_block_config = require("typewriter.utils.center_block_config")
 local logger = require("typewriter.logger")
+local treesitter = require("typewriter.treesitter")
 
 local M = {}
 local typewriter_active = false
@@ -154,7 +154,7 @@ end
 --- @usage require("typewriter.commands").center_block_and_cursor()
 --- Center the current code block and cursor
 function M.center_block_and_cursor()
-	local node = ts_utils.get_node_at_cursor()
+	local node = treesitter.get_node_at_cursor()
 	if not node then
 		return
 	end
@@ -204,7 +204,7 @@ end
 ---
 --- @usage require("typewriter.commands").move_to_top_of_block()
 function M.move_to_top_of_block()
-	local node = ts_utils.get_node_at_cursor()
+	local node = treesitter.get_node_at_cursor()
 	if not node then
 		return
 	end
@@ -241,7 +241,7 @@ end
 ---
 --- @usage require("typewriter.commands").move_to_bottom_of_block()
 function M.move_to_bottom_of_block()
-	local node = ts_utils.get_node_at_cursor()
+	local node = treesitter.get_node_at_cursor()
 	if not node then
 		return
 	end
