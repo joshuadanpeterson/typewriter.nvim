@@ -16,6 +16,7 @@ local logger = require("typewriter.logger")
 
 local M = {}
 local typewriter_active = false
+local handling_window_scroll = false
 
 --- Restore the cursor to its original position
 ---
@@ -85,11 +86,28 @@ end
 function M.enable_typewriter_mode()
 	if not utils.is_typewriter_active() then
 		utils.set_typewriter_active(true)
+		local group = api.nvim_create_augroup("TypewriterMode", { clear = true })
 		api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-			group = api.nvim_create_augroup("TypewriterMode", { clear = true }),
+			group = group,
 			callback = function()
 				M.center_cursor()
 				utils.center_cursor_horizontally()
+			end,
+		})
+		api.nvim_create_autocmd("WinScrolled", {
+			group = group,
+			callback = function()
+				if handling_window_scroll or not utils.is_typewriter_active() then
+					return
+				end
+				handling_window_scroll = true
+				vim.schedule(function()
+					M.center_cursor()
+					utils.center_cursor_horizontally()
+					vim.schedule(function()
+						handling_window_scroll = false
+					end)
+				end)
 			end,
 		})
                 utils.notify("Typewriter mode enabled")

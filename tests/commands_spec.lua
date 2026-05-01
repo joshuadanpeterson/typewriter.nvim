@@ -36,6 +36,31 @@ describe('typewriter.commands', function()
     assert.is_not_nil(content:find('Typewriter mode disabled'))
   end)
 
+  it('recenters after window-only scrolling', function()
+    local autocmds = {}
+    vim.api.nvim_create_autocmd = function(event, opts)
+      table.insert(autocmds, { event = event, callback = opts.callback })
+    end
+
+    local cmd
+    vim.api.nvim_win_get_cursor = function() return {25, 0} end
+    vim.api.nvim_buf_line_count = function() return 50 end
+    vim.api.nvim_command = function(c) cmd = c end
+
+    commands.enable_typewriter_mode()
+
+    local scroll_callback
+    for _, autocmd in ipairs(autocmds) do
+      if autocmd.event == 'WinScrolled' then
+        scroll_callback = autocmd.callback
+      end
+    end
+
+    assert.is_not_nil(scroll_callback)
+    scroll_callback()
+    assert.are.equal('normal! zz', cmd)
+  end)
+
   it('centers with zt when at top of file', function()
     utils.set_typewriter_active(true)
     vim.api.nvim_win_get_cursor = function() return {1, 0} end

@@ -18,7 +18,7 @@ describe('typewriter.utils', function()
   
   it('center_cursor_horizontally adjusts view and redraws', function()
       vim.api.nvim_win_get_width = function() return 80 end
-      vim.fn.virtcol = function() return 40 end
+      vim.fn.virtcol = function() return 50 end
       vim.api.nvim_win_set_option = function(_, name, value)
       _G.hopt = { name, value }
       end
